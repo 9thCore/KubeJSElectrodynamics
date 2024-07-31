@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Either;
+import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
 import dev.latvian.mods.kubejs.fluid.OutputFluid;
 import dev.latvian.mods.kubejs.item.InputItem;
@@ -135,4 +136,112 @@ public class Components {
             }
         }
     };
+    public static final RecipeComponent<InputFluid[]> ARRAY_FLUID_INPUT = new RecipeComponent<>() {
+        @Override
+        public Class<?> componentClass() {
+            return InputFluid[].class;
+        }
+
+        @Override
+        public JsonElement write(RecipeJS recipe, InputFluid[] value) {
+            JsonObject json = new JsonObject();
+            json.addProperty(COUNT, value.length);
+            int i = 0;
+            for (InputFluid item : value) {
+                json.add(String.valueOf(i), recipe.writeInputFluid(item));
+                i++;
+            }
+            return json;
+        }
+
+        @Override
+        public InputFluid[] read(RecipeJS recipe, Object from) {
+            if (from instanceof InputFluid[] item) {
+                return item;
+            } else if (from instanceof InputFluid item) {
+                return new InputFluid[]{item};
+            } else if (from instanceof String string) {
+                return new InputFluid[]{recipe.readInputFluid(from)};
+            } else if (from instanceof NativeArray array) {
+                long longCount = array.getLength();
+                if (longCount > Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException("Array is too long! Max size: " + Integer.MAX_VALUE);
+                }
+                int count = (int)longCount;
+                InputFluid[] result = new InputFluid[count];
+                for (int i = 0; i < count; i++) {
+                    result[i] = recipe.readInputFluid(array.get(i));
+                }
+                return result;
+            } else if (from instanceof JsonObject object) {
+                if (!object.has(COUNT)) {
+                    throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
+                }
+                int count = object.get(COUNT).getAsInt();
+                InputFluid[] result = new InputFluid[count];
+                for (int i = 0; i < count; i++) {
+                    result[i] = recipe.readInputFluid(object.get(String.valueOf(i)));
+                }
+                return result;
+            } else {
+                throw new IllegalArgumentException("Expected JSON object!");
+            }
+        }
+    };
+
+    /*
+    // Not used by anything as of yet
+    public static final RecipeComponent<OutputFluid[]> ARRAY_FLUID_OUTPUT = new RecipeComponent<>() {
+        @Override
+        public Class<?> componentClass() {
+            return OutputFluid[].class;
+        }
+
+        @Override
+        public JsonElement write(RecipeJS recipe, OutputFluid[] value) {
+            JsonObject json = new JsonObject();
+            json.addProperty(COUNT, value.length);
+            int i = 0;
+            for (OutputFluid item : value) {
+                json.add(String.valueOf(i), recipe.writeOutputFluid(item));
+                i++;
+            }
+            return json;
+        }
+
+        @Override
+        public OutputFluid[] read(RecipeJS recipe, Object from) {
+            if (from instanceof OutputFluid[] items) {
+                return items;
+            } else if (from instanceof OutputFluid item) {
+                return new OutputFluid[]{item};
+            } else if (from instanceof String string) {
+                return new OutputFluid[]{recipe.readOutputFluid(string)};
+            } else if (from instanceof NativeArray array) {
+                long longCount = array.getLength();
+                if (longCount > Integer.MAX_VALUE) {
+                    throw new IllegalArgumentException("Array is too long! Max size: " + Integer.MAX_VALUE);
+                }
+                int count = (int)longCount;
+                OutputFluid[] result = new OutputFluid[count];
+                for (int i = 0; i < count; i++) {
+                    result[i] = recipe.readOutputFluid(array.get(i));
+                }
+                return result;
+            } else if (from instanceof JsonObject object) {
+                if (!object.has(COUNT)) {
+                    throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
+                }
+                int count = object.get(COUNT).getAsInt();
+                OutputFluid[] result = new OutputFluid[count];
+                for (int i = 0; i < count; i++) {
+                    result[i] = recipe.readOutputFluid(object.get(String.valueOf(i)));
+                }
+                return result;
+            } else {
+                throw new IllegalArgumentException("Expected JSON object!");
+            }
+        }
+    };
+     */
 }
