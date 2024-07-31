@@ -1,0 +1,1 @@
+com.core.kubejselectrodynamics.plugin.KubePlugin

@@ -13,7 +13,6 @@ public class KubePlugin extends KubeJSPlugin {
 
     @Override
     public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
-        KubeJSElectrodynamics.LogInfo("ABC Registering recipes");
         event.register(GetRecipeType("energized_alloyer_recipe"), ItemToItem.SCHEMA);
     }
 }
