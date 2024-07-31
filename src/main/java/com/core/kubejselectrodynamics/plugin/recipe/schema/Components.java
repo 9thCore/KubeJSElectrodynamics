@@ -51,12 +51,12 @@ public class Components {
 
         @Override
         public InputItem[] read(RecipeJS recipe, Object from) {
-            KubeJSElectrodynamics.LogInfo(from.getClass().getName());
-
             if (from instanceof InputItem[] item) {
                 return item;
             } else if (from instanceof InputItem item) {
                 return new InputItem[]{item};
+            } else if (from instanceof String string) {
+                return new InputItem[]{InputItem.of(string)};
             } else if (from instanceof NativeArray array) {
                 long longCount = array.getLength();
                 if (longCount > Integer.MAX_VALUE) {
@@ -107,6 +107,8 @@ public class Components {
                 return items;
             } else if (from instanceof OutputItem item) {
                 return new OutputItem[]{item};
+            } else if (from instanceof String string) {
+                return new OutputItem[]{OutputItem.of(string)};
             } else if (from instanceof NativeArray array) {
                 long longCount = array.getLength();
                 if (longCount > Integer.MAX_VALUE) {
