@@ -11,4 +11,8 @@ public class KubeJSElectrodynamics
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public KubeJSElectrodynamics() {}
+
+    public static void LogInfo(Object message) {
+        LOGGER.info(message.toString());
+    }
 }
