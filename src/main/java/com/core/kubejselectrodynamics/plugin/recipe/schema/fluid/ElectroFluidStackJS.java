@@ -54,6 +54,8 @@ public class ElectroFluidStackJS implements WrappedJS, InputFluid, OutputFluid {
             return EMPTY;
         } else if (from instanceof ElectroFluidStackJS stack) {
             return stack;
+        } else if (from instanceof FluidStackJS stack) {
+            return new ElectroFluidStackJS(ForgeRegistries.FLUIDS.getKey(stack.getFluid()), stack.getAmount());
         } else if (from instanceof String string) {
             if (string.startsWith("#")) {
                 return new ElectroFluidStackJS(new TagKey<>(Registries.FLUID, new ResourceLocation(string.substring(1))), DEFAULT_AMOUNT);
