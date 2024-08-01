@@ -3,10 +3,13 @@ package com.core.kubejselectrodynamics.plugin.recipe.schema;
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dev.latvian.mods.kubejs.fluid.FluidLike;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.item.OutputItem;
+import dev.latvian.mods.kubejs.recipe.InputReplacement;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
+import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.ReplacementMatch;
 import dev.latvian.mods.kubejs.recipe.component.*;
 import dev.latvian.mods.rhino.NativeArray;
@@ -21,8 +24,8 @@ public class Components {
         }
         return "Must have between " + minItems + " and " + maxItems + " elements!";
     }
-    private static int CastToInt(NativeObject object, Object key) {
-        return(int)((double)object.get(key));
+    public static int CastToInt(NativeObject object, Object key) {
+        return (int)((double)object.get(key));
     }
     private static final String COUNT = "count";
     private static final String COMPONENT_TYPE = "electrodynamics_array";
@@ -193,10 +196,16 @@ public class Components {
         return ARRAY_ITEM_OUTPUT(exact, exact);
     }
     public static RecipeComponent<InputFluid[]> ARRAY_FLUID_INPUT(int minFluids, int maxFluids) {
-        return new RecipeComponentWithParent<>() {
+
+        return new RecipeComponent<>() {
             @Override
-            public RecipeComponent<InputFluid[]> parentComponent() {
-                return FluidComponents.INPUT_ARRAY;
+            public Class<?> componentClass() {
+                return InputFluid[].class;
+            }
+
+            @Override
+            public ComponentRole role() {
+                return ComponentRole.INPUT;
             }
 
             @Override
@@ -209,8 +218,8 @@ public class Components {
                 JsonObject json = new JsonObject();
                 json.addProperty(COUNT, value.length);
                 int i = 0;
-                for (InputFluid item : value) {
-                    json.add(String.valueOf(i), recipe.writeInputFluid(item));
+                for (InputFluid fluid : value) {
+                    json.add(String.valueOf(i), recipe.writeInputFluid(fluid));
                     i++;
                 }
                 return json;
@@ -218,12 +227,12 @@ public class Components {
 
             @Override
             public InputFluid[] read(RecipeJS recipe, Object from) {
-                if (from instanceof InputFluid[] item) {
-                    return item;
-                } else if (from instanceof InputFluid item) {
-                    return new InputFluid[]{item};
+                if (from instanceof InputFluid[] fluids) {
+                    return fluids;
+                } else if (from instanceof InputFluid fluid) {
+                    return new InputFluid[]{fluid};
                 } else if (from instanceof String string) {
-                    return new InputFluid[]{recipe.readInputFluid(from)};
+                     return new InputFluid[]{recipe.readInputFluid(string)};
                 } else if (from instanceof NativeArray array) {
                     long longCount = array.getLength();
                     if (longCount > Integer.MAX_VALUE) {
@@ -267,6 +276,30 @@ public class Components {
                 } else {
                     throw new IllegalArgumentException("Expected JSON object!");
                 }
+            }
+
+            @Override
+            public boolean isInput(RecipeJS recipe, InputFluid[] value, ReplacementMatch match) {
+                if (match instanceof FluidLike other) {
+                    for (InputFluid v : value) {
+                        if (v.matches(other)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public String checkEmpty(RecipeKey<InputFluid[]> key, InputFluid[] value) {
+                int i = 0;
+                for (InputFluid fluid : value) {
+                    if (fluid.kjs$isEmpty()) {
+                        return "Fluid " + i + " can't be empty!";
+                    }
+                    i++;
+                }
+                return "";
             }
         };
     }
