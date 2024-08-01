@@ -9,6 +9,7 @@ import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
 import dev.latvian.mods.kubejs.fluid.OutputFluid;
 import dev.latvian.mods.kubejs.item.InputItem;
+import dev.latvian.mods.kubejs.item.ItemStackJS;
 import dev.latvian.mods.kubejs.item.OutputItem;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.component.*;
@@ -108,6 +109,8 @@ public class Components {
                 return items;
             } else if (from instanceof OutputItem item) {
                 return new OutputItem[]{item};
+            } else if (from instanceof ItemStack stack) {
+                return new OutputItem[]{OutputItem.of(stack).withChance(1.0D)};
             } else if (from instanceof String string) {
                 return new OutputItem[]{OutputItem.of(string)};
             } else if (from instanceof NativeArray array) {
