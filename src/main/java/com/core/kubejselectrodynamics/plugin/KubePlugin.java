@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics.plugin;
 
+import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToItem;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.ItemToItem;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
@@ -26,5 +27,8 @@ public class KubePlugin extends KubeJSPlugin {
         register(event, "reinforced_alloyer", ItemToItem.ALLOYER_SCHEMA);
         register(event, "wire_mill", ItemToItem.SCHEMA);
         register(event, "chemical_crystallizer", FluidToItem.SCHEMA);
+        register(event, "chemical_mixer", FluidItemToFluid.SCHEMA);
+        register(event, "fermentation_plant", FluidItemToFluid.SCHEMA);
+        register(event, "mineral_washer", FluidItemToFluid.SCHEMA);
     }
 }
