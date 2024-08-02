@@ -4,10 +4,15 @@ import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToGas;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToItem;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.ItemToItem;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasStackJS;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasWrapper;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasBuilder;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
+import dev.latvian.mods.kubejs.script.BindingsEvent;
+import dev.latvian.mods.kubejs.script.ScriptType;
+import dev.latvian.mods.rhino.util.wrap.TypeWrappers;
 import net.minecraft.resources.ResourceLocation;
 
 public class KubePlugin extends KubeJSPlugin {
@@ -38,5 +43,11 @@ public class KubePlugin extends KubeJSPlugin {
         register(event, "fermentation_plant", FluidItemToFluid.SCHEMA);
         register(event, "mineral_washer", FluidItemToFluid.SCHEMA);
         register(event, "electrolytic_separator", FluidToGas.SCHEMA);
+    }
+
+    @Override
+    public void registerBindings(BindingsEvent event) {
+        super.registerBindings(event);
+        event.add("ElectrodynamicsGas", ElectroGasWrapper.class);
     }
 }
