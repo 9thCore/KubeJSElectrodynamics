@@ -5,14 +5,20 @@ import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.util.WrappedJS;
 import dev.latvian.mods.rhino.NativeObject;
 import electrodynamics.api.gas.GasStack;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class ElectroGasStackJS implements WrappedJS, OutputGas {
     double chance = 1.0D;
-    public static ElectroGasStackJS of(Object from) {
-        if (from instanceof ElectroGasStackJS stack) {
+    public static ElectroGasStackJS of(@Nullable Object from) {
+        if (from == null) {
+            return EmptyElectroGasStackJS.INSTANCE;
+        } else if (from instanceof ElectroGasStackJS stack) {
             return stack;
         } else if (from instanceof GasStack stack) {
             return new BoundElectroGasStackJS(stack);
+        } else if (from instanceof ResourceLocation location) {
+            return UnboundElectroGasJS.of(location.toString());
         } else if (from instanceof String string) {
             return UnboundElectroGasJS.of(string);
         } else if (from instanceof NativeObject nativeObject) {
