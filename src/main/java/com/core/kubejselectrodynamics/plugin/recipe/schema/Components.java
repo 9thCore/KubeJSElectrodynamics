@@ -1,13 +1,14 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
-import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasStackJS;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasLike;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.OutputGas;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.fluid.FluidLike;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.item.OutputItem;
-import dev.latvian.mods.kubejs.recipe.InputReplacement;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.ReplacementMatch;
@@ -196,7 +197,6 @@ public class Components {
         return ARRAY_ITEM_OUTPUT(exact, exact);
     }
     public static RecipeComponent<InputFluid[]> ARRAY_FLUID_INPUT(int minFluids, int maxFluids) {
-
         return new RecipeComponent<>() {
             @Override
             public Class<?> componentClass() {
@@ -305,5 +305,149 @@ public class Components {
     }
     public static RecipeComponent<InputFluid[]> ARRAY_FLUID_INPUT(int exact) {
         return ARRAY_FLUID_INPUT(exact, exact);
+    }
+    public static RecipeComponent<OutputGas> GAS_OUTPUT = new RecipeComponent<>() {
+        @Override
+        public Class<?> componentClass() {
+            return OutputGas.class;
+        }
+
+        @Override
+        public ComponentRole role() {
+            return ComponentRole.OUTPUT;
+        }
+
+        @Override
+        public String componentType() {
+            return COMPONENT_TYPE;
+        }
+
+        @Override
+        public JsonElement write(RecipeJS recipe, OutputGas value) {
+            if (value instanceof ElectroGasStackJS stack) {
+                return stack.toJson();
+            } else {
+                throw new IllegalArgumentException("Invalid gas object!");
+            }
+        }
+
+        @Override
+        public OutputGas read(RecipeJS recipe, Object from) {
+            return ElectroGasStackJS.of(from);
+        }
+
+        @Override
+        public boolean isOutput(RecipeJS recipe, OutputGas value, ReplacementMatch match) {
+            if (match instanceof GasLike other) {
+                return value.matches(other);
+            }
+            return false;
+        }
+    };
+    public static RecipeComponent<OutputGas[]> ARRAY_GAS_OUTPUT(int minGasses, int maxGasses) {
+        return new RecipeComponent<>() {
+            @Override
+            public Class<?> componentClass() {
+                return OutputGas[].class;
+            }
+
+            @Override
+            public ComponentRole role() {
+                return ComponentRole.OUTPUT;
+            }
+
+            @Override
+            public String componentType() {
+                return COMPONENT_TYPE;
+            }
+
+            @Override
+            public JsonElement write(RecipeJS recipe, OutputGas[] value) {
+                JsonObject json = new JsonObject();
+                json.addProperty(COUNT, value.length);
+                int i = 0;
+                for (OutputGas gas : value) {
+                    if (gas instanceof ElectroGasStackJS stack) {
+                        json.add(String.valueOf(i), stack.toJson());
+                    }
+                    i++;
+                }
+                return json;
+            }
+
+            @Override
+            public OutputGas[] read(RecipeJS recipe, Object from) {
+                if (from instanceof OutputGas[] fluids) {
+                    return fluids;
+                } else if (from instanceof OutputGas fluid) {
+                    return new OutputGas[]{fluid};
+                } else if (from instanceof String string) {
+                    return new OutputGas[]{ElectroGasStackJS.of(string)};
+                } else if (from instanceof NativeArray array) {
+                    long longCount = array.getLength();
+                    if (longCount > Integer.MAX_VALUE) {
+                        throw new IllegalArgumentException("Array is too long! Max size: " + Integer.MAX_VALUE);
+                    }
+                    int count = (int) longCount;
+                    if (count < minGasses || count > maxGasses) {
+                        throw new IllegalArgumentException(ConstructExceptionMessage(minGasses, maxGasses));
+                    }
+                    OutputGas[] result = new OutputGas[count];
+                    for (int i = 0; i < count; i++) {
+                        result[i] = ElectroGasStackJS.of(array.get(i));
+                    }
+                    return result;
+                } else if (from instanceof NativeObject nativeObject) {
+                    if (nativeObject.containsKey("gas")) {
+                        return new OutputGas[]{GAS_OUTPUT.read(recipe, from)};
+                    }
+                    if (!nativeObject.containsKey(COUNT)) {
+                        throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
+                    }
+                    int count = CastToInt(nativeObject, COUNT);
+                    if (count < minGasses || count > maxGasses) {
+                        throw new IllegalArgumentException(ConstructExceptionMessage(minGasses, maxGasses));
+                    }
+                    OutputGas[] result = new OutputGas[count];
+                    for (int i = 0; i < count; i++) {
+                        result[i] = ElectroGasStackJS.of(nativeObject.get(i));
+                    }
+                    return result;
+                } else if (from instanceof JsonObject object) {
+                    if (object.has("gas")) {
+                        return new OutputGas[]{GAS_OUTPUT.read(recipe, from)};
+                    }
+                    if (!object.has(COUNT)) {
+                        throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
+                    }
+                    int count = object.get(COUNT).getAsInt();
+                    if (count < minGasses || count > maxGasses) {
+                        throw new IllegalArgumentException(ConstructExceptionMessage(minGasses, maxGasses));
+                    }
+                    OutputGas[] result = new OutputGas[count];
+                    for (int i = 0; i < count; i++) {
+                        result[i] = ElectroGasStackJS.of(object.get(String.valueOf(i)));
+                    }
+                    return result;
+                } else {
+                    throw new IllegalArgumentException("Expected JSON object!");
+                }
+            }
+
+            @Override
+            public boolean isOutput(RecipeJS recipe, OutputGas[] value, ReplacementMatch match) {
+                if (match instanceof GasLike other) {
+                    for (OutputGas v : value) {
+                        if (v.matches(other)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        };
+    }
+    public static RecipeComponent<OutputGas[]> ARRAY_GAS_OUTPUT(int exact) {
+        return ARRAY_GAS_OUTPUT(exact, exact);
     }
 }
