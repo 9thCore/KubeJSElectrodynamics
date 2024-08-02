@@ -8,7 +8,7 @@ import electrodynamics.api.gas.GasStack;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ElectroGasStackJS implements WrappedJS, OutputGas {
+public abstract class ElectroGasStackJS implements WrappedJS, InputGas, OutputGas {
     double chance = 1.0D;
     public static ElectroGasStackJS of(@Nullable Object from) {
         if (from == null) {
