@@ -4,6 +4,7 @@ import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToGas;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToItem;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.ItemToItem;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasBuilder;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
@@ -16,6 +17,11 @@ public class KubePlugin extends KubeJSPlugin {
 
     public void register(RegisterRecipeSchemasEvent event, String name, RecipeSchema schema) {
         event.register(GetRecipeType(name + "_recipe"), schema);
+    }
+
+    @Override
+    public void init() {
+        GasBuilder.INFO.addType("test", GasBuilder.class, GasBuilder::new);
     }
 
     @Override
