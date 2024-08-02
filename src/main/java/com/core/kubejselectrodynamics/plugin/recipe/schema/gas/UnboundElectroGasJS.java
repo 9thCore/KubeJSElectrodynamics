@@ -27,7 +27,6 @@ public class UnboundElectroGasJS extends ElectroGasStackJS {
         } else if (from instanceof NativeObject nativeObject) {
             UnboundElectroGasJS stack = UnboundElectroGasJS.of(nativeObject.get("gas"));
             if (nativeObject.containsKey("amount")) {
-                KubeJSElectrodynamics.LogInfo("ABC: " + (nativeObject.get("amount") instanceof Integer v));
                 stack.amount = (double)nativeObject.get("amount");
             } else if (nativeObject.containsKey("count")) {
                 stack.amount = (double)nativeObject.get("count");
