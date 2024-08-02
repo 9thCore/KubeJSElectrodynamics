@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class GasBuilder extends BuilderBase<Gas> {
     public static RegistryInfo<Gas> INFO = RegistryInfo.of(ElectrodynamicsRegistries.GAS_REGISTRY_KEY, Gas.class);
     private final ResourceLocation location;
-    private Component description;
+    private Component name;
     private double condensationTemp = Double.NaN;
     private Fluid condensationFluid = Fluids.EMPTY;
     private Item item;
@@ -31,8 +31,8 @@ public class GasBuilder extends BuilderBase<Gas> {
         return INFO;
     }
 
-    public GasBuilder setDescription(Component description) {
-        this.description = description;
+    public GasBuilder setName(Component name) {
+        this.name = name;
         return this;
     }
 
@@ -52,7 +52,7 @@ public class GasBuilder extends BuilderBase<Gas> {
         return new Gas(
                 () -> item,
                 TagKey.create(ElectrodynamicsRegistries.GAS_REGISTRY_KEY, location),
-                description,
+                name,
                 condensationTemp,
                 condensationFluid
         );
