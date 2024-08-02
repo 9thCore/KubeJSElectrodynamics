@@ -21,7 +21,7 @@ public class KubePlugin extends KubeJSPlugin {
 
     @Override
     public void init() {
-        GasBuilder.INFO.addType("test", GasBuilder.class, GasBuilder::new);
+        GasBuilder.INFO.addType("basic", GasBuilder.class, GasBuilder::new, true);
     }
 
     @Override
