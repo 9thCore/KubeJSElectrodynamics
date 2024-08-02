@@ -1,6 +1,5 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
-import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.ElectroFluidStackJS;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -8,12 +7,11 @@ import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
 import dev.latvian.mods.kubejs.fluid.OutputFluid;
 import dev.latvian.mods.kubejs.item.InputItem;
-import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 
 public class FluidItemToFluid {
 
-    public static class FluidItemToFluidRecipeJS extends RecipeJS {
+    public static class FluidItemToFluidRecipeJS extends ElectrodynamicsRecipeJS {
         @Override
         public OutputFluid readOutputFluid(Object from) {
             return ElectroFluidStackJS.of(from);

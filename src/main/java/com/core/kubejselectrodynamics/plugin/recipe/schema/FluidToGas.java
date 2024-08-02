@@ -4,12 +4,11 @@ import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.ElectroFluidSta
 import com.google.gson.JsonElement;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
-import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 
 public class FluidToGas {
 
-    public static class FluidToGasRecipeJS extends RecipeJS {
+    public static class FluidToGasRecipeJS extends ElectrodynamicsRecipeJS {
         @Override
         public InputFluid readInputFluid(Object from) {
             return ElectroFluidStackJS.of(from);

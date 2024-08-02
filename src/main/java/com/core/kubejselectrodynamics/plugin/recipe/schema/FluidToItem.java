@@ -2,17 +2,13 @@ package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
 import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.ElectroFluidStackJS;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
-import dev.latvian.mods.kubejs.recipe.InputReplacement;
-import dev.latvian.mods.kubejs.recipe.RecipeJS;
-import dev.latvian.mods.kubejs.recipe.ReplacementMatch;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 
 public class FluidToItem {
 
-    public static class FluidToItemRecipeJS extends RecipeJS {
+    public static class FluidToItemRecipeJS extends ElectrodynamicsRecipeJS {
         @Override
         public InputFluid readInputFluid(Object from) {
             return ElectroFluidStackJS.of(from);
