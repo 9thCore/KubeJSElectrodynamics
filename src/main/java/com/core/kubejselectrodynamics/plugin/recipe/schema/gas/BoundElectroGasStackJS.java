@@ -1,6 +1,9 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema.gas;
 
 import electrodynamics.api.gas.GasStack;
+import electrodynamics.registers.ElectrodynamicsRegistries;
+
+import java.util.Objects;
 
 public class BoundElectroGasStackJS extends ElectroGasStackJS {
     private final GasStack stack;
@@ -10,7 +13,7 @@ public class BoundElectroGasStackJS extends ElectroGasStackJS {
     }
 
     public String getID() {
-        return stack.getGas().toString();
+        return Objects.requireNonNull(ElectrodynamicsRegistries.gasRegistry().getKey(stack.getGas())).toString();
     }
 
     @Override
