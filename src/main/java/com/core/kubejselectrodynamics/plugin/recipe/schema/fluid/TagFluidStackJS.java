@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class whose purpose is to store fluids using a tag.
+ * Not intended for gameplay use, but useful for the schema.
+ */
 public class TagFluidStackJS extends FluidStackJS {
     private final ResourceLocation tagLocation;
     private TagKey<Fluid> tag;

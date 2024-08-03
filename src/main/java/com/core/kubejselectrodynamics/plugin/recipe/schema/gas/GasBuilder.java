@@ -2,6 +2,7 @@ package com.core.kubejselectrodynamics.plugin.recipe.schema.gas;
 
 import dev.latvian.mods.kubejs.registry.BuilderBase;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
+import dev.latvian.mods.kubejs.typings.Info;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.network.chat.Component;
@@ -12,7 +13,9 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
-// Creates Electrodynamics gasses from JS
+/**
+ * Electrodynamics Gas creator from JavaScript.
+ */
 public class GasBuilder extends BuilderBase<Gas> {
     public static RegistryInfo<Gas> INFO = RegistryInfo.of(ElectrodynamicsRegistries.GAS_REGISTRY_KEY, Gas.class);
     private final ResourceLocation location;
@@ -31,17 +34,20 @@ public class GasBuilder extends BuilderBase<Gas> {
         return INFO;
     }
 
+    @Info("Display name of gas.")
     public GasBuilder setName(Component name) {
         this.name = name;
         return this;
     }
 
+    @Info("Gas will be condensated into given condensationFluid when its temperature is below condensationTemp.")
     public GasBuilder setCondensationFluid(@NotNull Fluid condensationFluid, double condensationTemp) {
         this.condensationFluid = condensationFluid;
         this.condensationTemp = condensationTemp;
         return this;
     }
 
+    @Info("Presumably default container used for gas? Defaults to Electrodynamics gas canister.")
     public GasBuilder setContainer(Item item) {
         this.item = item;
         return this;

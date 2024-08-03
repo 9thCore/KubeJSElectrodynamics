@@ -6,6 +6,7 @@ import dev.architectury.fluid.FluidStack;
 import dev.architectury.hooks.fluid.forge.FluidStackHooksForge;
 import dev.latvian.mods.kubejs.fluid.EmptyFluidStackJS;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
+import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.rhino.NativeObject;
 import dev.latvian.mods.rhino.mod.util.NBTUtils;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
@@ -24,6 +25,7 @@ public final class ElectroFluidWrapper {
      * @param from
      * @return JS Fluid Stack
      */
+    @Info("Return a FluidStackJS object representing the given object, default fluid amount and no NBT data.")
     public static FluidStackJS of(@Nullable Object from) {
         if (from == null) {
             return EmptyFluidStackJS.INSTANCE;
@@ -79,12 +81,14 @@ public final class ElectroFluidWrapper {
         return FluidStackJS.of(from);
     }
 
+    @Info("Return a FluidStackJS object representing the given object, given fluid amount and no NBT data.")
     public static FluidStackJS of(@Nullable Object o, long amount) {
         FluidStackJS stack = of(o);
         stack.setAmount(amount);
         return stack;
     }
 
+    @Info("Return a FluidStackJS object representing the given object, given fluid amount and given NBT data.")
     public static FluidStackJS of(@Nullable Object o, long amount, @Nullable CompoundTag nbt) {
         FluidStackJS stack = of(o, amount);
         stack.setNbt(nbt);

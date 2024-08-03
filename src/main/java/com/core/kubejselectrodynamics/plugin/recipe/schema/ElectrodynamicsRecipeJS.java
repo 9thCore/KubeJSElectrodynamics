@@ -6,6 +6,7 @@ import com.core.kubejselectrodynamics.util.ElectroFluidWrapper;
 import dev.architectury.hooks.fluid.forge.FluidStackHooksForge;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
+import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.recipeutils.AbstractMaterialRecipe;
@@ -18,6 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.List;
 
 public class ElectrodynamicsRecipeJS extends RecipeJS {
+    @Info("Return the original recipe's item ingredients only.")
     public Ingredient[] getOriginalRecipeItemIngredients() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get item ingredients");
@@ -48,6 +50,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's item byproducts only.")
     public ItemStack[] getOriginalRecipeItemByproducts() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get item byproducts");
@@ -62,6 +65,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's fluid ingredients only.")
     public FluidStackJS[] getOriginalRecipeFluidIngredients() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get fluid ingredients");
@@ -82,6 +86,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's fluid result only.")
     public FluidStackJS getOriginalRecipeFluidResult() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get fluid result");
@@ -96,6 +101,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's fluid byproducts only.")
     public FluidStackJS[] getOriginalRecipeFluidByproducts() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get fluid byproducts");
@@ -115,6 +121,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's gas ingredients only.")
     public ElectroGasStackJS[] getOriginalRecipeGasIngredients() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get gas ingredients");
@@ -135,6 +142,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's gas byproducts only.")
     public ElectroGasStackJS[] getOriginalRecipeGasByproducts() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get gas byproducts");
@@ -154,6 +162,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's gas result only.")
     public ElectroGasStackJS getOriginalRecipeGasResult() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get gas result");
@@ -168,6 +177,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    @Info("Return the original recipe's power usage per tick.")
     public double getOriginalRecipeUsagePerTick() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get usage per tick");
@@ -182,6 +192,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return 0.0D;
     }
 
+    @Info("Return the original recipe's ticks required to craft.")
     public int getOriginalRecipeTicks() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get ticks");
