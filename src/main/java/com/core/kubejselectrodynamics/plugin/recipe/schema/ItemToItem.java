@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
+import com.core.kubejselectrodynamics.util.ItemUtils;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.InputItem;
@@ -10,9 +11,7 @@ public class ItemToItem {
     public static class ItemToItemRecipeJS extends ElectrodynamicsRecipeJS {
         @Override
         public JsonElement writeInputItem(InputItem item) {
-            JsonObject json = item.ingredient.toJson().getAsJsonObject();
-            json.addProperty("count", item.count);
-            return json;
+            return ItemUtils.writeInputItem(item);
         }
     }
 
