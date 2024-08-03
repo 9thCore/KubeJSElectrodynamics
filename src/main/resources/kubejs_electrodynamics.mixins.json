@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "mixins.kubejs_electrodynamics.refmap.json",
   "mixins": [
-    "FluidIngredientMixin"
+    "FluidIngredientMixin",
+    "IngredientMixin",
+    "CountableIngredientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
