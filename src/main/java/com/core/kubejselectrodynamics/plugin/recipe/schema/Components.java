@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
+import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasStackJS;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasLike;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.OutputGas;
@@ -15,6 +16,7 @@ import dev.latvian.mods.kubejs.recipe.ReplacementMatch;
 import dev.latvian.mods.kubejs.recipe.component.*;
 import dev.latvian.mods.rhino.NativeArray;
 import dev.latvian.mods.rhino.NativeObject;
+import electrodynamics.common.recipe.recipeutils.CountableIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -39,7 +41,7 @@ public class Components {
 
             @Override
             public String componentType() {
-                return COMPONENT_TYPE;
+                return COMPONENT_TYPE + "_item_input";
             }
 
             @Override
@@ -61,9 +63,16 @@ public class Components {
                 } else if (from instanceof InputItem item) {
                     return new InputItem[]{item};
                 } else if (from instanceof Ingredient ingredient) {
-                    return new InputItem[]{InputItem.of(ingredient)};
+                    return new InputItem[]{recipe.readInputItem(ingredient)};
+                } else if (from instanceof Ingredient[] ingredients) {
+                    InputItem[] output = new InputItem[ingredients.length];
+                    int i = 0;
+                    for (Ingredient ingredient : ingredients) {
+                        output[i++] = recipe.readInputItem(ingredient);
+                    }
+                    return output;
                 } else if (from instanceof String string) {
-                    return new InputItem[]{InputItem.of(string)};
+                    return new InputItem[]{recipe.readInputItem(string)};
                 } else if (from instanceof NativeArray array) {
                     long longCount = array.getLength();
                     if (longCount > Integer.MAX_VALUE) {
@@ -75,7 +84,7 @@ public class Components {
                     }
                     InputItem[] result = new InputItem[count];
                     for (int i = 0; i < count; i++) {
-                        result[i] = InputItem.of(array.get(i));
+                        result[i] = recipe.readInputItem(array.get(i));
                     }
                     return result;
                 } else if (from instanceof NativeObject nativeObject) {
@@ -88,7 +97,7 @@ public class Components {
                     }
                     InputItem[] result = new InputItem[count];
                     for (int i = 0; i < count; i++) {
-                        result[i] = InputItem.of(nativeObject.get(i));
+                        result[i] = recipe.readInputItem(nativeObject.get(i));
                     }
                     return result;
                 } else if (from instanceof JsonObject object) {
@@ -101,7 +110,7 @@ public class Components {
                     }
                     InputItem[] result = new InputItem[count];
                     for (int i = 0; i < count; i++) {
-                        result[i] = InputItem.of(object.get(String.valueOf(i)));
+                        result[i] = recipe.readInputItem(object.get(String.valueOf(i)));
                     }
                     return result;
                 } else {
@@ -122,7 +131,7 @@ public class Components {
 
             @Override
             public String componentType() {
-                return COMPONENT_TYPE;
+                return COMPONENT_TYPE + "_item_output";
             }
 
             @Override
@@ -210,7 +219,7 @@ public class Components {
 
             @Override
             public String componentType() {
-                return COMPONENT_TYPE;
+                return COMPONENT_TYPE + "_fluid_input";
             }
 
             @Override
@@ -319,7 +328,7 @@ public class Components {
 
         @Override
         public String componentType() {
-            return COMPONENT_TYPE;
+            return COMPONENT_TYPE + "_gas_output";
         }
 
         @Override
