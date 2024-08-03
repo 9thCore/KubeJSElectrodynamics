@@ -14,6 +14,7 @@ import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.ReplacementMatch;
 import dev.latvian.mods.kubejs.recipe.component.*;
+import dev.latvian.mods.kubejs.util.ConsoleJS;
 import dev.latvian.mods.rhino.NativeArray;
 import dev.latvian.mods.rhino.NativeObject;
 import electrodynamics.common.recipe.recipeutils.CountableIngredient;
@@ -23,9 +24,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class Components {
     private static String ConstructExceptionMessage(int minItems, int maxItems) {
         if (minItems == maxItems) {
-            return "Must have exactly " + minItems + " elements!";
+            return "Array must have exactly " + minItems + " elements!";
         }
-        return "Must have between " + minItems + " and " + maxItems + " elements!";
+        return "Array must have between " + minItems + " and " + maxItems + " elements!";
     }
     public static int CastToInt(NativeObject object, Object key) {
         return (int)((double)object.get(key));
@@ -76,10 +77,12 @@ public class Components {
                 } else if (from instanceof NativeArray array) {
                     long longCount = array.getLength();
                     if (longCount > Integer.MAX_VALUE) {
+                        ConsoleJS.SERVER.error("Given array is too long! Max size: " + Integer.MAX_VALUE);
                         throw new IllegalArgumentException("Array is too long! Max size: " + Integer.MAX_VALUE);
                     }
                     int count = (int) longCount;
                     if (count < minItems || count > maxItems) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minItems, maxItems));
                         throw new IllegalStateException(ConstructExceptionMessage(minItems, maxItems));
                     }
                     InputItem[] result = new InputItem[count];
@@ -89,10 +92,12 @@ public class Components {
                     return result;
                 } else if (from instanceof NativeObject nativeObject) {
                     if (!nativeObject.containsKey(COUNT)) {
+                        ConsoleJS.SERVER.error("Object does not have \"" + COUNT + "\" property!");
                         throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
                     }
                     int count = CastToInt(nativeObject, COUNT);
                     if (count < minItems || count > maxItems) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minItems, maxItems));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minItems, maxItems));
                     }
                     InputItem[] result = new InputItem[count];
@@ -102,10 +107,12 @@ public class Components {
                     return result;
                 } else if (from instanceof JsonObject object) {
                     if (!object.has(COUNT)) {
+                        ConsoleJS.SERVER.error("Object does not have \"" + COUNT + "\" property!");
                         throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
                     }
                     int count = object.get(COUNT).getAsInt();
                     if (count < minItems || count > maxItems) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minItems, maxItems));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minItems, maxItems));
                     }
                     InputItem[] result = new InputItem[count];
@@ -114,7 +121,7 @@ public class Components {
                     }
                     return result;
                 } else {
-                    throw new IllegalArgumentException("Expected JSON object!");
+                    throw new IllegalArgumentException("Invalid item object/s!");
                 }
             }
         };
@@ -159,10 +166,12 @@ public class Components {
                 } else if (from instanceof NativeArray array) {
                     long longCount = array.getLength();
                     if (longCount > Integer.MAX_VALUE) {
+                        ConsoleJS.SERVER.error("Array is too long! Max size: " + Integer.MAX_VALUE);
                         throw new IllegalArgumentException("Array is too long! Max size: " + Integer.MAX_VALUE);
                     }
                     int count = (int)longCount;
                     if (count < minItems || count > maxItems) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minItems, maxItems));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minItems, maxItems));
                     }
                     OutputItem[] result = new OutputItem[count];
@@ -172,10 +181,12 @@ public class Components {
                     return result;
                 } else if (from instanceof NativeObject nativeObject) {
                     if (!nativeObject.containsKey(COUNT)) {
+                        ConsoleJS.SERVER.error("Object does not have \"" + COUNT + "\" property!");
                         throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
                     }
                     int count = CastToInt(nativeObject, COUNT);
                     if (count < minItems || count > maxItems) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minItems, maxItems));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minItems, maxItems));
                     }
                     OutputItem[] result = new OutputItem[count];
@@ -185,10 +196,12 @@ public class Components {
                     return result;
                 } else if (from instanceof JsonObject object) {
                     if (!object.has(COUNT)) {
+                        ConsoleJS.SERVER.error("Object does not have \"" + COUNT + "\" property!");
                         throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
                     }
                     int count = object.get(COUNT).getAsInt();
                     if (count < minItems || count > maxItems) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minItems, maxItems));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minItems, maxItems));
                     }
                     OutputItem[] result = new OutputItem[count];
@@ -197,7 +210,7 @@ public class Components {
                     }
                     return result;
                 } else {
-                    throw new IllegalArgumentException("Expected JSON object!");
+                    throw new IllegalArgumentException("Invalid item object/s!");
                 }
             }
         };
@@ -245,10 +258,12 @@ public class Components {
                 } else if (from instanceof NativeArray array) {
                     long longCount = array.getLength();
                     if (longCount > Integer.MAX_VALUE) {
+                        ConsoleJS.SERVER.error("Array is too long! Max size: " + Integer.MAX_VALUE);
                         throw new IllegalArgumentException("Array is too long! Max size: " + Integer.MAX_VALUE);
                     }
                     int count = (int) longCount;
                     if (count < minFluids || count > maxFluids) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minFluids, maxFluids));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minFluids, maxFluids));
                     }
                     InputFluid[] result = new InputFluid[count];
@@ -258,10 +273,12 @@ public class Components {
                     return result;
                 } else if (from instanceof NativeObject nativeObject) {
                     if (!nativeObject.containsKey(COUNT)) {
+                        ConsoleJS.SERVER.error("Object does not have \"" + COUNT + "\" property!");
                         throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
                     }
                     int count = CastToInt(nativeObject, COUNT);
                     if (count < minFluids || count > maxFluids) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minFluids, maxFluids));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minFluids, maxFluids));
                     }
                     InputFluid[] result = new InputFluid[count];
@@ -271,10 +288,12 @@ public class Components {
                     return result;
                 } else if (from instanceof JsonObject object) {
                     if (!object.has(COUNT)) {
+                        ConsoleJS.SERVER.error("Object does not have \"" + COUNT + "\" property!");
                         throw new IllegalArgumentException("Object does not have \"" + COUNT + "\" property!");
                     }
                     int count = object.get(COUNT).getAsInt();
                     if (count < minFluids || count > maxFluids) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minFluids, maxFluids));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minFluids, maxFluids));
                     }
                     InputFluid[] result = new InputFluid[count];
@@ -283,7 +302,7 @@ public class Components {
                     }
                     return result;
                 } else {
-                    throw new IllegalArgumentException("Expected JSON object!");
+                    throw new IllegalArgumentException("Invalid fluid object/s!");
                 }
             }
 
@@ -336,7 +355,7 @@ public class Components {
             if (value instanceof ElectroGasStackJS stack) {
                 return stack.toJson();
             } else {
-                throw new IllegalArgumentException("Invalid gas object!");
+                throw new IllegalArgumentException("Invalid gas object/s!");
             }
         }
 
@@ -395,10 +414,12 @@ public class Components {
                 } else if (from instanceof NativeArray array) {
                     long longCount = array.getLength();
                     if (longCount > Integer.MAX_VALUE) {
+                        ConsoleJS.SERVER.error("Array is too long! Max size: " + Integer.MAX_VALUE);
                         throw new IllegalArgumentException("Array is too long! Max size: " + Integer.MAX_VALUE);
                     }
                     int count = (int) longCount;
                     if (count < minGasses || count > maxGasses) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minGasses, maxGasses));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minGasses, maxGasses));
                     }
                     OutputGas[] result = new OutputGas[count];
@@ -415,6 +436,7 @@ public class Components {
                     }
                     int count = CastToInt(nativeObject, COUNT);
                     if (count < minGasses || count > maxGasses) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minGasses, maxGasses));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minGasses, maxGasses));
                     }
                     OutputGas[] result = new OutputGas[count];
@@ -431,6 +453,7 @@ public class Components {
                     }
                     int count = object.get(COUNT).getAsInt();
                     if (count < minGasses || count > maxGasses) {
+                        ConsoleJS.SERVER.error(ConstructExceptionMessage(minGasses, maxGasses));
                         throw new IllegalArgumentException(ConstructExceptionMessage(minGasses, maxGasses));
                     }
                     OutputGas[] result = new OutputGas[count];
