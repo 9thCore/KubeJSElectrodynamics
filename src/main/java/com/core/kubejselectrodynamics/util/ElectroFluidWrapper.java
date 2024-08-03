@@ -1,6 +1,5 @@
 package com.core.kubejselectrodynamics.util;
 
-import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.TagFluidStackJS;
 import com.google.gson.JsonObject;
 import dev.architectury.fluid.FluidStack;
@@ -12,8 +11,9 @@ import dev.latvian.mods.rhino.mod.util.NBTUtils;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public final class ElectroFluidWrapper {
     /**
@@ -24,28 +24,25 @@ public final class ElectroFluidWrapper {
      * @param from
      * @return JS Fluid Stack
      */
-    public static FluidStackJS of(Object from) {
+    public static FluidStackJS of(@Nullable Object from) {
         if (from == null) {
             return EmptyFluidStackJS.INSTANCE;
         } else if (from instanceof FluidStackJS stack) {
             return stack;
         } else if (from instanceof String string) {
             if (string.startsWith("#")) {
-                return new TagFluidStackJS(TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), new ResourceLocation(string)));
+                return new TagFluidStackJS(new ResourceLocation(string.substring(1)));
             } else {
                 return FluidStackJS.of(string);
             }
         } else if (from instanceof FluidStack stack) {
             return FluidStackJS.of(stack);
         } else if (from instanceof FluidIngredient ingredient) {
-            return FluidStackJS.of(FluidStackHooksForge.fromForge(ingredient.getFluidStack()));
+            return new TagFluidStackJS(Objects.requireNonNull(ingredient.tag).location());
         } else if (from instanceof NativeObject object) {
             FluidStackJS stack = null;
             if (object.containsKey("tag")) {
-                stack = new TagFluidStackJS(TagKey.create(
-                        ForgeRegistries.FLUIDS.getRegistryKey(),
-                        new ResourceLocation((String)object.get("tag"))
-                ));
+                stack = new TagFluidStackJS(new ResourceLocation((String)object.get("tag")));
             }
             if (object.containsKey("fluid")) {
                 stack = FluidStackJS.of(object.get("fluid"));
@@ -67,10 +64,7 @@ public final class ElectroFluidWrapper {
             return stack;
         } else if (from instanceof JsonObject object) {
             if (object.has("tag")) {
-                TagFluidStackJS stack = new TagFluidStackJS(TagKey.create(
-                        ForgeRegistries.FLUIDS.getRegistryKey(),
-                        new ResourceLocation(object.get("tag").getAsString())
-                ));
+                TagFluidStackJS stack = new TagFluidStackJS(new ResourceLocation(object.get("tag").getAsString()));
                 if (object.has("amount")) {
                     stack.setAmount(object.get("amount").getAsLong());
                 } else if (object.has("count")) {
@@ -83,5 +77,17 @@ public final class ElectroFluidWrapper {
             }
         }
         return FluidStackJS.of(from);
+    }
+
+    public static FluidStackJS of(@Nullable Object o, long amount) {
+        FluidStackJS stack = of(o);
+        stack.setAmount(amount);
+        return stack;
+    }
+
+    public static FluidStackJS of(@Nullable Object o, long amount, @Nullable CompoundTag nbt) {
+        FluidStackJS stack = of(o, amount);
+        stack.setNbt(nbt);
+        return stack;
     }
 }
