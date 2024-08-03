@@ -22,6 +22,7 @@ public class FluidToItem {
             Keys.ITEM_OUTPUT,
             Keys.FLUID_INPUTS_EXACT_1,
             Keys.USAGE_PER_TICK,
-            Keys.TICKS
+            Keys.TICKS,
+            Keys.EXPERIENCE
     );
 }

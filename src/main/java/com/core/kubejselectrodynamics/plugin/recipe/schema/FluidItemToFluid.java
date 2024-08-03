@@ -44,6 +44,7 @@ public class FluidItemToFluid {
             Keys.FLUID_INPUTS_EXACT_1,
             Keys.ITEM_INPUTS_EXACT_1,
             Keys.USAGE_PER_TICK,
-            Keys.TICKS
+            Keys.TICKS,
+            Keys.EXPERIENCE
     );
 }

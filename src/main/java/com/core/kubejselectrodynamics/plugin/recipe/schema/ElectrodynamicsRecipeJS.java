@@ -206,4 +206,19 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         ConsoleJS.SERVER.warn("Original recipe not of Electrodynamics type - could not get ticks");
         return 0;
     }
+
+    @Info("Return the original recipe's experience.")
+    public double getOriginalRecipeExperience() {
+        if (getOriginalRecipe() == null) {
+            ConsoleJS.SERVER.warn("Original recipe is null - could not get experience");
+            return 0;
+        }
+
+        if (getOriginalRecipe() instanceof AbstractMaterialRecipe recipe) {
+            return recipe.getXp();
+        }
+
+        ConsoleJS.SERVER.warn("Original recipe not of Electrodynamics type - could not get experience");
+        return 0;
+    }
 }

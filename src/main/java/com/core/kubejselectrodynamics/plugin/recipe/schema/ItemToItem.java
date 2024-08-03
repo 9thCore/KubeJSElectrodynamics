@@ -22,6 +22,7 @@ public class ItemToItem {
             Keys.ITEM_INPUTS_EXACT_1,
             Keys.USAGE_PER_TICK,
             Keys.TICKS,
+            Keys.EXPERIENCE,
             Keys.ITEM_BI_EXACT_1
     );
 
@@ -32,6 +33,7 @@ public class ItemToItem {
             Keys.ITEM_INPUTS_EXACT_2,
             Keys.USAGE_PER_TICK,
             Keys.TICKS,
+            Keys.EXPERIENCE,
             Keys.ITEM_BI_EXACT_1
     );
 
@@ -42,6 +44,7 @@ public class ItemToItem {
             Keys.ITEM_INPUTS_EXACT_2,
             Keys.USAGE_PER_TICK,
             Keys.TICKS,
+            Keys.EXPERIENCE,
             Keys.ITEM_BI_EXACT_1
     );
 }
