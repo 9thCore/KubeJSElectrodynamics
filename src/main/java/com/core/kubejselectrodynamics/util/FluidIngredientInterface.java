@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin.fluidingredient;
+package com.core.kubejselectrodynamics.util;
 
 public interface FluidIngredientInterface {
     int kjsElectroMixin$getAmount();

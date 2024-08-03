@@ -189,6 +189,10 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
+mixin {
+    config "${mod_id}.mixins.json"
+}
+
 // Example for how to get properties into the manifest for reading at runtime.
 tasks.named('jar', Jar).configure {
     manifest {
