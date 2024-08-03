@@ -1,6 +1,9 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
+import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.TagFluidStackJS;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasStackJS;
+import com.core.kubejselectrodynamics.util.ElectroFluidWrapper;
+import dev.architectury.hooks.fluid.forge.FluidStackHooksForge;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
@@ -9,11 +12,42 @@ import electrodynamics.common.recipe.recipeutils.AbstractMaterialRecipe;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import electrodynamics.common.recipe.recipeutils.GasIngredient;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
 public class ElectrodynamicsRecipeJS extends RecipeJS {
+    public Ingredient[] getOriginalRecipeItemIngredients() {
+        if (getOriginalRecipe() == null) {
+            ConsoleJS.SERVER.warn("Original recipe is null - could not get item ingredients");
+            return null;
+        }
+
+        if (getOriginalRecipe() instanceof AbstractMaterialRecipe recipe) {
+            List<Ingredient> allIngredients = recipe.getIngredients();
+
+            // Use an array so we don't lose extended class data
+            Ingredient[] itemIngredients = new Ingredient[allIngredients.size()];
+            int i = 0;
+            for (Ingredient ingredient : allIngredients) {
+                if (!(ingredient instanceof FluidIngredient) && !(ingredient instanceof GasIngredient)) {
+                    itemIngredients[i++] = ingredient;
+                }
+            }
+
+            // Since we may or may not have included all ingredients, we have to re-create it with the correct length
+            Ingredient[] output = new Ingredient[i];
+            for (int j = 0; j < i; j++) {
+                output[j] = itemIngredients[j];
+            }
+            return output;
+        }
+
+        ConsoleJS.SERVER.warn("Original recipe is not of Electrodynamics type - could not get item ingredients");
+        return null;
+    }
+
     public ItemStack[] getOriginalRecipeItemByproducts() {
         if (getOriginalRecipe() == null) {
             ConsoleJS.SERVER.warn("Original recipe is null - could not get item byproducts");
@@ -35,17 +69,30 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         }
 
         if (getOriginalRecipe() instanceof AbstractMaterialRecipe recipe) {
-            List<FluidIngredient> ingredients = recipe.getFluidIngredients();
-            FluidStackJS[] output = new FluidStackJS[ingredients.size()];
+            List<FluidIngredient> fluidIngredients = recipe.getFluidIngredients();
+            FluidStackJS[] output = new FluidStackJS[fluidIngredients.size()];
             int i = 0;
-            for (FluidIngredient ingredient : ingredients) {
-                FluidStack stack = ingredient.getFluidStack();
-                output[i++] = FluidStackJS.of(stack.getFluid(), stack.getAmount(), stack.getTag());
+            for (FluidIngredient fluid : fluidIngredients) {
+                output[i++] = ElectroFluidWrapper.of(fluid);
             }
             return output;
         }
 
         ConsoleJS.SERVER.warn("Original recipe is not of Electrodynamics type - could not get fluid ingredients");
+        return null;
+    }
+
+    public FluidStackJS getOriginalRecipeFluidResult() {
+        if (getOriginalRecipe() == null) {
+            ConsoleJS.SERVER.warn("Original recipe is null - could not get fluid result");
+            return null;
+        }
+
+        if (getOriginalRecipe() instanceof AbstractMaterialRecipe recipe) {
+            return ElectroFluidWrapper.of(FluidStackHooksForge.fromForge(recipe.getFluidRecipeOutput()));
+        }
+
+        ConsoleJS.SERVER.warn("Original recipe not of Electrodynamics type - could not get fluid result");
         return null;
     }
 
@@ -59,7 +106,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
             FluidStackJS[] output = new FluidStackJS[recipe.getFluidBiproductCount()];
             int i = 0;
             for (FluidStack stack : recipe.getFullFluidBiStacks()) {
-                output[i++] = FluidStackJS.of(stack.getFluid(), stack.getAmount(), stack.getTag());
+                output[i++] = ElectroFluidWrapper.of(stack);
             }
             return output;
         }
@@ -107,9 +154,9 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
-    public ElectroGasStackJS getOriginalRecipeGasOutput() {
+    public ElectroGasStackJS getOriginalRecipeGasResult() {
         if (getOriginalRecipe() == null) {
-            ConsoleJS.SERVER.warn("Original recipe is null - could not get output gas");
+            ConsoleJS.SERVER.warn("Original recipe is null - could not get gas result");
             return null;
         }
 
@@ -117,7 +164,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
             return ElectroGasStackJS.of(recipe.getGasRecipeOutput());
         }
 
-        ConsoleJS.SERVER.warn("Original recipe not of Electrodynamics type - could not get output gas");
+        ConsoleJS.SERVER.warn("Original recipe not of Electrodynamics type - could not get gas result");
         return null;
     }
 
