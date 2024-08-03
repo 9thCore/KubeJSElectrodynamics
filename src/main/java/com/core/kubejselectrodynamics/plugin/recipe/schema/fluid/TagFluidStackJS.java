@@ -4,9 +4,9 @@ import com.google.gson.JsonObject;
 import dev.architectury.fluid.FluidStack;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,15 +15,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class TagFluidStackJS extends FluidStackJS {
-    private static final Fluid[] EMPTY_ARRAY = new Fluid[]{Fluids.EMPTY};
-    private final TagKey<Fluid> tag;
+    private final ResourceLocation tagLocation;
+    private TagKey<Fluid> tag;
     private long amount;
     private CompoundTag nbt;
     private final ArrayList<FluidStack> cached;
     private List<Fluid> cachedFluid;
 
-    public TagFluidStackJS(TagKey<Fluid> tag) {
-        this.tag = tag;
+    public TagFluidStackJS(ResourceLocation location) {
+        this.tag = null;
+        this.tagLocation = location;
         amount = FluidStack.bucketAmount();
         nbt = null;
         cached = new ArrayList<>();
@@ -32,7 +33,7 @@ public class TagFluidStackJS extends FluidStackJS {
 
     @Override
     public String getId() {
-        return tag.location().toString();
+        return tagLocation.toString();
     }
 
     @Override
@@ -54,7 +55,7 @@ public class TagFluidStackJS extends FluidStackJS {
 
     public Fluid[] getFluids() {
         if (cachedFluid.isEmpty()) {
-            cachedFluid = Objects.requireNonNull(ForgeRegistries.FLUIDS.tags()).getTag(tag).stream().toList();
+            cachedFluid = Objects.requireNonNull(ForgeRegistries.FLUIDS.tags()).getTag(getTag()).stream().toList();
         }
         return cachedFluid.toArray(new Fluid[0]);
     }
@@ -83,14 +84,17 @@ public class TagFluidStackJS extends FluidStackJS {
 
     @Override
     public FluidStackJS kjs$copy(long amount) {
-        TagFluidStackJS stack = new TagFluidStackJS(tag);
+        TagFluidStackJS stack = new TagFluidStackJS(tagLocation);
         stack.amount = amount;
         stack.nbt = nbt == null ? null : nbt.copy();
         return stack;
     }
 
-    public boolean isTag() {
-        return tag != null;
+    public TagKey<Fluid> getTag() {
+        if (tag == null) {
+            tag = TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), tagLocation);
+        }
+        return tag;
     }
 
     @Override
@@ -102,7 +106,7 @@ public class TagFluidStackJS extends FluidStackJS {
     public JsonObject toJson() {
         JsonObject object = super.toJson();
         object.addProperty("tag", getId());
-        object.remove("tag");
+        object.remove("fluid");
         return object;
     }
 }
