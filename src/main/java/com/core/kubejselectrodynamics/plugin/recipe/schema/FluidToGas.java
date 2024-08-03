@@ -1,6 +1,7 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
-import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.ElectroFluidStackJS;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.TagFluidStackJS;
+import com.core.kubejselectrodynamics.util.ElectroFluidWrapper;
 import com.google.gson.JsonElement;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
@@ -11,18 +12,7 @@ public class FluidToGas {
     public static class FluidToGasRecipeJS extends ElectrodynamicsRecipeJS {
         @Override
         public InputFluid readInputFluid(Object from) {
-            return ElectroFluidStackJS.of(from);
-        }
-
-        @Override
-        public JsonElement writeInputFluid(InputFluid value) {
-            if (value instanceof ElectroFluidStackJS stack) {
-                return stack.toJson();
-            } else if (value instanceof FluidStackJS stack) {
-                return stack.toJson();
-            } else {
-                throw new IllegalArgumentException("Unexpected fluid object!");
-            }
+            return ElectroFluidWrapper.of(from);
         }
     }
 
