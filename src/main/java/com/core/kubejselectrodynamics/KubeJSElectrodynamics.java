@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 @Mod(KubeJSElectrodynamics.MODID)
 public class KubeJSElectrodynamics
 {
-    public static final String MODID = "kubejs_electrodynamics";
+    public static final String MODID = "kubejselectrodynamics";
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public KubeJSElectrodynamics() {}
