@@ -1,13 +1,17 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema.gas;
 
+import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.util.GasRegistrationUtil;
+import com.core.kubejselectrodynamics.util.TextUtil;
 import dev.latvian.mods.kubejs.registry.BuilderBase;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import dev.latvian.mods.kubejs.typings.Info;
 import electrodynamics.api.gas.Gas;
+import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -23,7 +27,6 @@ import org.jetbrains.annotations.NotNull;
 public class GasBuilder extends BuilderBase<Gas> {
     public static RegistryInfo<Gas> INFO = RegistryInfo.of(ElectrodynamicsRegistries.GAS_REGISTRY_KEY, Gas.class);
     private final ResourceLocation location;
-    private Component name;
     private double condensationTemp = Double.NaN;
     private Fluid condensationFluid = Fluids.EMPTY;
     private Item item = Items.AIR;
@@ -36,12 +39,6 @@ public class GasBuilder extends BuilderBase<Gas> {
     @Override
     public RegistryInfo<Gas> getRegistryType() {
         return INFO;
-    }
-
-    @Override
-    public GasBuilder displayName(Component name) {
-        this.name = name;
-        return this;
     }
 
     @Info("Gas will be condensated into given condensationFluid when its temperature is below condensationTemp.")
@@ -62,7 +59,7 @@ public class GasBuilder extends BuilderBase<Gas> {
         Gas gas = new Gas(
             () -> item,
             TagKey.create(ElectrodynamicsRegistries.GAS_REGISTRY_KEY, location),
-            name,
+            Component.translatable(getBuilderTranslationKey()),
             condensationTemp,
             condensationFluid
         );
