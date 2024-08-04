@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema.gas;
 
+import com.core.kubejselectrodynamics.util.GasRegistrationUtil;
 import dev.latvian.mods.kubejs.registry.BuilderBase;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import dev.latvian.mods.kubejs.typings.Info;
@@ -11,6 +12,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -55,12 +57,14 @@ public class GasBuilder extends BuilderBase<Gas> {
 
     @Override
     public Gas createObject() {
-        return new Gas(
-                () -> item,
-                TagKey.create(ElectrodynamicsRegistries.GAS_REGISTRY_KEY, location),
-                name,
-                condensationTemp,
-                condensationFluid
+        Gas gas = new Gas(
+            () -> item,
+            TagKey.create(ElectrodynamicsRegistries.GAS_REGISTRY_KEY, location),
+            name,
+            condensationTemp,
+            condensationFluid
         );
+        GasRegistrationUtil.KJS_REGISTERED_GASSES.add(RegistryObject.create(location, ElectrodynamicsRegistries.gasRegistry()));
+        return gas;
     }
 }
