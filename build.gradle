@@ -157,8 +157,13 @@ dependencies {
     implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
-    // Electrodynamics
+    // Electrodynamics (and its many addons)
     implementation fg.deobf("curse.maven:electrodynamics-316867:5502166")
+    implementation fg.deobf("curse.maven:nuclear-science-318646:5502169")
+    implementation fg.deobf("curse.maven:modular-forcefields-322896:5446493")
+    implementation fg.deobf("curse.maven:blast-craft-405322:5446485")
+    implementation fg.deobf("curse.maven:assembly-lines-404360:5446480")
+    implementation fg.deobf("curse.maven:dynamic-electricity-535933:4880390")
 
     // JEI
     implementation fg.deobf("curse.maven:jei-238222:5576551")
