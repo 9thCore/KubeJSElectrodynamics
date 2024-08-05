@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChapterGas extends Chapter {
-    private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, new ResourceLocation(KubeJSElectrodynamics.MODID, "textures/guidebook/chapter/gas/gastexture.png"));
+    private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, new ResourceLocation(KubeJSElectrodynamics.MODID, "textures/guidebook/chapter/gas/logo.png"));
 
     public ChapterGas(Module module) {
         super(module);
