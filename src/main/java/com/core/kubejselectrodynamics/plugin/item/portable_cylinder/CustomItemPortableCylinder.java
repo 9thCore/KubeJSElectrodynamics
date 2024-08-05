@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.plugin.item;
+package com.core.kubejselectrodynamics.plugin.item.portable_cylinder;
 
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.item.CustomItemExtension;
