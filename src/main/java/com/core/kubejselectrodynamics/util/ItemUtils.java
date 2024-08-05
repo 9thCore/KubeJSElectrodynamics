@@ -51,4 +51,15 @@ public class ItemUtils {
         json.addProperty("count", item.count);
         return json;
     }
+
+    public static JsonElement fluidContainerModel(JsonElement textures, String baseFluid, boolean luminosity, boolean tint) {
+        JsonObject model = new JsonObject();
+        model.addProperty("parent", "forge:item/default");
+        model.addProperty("apply_fluid_luminosity", luminosity);
+        model.addProperty("apply_tint", tint);
+        model.addProperty("fluid", baseFluid);
+        model.addProperty("loader", "forge:fluid_container");
+        model.add("textures", textures);
+        return model;
+    }
 }

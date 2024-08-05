@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics.plugin;
 
+import com.core.kubejselectrodynamics.plugin.item.canister.ItemCanisterBuilder;
 import com.core.kubejselectrodynamics.plugin.item.portable_cylinder.ItemPortableCylinderBuilder;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToGas;
@@ -28,6 +29,7 @@ public class KubePlugin extends KubeJSPlugin {
     public void init() {
         GasBuilder.INFO.addType("basic", GasBuilder.class, GasBuilder::new, true);
         RegistryInfo.ITEM.addType("electrodynamics:portable_cylinder", ItemPortableCylinderBuilder.class, ItemPortableCylinderBuilder::new, false);
+        RegistryInfo.ITEM.addType("electrodynamics:canister", ItemCanisterBuilder.class, ItemCanisterBuilder::new, false);
     }
 
     @Override
