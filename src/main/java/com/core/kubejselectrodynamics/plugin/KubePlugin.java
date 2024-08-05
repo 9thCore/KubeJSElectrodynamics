@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics.plugin;
 
+import com.core.kubejselectrodynamics.plugin.item.ItemPortableCylinderBuilder;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToGas;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToItem;
@@ -10,6 +11,7 @@ import com.core.kubejselectrodynamics.util.ElectroFluidWrapper;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
+import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import dev.latvian.mods.kubejs.script.BindingsEvent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -25,6 +27,7 @@ public class KubePlugin extends KubeJSPlugin {
     @Override
     public void init() {
         GasBuilder.INFO.addType("basic", GasBuilder.class, GasBuilder::new, true);
+        RegistryInfo.ITEM.addType("electrodynamics:portable_cylinder", ItemPortableCylinderBuilder.class, ItemPortableCylinderBuilder::new, false);
     }
 
     @Override
