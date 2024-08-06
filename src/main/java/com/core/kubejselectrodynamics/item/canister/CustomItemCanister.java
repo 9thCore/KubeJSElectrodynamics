@@ -36,7 +36,6 @@ public class CustomItemCanister extends ItemCanister implements CustomItemExtens
     @Override
     public Collection<ItemStack> getEntries() {
         Collection<ItemStack> entries = new ArrayList<>();
-        entries.add(getDefaultInstance());
         if (!CapabilityUtils.isFluidItemNull()) {
             for (Fluid liq : ForgeRegistries.FLUIDS.getValues()) {
                 if (liq.isSame(Fluids.EMPTY)) {

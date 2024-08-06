@@ -40,7 +40,6 @@ public class CustomItemPortableCylinder extends ItemPortableCylinder implements 
     @Override
     public Collection<ItemStack> getEntries() {
         Collection<ItemStack> entries = new ArrayList<>();
-        entries.add(getDefaultInstance());
         if (ElectrodynamicsCapabilities.GAS_HANDLER_ITEM != null) {
             for (Gas gas : ElectrodynamicsRegistries.gasRegistry().getValues()) {
                 if (gas.isEmpty()) {
