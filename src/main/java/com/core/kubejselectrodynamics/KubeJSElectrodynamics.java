@@ -1,12 +1,14 @@
 package com.core.kubejselectrodynamics;
 
 import com.core.kubejselectrodynamics.client.ClientRegister;
+import com.core.kubejselectrodynamics.item.CustomItemTab;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 @Mod(KubeJSElectrodynamics.MODID)
@@ -16,7 +18,9 @@ public class KubeJSElectrodynamics
     public static final String MODID = "kubejselectrodynamics";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public KubeJSElectrodynamics() {}
+    public KubeJSElectrodynamics() {
+        CustomItemTab.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+    }
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent

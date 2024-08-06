@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.plugin.item.portable_cylinder;
 
-import com.core.kubejselectrodynamics.item.CustomItemRegistrationUtil;
+import com.core.kubejselectrodynamics.item.CustomItemTab;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
 import dev.latvian.mods.kubejs.typings.Info;
 import electrodynamics.common.item.gear.tools.ItemPortableCylinder;
@@ -39,7 +39,7 @@ public class ItemPortableCylinderBuilder extends ItemBuilder {
     public Item createObject() {
         CustomItemPortableCylinder item = new CustomItemPortableCylinder(
                 createItemProperties(),
-                CustomItemRegistrationUtil.getKubeJSTab()
+                CustomItemTab.TAB
         ) {
             @Override
             public double getGasCapacity() {
@@ -56,7 +56,7 @@ public class ItemPortableCylinderBuilder extends ItemBuilder {
                 return maxPressure;
             }
         };
-        CustomItemRegistrationUtil.items.add(item);
+        CustomItemTab.items.add(item);
         return item;
     }
 }

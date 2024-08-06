@@ -17,10 +17,11 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -33,7 +34,9 @@ public class CustomItemCanister extends ItemCanister implements CustomItemExtens
      * Method originally from Electrodynamics' source code (addCreativeModeItems), adapted to fit custom implementation
      */
     @Override
-    public void registerIntoTab(BuildCreativeModeTabContentsEvent event) {
+    public Collection<ItemStack> getEntries() {
+        Collection<ItemStack> entries = new ArrayList<>();
+        entries.add(getDefaultInstance());
         if (!CapabilityUtils.isFluidItemNull()) {
             for (Fluid liq : ForgeRegistries.FLUIDS.getValues()) {
                 if (liq.isSame(Fluids.EMPTY)) {
@@ -41,9 +44,10 @@ public class CustomItemCanister extends ItemCanister implements CustomItemExtens
                 }
                 ItemStack temp = new ItemStack(this);
                 temp.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(h -> ((RestrictedFluidHandlerItemStack) h).setFluid(new FluidStack(liq, getCapacity())));
-                event.accept(temp);
+                entries.add(temp);
             }
         }
+        return entries;
     }
 
     /**
@@ -68,11 +72,6 @@ public class CustomItemCanister extends ItemCanister implements CustomItemExtens
                 }
             });
         }
-    }
-
-    @Override
-    public boolean isCorrectTab(CreativeModeTab tab) {
-        return isAllowedInCreativeTab(tab);
     }
 
     public int getCapacity() {

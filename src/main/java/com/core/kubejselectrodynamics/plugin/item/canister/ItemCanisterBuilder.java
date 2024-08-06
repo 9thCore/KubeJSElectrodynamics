@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.plugin.item.canister;
 
-import com.core.kubejselectrodynamics.item.CustomItemRegistrationUtil;
+import com.core.kubejselectrodynamics.item.CustomItemTab;
 import com.core.kubejselectrodynamics.util.ItemUtils;
 import dev.latvian.mods.kubejs.generator.AssetJsonGenerator;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
@@ -74,14 +74,14 @@ public class ItemCanisterBuilder extends ItemBuilder {
     public Item createObject() {
         CustomItemCanister item = new CustomItemCanister(
                 createItemProperties(),
-                CustomItemRegistrationUtil.getKubeJSTab()
+                CustomItemTab.TAB
         ) {
             @Override
             public int getCapacity() {
                 return capacity;
             }
         };
-        CustomItemRegistrationUtil.items.add(item);
+        CustomItemTab.items.add(item);
         return item;
     }
 }

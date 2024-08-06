@@ -22,9 +22,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -37,7 +38,9 @@ public class CustomItemPortableCylinder extends ItemPortableCylinder implements 
      * Method originally from Electrodynamics' source code (addCreativeModeItems), adapted to fit custom implementation
      */
     @Override
-    public void registerIntoTab(BuildCreativeModeTabContentsEvent event) {
+    public Collection<ItemStack> getEntries() {
+        Collection<ItemStack> entries = new ArrayList<>();
+        entries.add(getDefaultInstance());
         if (ElectrodynamicsCapabilities.GAS_HANDLER_ITEM != null) {
             for (Gas gas : ElectrodynamicsRegistries.gasRegistry().getValues()) {
                 if (gas.isEmpty()) {
@@ -45,14 +48,10 @@ public class CustomItemPortableCylinder extends ItemPortableCylinder implements 
                 }
                 ItemStack temp = new ItemStack(this);
                 temp.getCapability(ElectrodynamicsCapabilities.GAS_HANDLER_ITEM).ifPresent(cap -> ((GasHandlerItemStack) cap).setGas(new GasStack(gas, getGasCapacity(), Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL)));
-                event.accept(temp);
+                entries.add(temp);
             }
         }
-    }
-
-    @Override
-    public boolean isCorrectTab(CreativeModeTab tab) {
-        return isAllowedInCreativeTab(tab);
+        return entries;
     }
 
     /**
