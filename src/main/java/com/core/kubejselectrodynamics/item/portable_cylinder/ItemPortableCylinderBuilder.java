@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.plugin.item.portable_cylinder;
+package com.core.kubejselectrodynamics.item.portable_cylinder;
 
 import com.core.kubejselectrodynamics.item.CustomItemTab;
 import dev.latvian.mods.kubejs.item.ItemBuilder;

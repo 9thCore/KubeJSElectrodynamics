@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.plugin.item.canister;
+package com.core.kubejselectrodynamics.item.canister;
 
 import com.core.kubejselectrodynamics.item.CustomItemTab;
 import com.core.kubejselectrodynamics.util.ItemUtils;

@@ -1,7 +1,7 @@
 package com.core.kubejselectrodynamics.plugin;
 
-import com.core.kubejselectrodynamics.plugin.item.canister.ItemCanisterBuilder;
-import com.core.kubejselectrodynamics.plugin.item.portable_cylinder.ItemPortableCylinderBuilder;
+import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
+import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToGas;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToItem;
