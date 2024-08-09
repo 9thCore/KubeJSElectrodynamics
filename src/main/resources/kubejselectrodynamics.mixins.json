@@ -6,7 +6,8 @@
   "mixins": [
     "FluidIngredientMixin",
     "IngredientMixin",
-    "CountableIngredientMixin"
+    "CountableIngredientMixin",
+    "IItemElectricMixin"
   ],
   "injectors": {
     "defaultRequire": 1
