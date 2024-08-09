@@ -16,6 +16,7 @@ public class ItemBatteryBuilder extends ItemBuilder {
     private double outputJoules = 100.0D;
     private double inputVoltage = 120.0D;
     private double inputJoules = 100.0D;
+    private boolean fill = true;
 
     public ItemBatteryBuilder(ResourceLocation location) {
         super(location);
@@ -75,6 +76,12 @@ public class ItemBatteryBuilder extends ItemBuilder {
         return this;
     }
 
+    @Info("Prevents adding any prefilled stacks of this item to the \"KubeJS Electrodynamics Fills\" tab.")
+    public ItemBatteryBuilder dontFillTab() {
+        fill = false;
+        return this;
+    }
+
     /**
      * Method originally from KubeJS' source code, adapted to fit custom implementation
      */
@@ -115,7 +122,9 @@ public class ItemBatteryBuilder extends ItemBuilder {
                 (ElectricItemProperties) createItemProperties(),
                 CustomItemTab.TAB
         );
-        CustomItemTab.items.add(item);
+        if(fill) {
+            CustomItemTab.items.add(item);
+        }
         return item;
     }
 }

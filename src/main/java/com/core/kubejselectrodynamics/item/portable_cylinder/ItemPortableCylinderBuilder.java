@@ -11,6 +11,7 @@ public class ItemPortableCylinderBuilder extends ItemBuilder {
     private double maxCapacity = ItemPortableCylinder.MAX_GAS_CAPCITY;
     private int maxPressure = ItemPortableCylinder.MAX_PRESSURE;
     private double maxTemperature = ItemPortableCylinder.MAX_TEMPERATURE;
+    private boolean fill = true;
 
     public ItemPortableCylinderBuilder(ResourceLocation location) {
         super(location);
@@ -35,6 +36,12 @@ public class ItemPortableCylinderBuilder extends ItemBuilder {
         return this;
     }
 
+    @Info("Prevents adding any prefilled stacks of this item to the \"KubeJS Electrodynamics Fills\" tab.")
+    public ItemPortableCylinderBuilder dontFillTab() {
+        fill = false;
+        return this;
+    }
+
     @Override
     public Item createObject() {
         CustomItemPortableCylinder item = new CustomItemPortableCylinder(
@@ -56,7 +63,9 @@ public class ItemPortableCylinderBuilder extends ItemBuilder {
                 return maxPressure;
             }
         };
-        CustomItemTab.items.add(item);
+        if(fill) {
+            CustomItemTab.items.add(item);
+        }
         return item;
     }
 }

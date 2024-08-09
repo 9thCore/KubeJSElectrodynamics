@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 public class ItemCanisterBuilder extends ItemBuilder {
     private String emptyFluid = "minecraft:water";
     private int capacity = ItemCanister.MAX_FLUID_CAPACITY;
+    private boolean fill = true;
 
     public ItemCanisterBuilder(ResourceLocation location) {
         super(location);
@@ -30,6 +31,12 @@ public class ItemCanisterBuilder extends ItemBuilder {
         """)
     public ItemCanisterBuilder emptyTexture(String emptyTexture) {
         this.emptyFluid = emptyTexture;
+        return this;
+    }
+
+    @Info("Prevents adding any prefilled stacks of this item to the \"KubeJS Electrodynamics Fills\" tab.")
+    public ItemCanisterBuilder dontFillTab() {
+        fill = false;
         return this;
     }
 
@@ -81,7 +88,9 @@ public class ItemCanisterBuilder extends ItemBuilder {
                 return capacity;
             }
         };
-        CustomItemTab.items.add(item);
+        if(fill) {
+            CustomItemTab.items.add(item);
+        }
         return item;
     }
 }
