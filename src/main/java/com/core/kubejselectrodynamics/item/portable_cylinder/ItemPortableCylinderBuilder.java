@@ -3,6 +3,7 @@ package com.core.kubejselectrodynamics.item.portable_cylinder;
 import com.core.kubejselectrodynamics.item.CustomItemTab;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
 import dev.latvian.mods.kubejs.typings.Info;
+import dev.latvian.mods.rhino.util.HideFromJS;
 import electrodynamics.common.item.gear.tools.ItemPortableCylinder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -42,27 +43,28 @@ public class ItemPortableCylinderBuilder extends ItemBuilder {
         return this;
     }
 
+    @HideFromJS
+    public double getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    @HideFromJS
+    public double getMaxTemperature() {
+        return maxTemperature;
+    }
+
+    @HideFromJS
+    public int getMaxPressure() {
+        return maxPressure;
+    }
+
     @Override
     public Item createObject() {
         CustomItemPortableCylinder item = new CustomItemPortableCylinder(
                 createItemProperties(),
-                CustomItemTab.TAB
-        ) {
-            @Override
-            public double getGasCapacity() {
-                return maxCapacity;
-            }
-
-            @Override
-            public double getTemperatureCapacity() {
-                return maxTemperature;
-            }
-
-            @Override
-            public int getPressureCapacity() {
-                return maxPressure;
-            }
-        };
+                CustomItemTab.TAB,
+                this
+        );
         if(fill) {
             CustomItemTab.items.add(item);
         }

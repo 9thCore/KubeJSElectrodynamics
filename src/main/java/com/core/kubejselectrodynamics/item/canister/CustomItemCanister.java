@@ -26,8 +26,11 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class CustomItemCanister extends ItemCanister implements CustomItemExtension {
-    public CustomItemCanister(Properties properties, Supplier<CreativeModeTab> creativeTab) {
+    private final ItemCanisterBuilder builder;
+
+    public CustomItemCanister(Properties properties, Supplier<CreativeModeTab> creativeTab, ItemCanisterBuilder builder) {
         super(properties, creativeTab);
+        this.builder = builder;
     }
 
     /**
@@ -42,7 +45,7 @@ public class CustomItemCanister extends ItemCanister implements CustomItemExtens
                     continue;
                 }
                 ItemStack temp = new ItemStack(this);
-                temp.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(h -> ((RestrictedFluidHandlerItemStack) h).setFluid(new FluidStack(liq, getCapacity())));
+                temp.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(h -> ((RestrictedFluidHandlerItemStack) h).setFluid(new FluidStack(liq, builder.getCapacity())));
                 entries.add(temp);
             }
         }
@@ -54,7 +57,7 @@ public class CustomItemCanister extends ItemCanister implements CustomItemExtens
      */
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
-        return new RestrictedFluidHandlerItemStack.SwapEmpty(stack, stack, getCapacity());
+        return new RestrictedFluidHandlerItemStack.SwapEmpty(stack, stack, builder.getCapacity());
     }
 
     /**
@@ -66,14 +69,10 @@ public class CustomItemCanister extends ItemCanister implements CustomItemExtens
             stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(h -> {
                 if (!((RestrictedFluidHandlerItemStack) h).getFluid().isEmpty()) {
                     RestrictedFluidHandlerItemStack cap = (RestrictedFluidHandlerItemStack) h;
-                    tooltip.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(cap.getFluidInTank(0).getAmount()), ChatFormatter.formatFluidMilibuckets(getCapacity())).withStyle(ChatFormatting.GRAY));
+                    tooltip.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(cap.getFluidInTank(0).getAmount()), ChatFormatter.formatFluidMilibuckets(builder.getCapacity())).withStyle(ChatFormatting.GRAY));
                     tooltip.add(cap.getFluid().getDisplayName().copy().withStyle(ChatFormatting.DARK_GRAY));
                 }
             });
         }
-    }
-
-    public int getCapacity() {
-        return MAX_FLUID_CAPACITY;
     }
 }

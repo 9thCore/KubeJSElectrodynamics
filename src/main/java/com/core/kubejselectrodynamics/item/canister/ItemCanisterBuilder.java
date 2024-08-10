@@ -5,6 +5,7 @@ import com.core.kubejselectrodynamics.util.ItemUtils;
 import dev.latvian.mods.kubejs.generator.AssetJsonGenerator;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
 import dev.latvian.mods.kubejs.typings.Info;
+import dev.latvian.mods.rhino.util.HideFromJS;
 import electrodynamics.common.item.gear.tools.ItemCanister;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -77,17 +78,18 @@ public class ItemCanisterBuilder extends ItemBuilder {
         );
     }
 
+    @HideFromJS
+    public int getCapacity() {
+        return capacity;
+    }
+
     @Override
     public Item createObject() {
         CustomItemCanister item = new CustomItemCanister(
                 createItemProperties(),
-                CustomItemTab.TAB
-        ) {
-            @Override
-            public int getCapacity() {
-                return capacity;
-            }
-        };
+                CustomItemTab.TAB,
+                this
+        );
         if(fill) {
             CustomItemTab.items.add(item);
         }

@@ -30,8 +30,11 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class CustomItemPortableCylinder extends ItemPortableCylinder implements CustomItemExtension {
-    public CustomItemPortableCylinder(Item.Properties properties, Supplier<CreativeModeTab> creativeTab) {
+    private final ItemPortableCylinderBuilder builder;
+
+    public CustomItemPortableCylinder(Item.Properties properties, Supplier<CreativeModeTab> creativeTab, ItemPortableCylinderBuilder builder) {
         super(properties, creativeTab);
+        this.builder = builder;
     }
 
     /**
@@ -46,7 +49,7 @@ public class CustomItemPortableCylinder extends ItemPortableCylinder implements 
                     continue;
                 }
                 ItemStack temp = new ItemStack(this);
-                temp.getCapability(ElectrodynamicsCapabilities.GAS_HANDLER_ITEM).ifPresent(cap -> ((GasHandlerItemStack) cap).setGas(new GasStack(gas, getGasCapacity(), Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL)));
+                temp.getCapability(ElectrodynamicsCapabilities.GAS_HANDLER_ITEM).ifPresent(cap -> ((GasHandlerItemStack) cap).setGas(new GasStack(gas, builder.getMaxCapacity(), Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL)));
                 entries.add(temp);
             }
         }
@@ -58,7 +61,7 @@ public class CustomItemPortableCylinder extends ItemPortableCylinder implements 
      */
     @Override
     public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new GasHandlerItemStack(stack, getGasCapacity(), getTemperatureCapacity(), getPressureCapacity());
+        return new GasHandlerItemStack(stack, builder.getMaxCapacity(), builder.getMaxTemperature(), builder.getMaxPressure());
     }
 
     /**
@@ -69,30 +72,18 @@ public class CustomItemPortableCylinder extends ItemPortableCylinder implements 
         stack.getCapability(ElectrodynamicsCapabilities.GAS_HANDLER_ITEM).ifPresent(cap -> {
             GasStack gas = cap.getGasInTank(0);
             if (gas.isEmpty()) {
-                tooltips.add(ElectroTextUtils.ratio(Component.literal("0"), ChatFormatter.formatFluidMilibuckets(getGasCapacity())).withStyle(ChatFormatting.GRAY));
+                tooltips.add(ElectroTextUtils.ratio(Component.literal("0"), ChatFormatter.formatFluidMilibuckets(builder.getMaxCapacity())).withStyle(ChatFormatting.GRAY));
             } else {
                 tooltips.add(gas.getGas().getDescription().copy().withStyle(ChatFormatting.GRAY));
-                tooltips.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(gas.getAmount()), ChatFormatter.formatFluidMilibuckets(getGasCapacity())).withStyle(ChatFormatting.DARK_GRAY));
+                tooltips.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(gas.getAmount()), ChatFormatter.formatFluidMilibuckets(builder.getMaxCapacity())).withStyle(ChatFormatting.DARK_GRAY));
                 tooltips.add(ChatFormatter.getChatDisplayShort(gas.getTemperature(), DisplayUnit.TEMPERATURE_KELVIN).withStyle(ChatFormatting.DARK_GRAY));
                 tooltips.add(ChatFormatter.getChatDisplayShort(gas.getPressure(), DisplayUnit.PRESSURE_ATM).withStyle(ChatFormatting.DARK_GRAY));
             }
 
         });
         if (Screen.hasShiftDown()) {
-            tooltips.add(ElectroTextUtils.tooltip("maxpressure", ChatFormatter.getChatDisplayShort(getPressureCapacity(), DisplayUnit.PRESSURE_ATM)).withStyle(ChatFormatting.GRAY));
-            tooltips.add(ElectroTextUtils.tooltip("maxtemperature", ChatFormatter.getChatDisplayShort(getTemperatureCapacity(), DisplayUnit.TEMPERATURE_KELVIN)).withStyle(ChatFormatting.GRAY));
+            tooltips.add(ElectroTextUtils.tooltip("maxpressure", ChatFormatter.getChatDisplayShort(builder.getMaxPressure(), DisplayUnit.PRESSURE_ATM)).withStyle(ChatFormatting.GRAY));
+            tooltips.add(ElectroTextUtils.tooltip("maxtemperature", ChatFormatter.getChatDisplayShort(builder.getMaxTemperature(), DisplayUnit.TEMPERATURE_KELVIN)).withStyle(ChatFormatting.GRAY));
         }
-    }
-
-    public double getGasCapacity() {
-        return ItemPortableCylinder.MAX_GAS_CAPCITY;
-    }
-
-    public int getPressureCapacity() {
-        return ItemPortableCylinder.MAX_PRESSURE;
-    }
-
-    public double getTemperatureCapacity() {
-        return ItemPortableCylinder.MAX_TEMPERATURE;
     }
 }
