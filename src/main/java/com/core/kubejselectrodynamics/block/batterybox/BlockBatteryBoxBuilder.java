@@ -1,11 +1,11 @@
 package com.core.kubejselectrodynamics.block.batterybox;
 
 import com.core.kubejselectrodynamics.block.BlockItemDescribableBuilder;
-import com.core.kubejselectrodynamics.block.ElectrodynamicsElectricityCapable;
+import com.core.kubejselectrodynamics.block.capabilities.ElectrodynamicsElectricityInput;
+import com.core.kubejselectrodynamics.block.capabilities.ElectrodynamicsElectricityOutput;
 import com.core.kubejselectrodynamics.block.TileRegister;
 import dev.latvian.mods.kubejs.block.BlockItemBuilder;
 import dev.latvian.mods.kubejs.block.custom.HorizontalDirectionalBlockBuilder;
-import dev.latvian.mods.kubejs.block.entity.BlockEntityInfo;
 import dev.latvian.mods.kubejs.client.VariantBlockStateGenerator;
 import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
@@ -15,15 +15,11 @@ import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.material.MapColor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
-public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder implements ElectrodynamicsElectricityCapable<BlockBatteryBoxBuilder> {
+public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder implements ElectrodynamicsElectricityInput<BlockBatteryBoxBuilder>, ElectrodynamicsElectricityOutput<BlockBatteryBoxBuilder> {
     private int voltage = 120;
     private double capacity = 1000.0D;
     private double output = 300.0D;
