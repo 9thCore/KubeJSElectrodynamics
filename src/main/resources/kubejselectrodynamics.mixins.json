@@ -7,7 +7,10 @@
     "FluidIngredientMixin",
     "IngredientMixin",
     "CountableIngredientMixin",
-    "IItemElectricMixin"
+    "IItemElectricMixin",
+    "ComponentMixins$ComponentContainerProviderMixin",
+    "ComponentMixins$ComponentElectrodynamicMixin",
+    "UtilsMixins$ElectricityUtilsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

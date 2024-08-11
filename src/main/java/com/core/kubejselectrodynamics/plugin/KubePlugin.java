@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics.plugin;
 
+import com.core.kubejselectrodynamics.block.batterybox.BlockBatteryBoxBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
@@ -28,10 +29,16 @@ public class KubePlugin extends KubeJSPlugin {
 
     @Override
     public void init() {
+        // GAS
         GasBuilder.INFO.addType("basic", GasBuilder.class, GasBuilder::new, true);
+
+        // ITEM
         RegistryInfo.ITEM.addType("electrodynamics:portable_cylinder", ItemPortableCylinderBuilder.class, ItemPortableCylinderBuilder::new, false);
         RegistryInfo.ITEM.addType("electrodynamics:canister", ItemCanisterBuilder.class, ItemCanisterBuilder::new, false);
         RegistryInfo.ITEM.addType("electrodynamics:battery", ItemBatteryBuilder.class, ItemBatteryBuilder::new, false);
+
+        // BLOCK
+        RegistryInfo.BLOCK.addType("electrodynamics:batterybox", BlockBatteryBoxBuilder.class, BlockBatteryBoxBuilder::new, false);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.core.kubejselectrodynamics;
 
+import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.client.ClientRegister;
 import com.core.kubejselectrodynamics.item.CustomItemTab;
 import com.mojang.logging.LogUtils;
@@ -20,6 +21,7 @@ public class KubeJSElectrodynamics
 
     public KubeJSElectrodynamics() {
         CustomItemTab.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TileRegister.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     @OnlyIn(Dist.CLIENT)
