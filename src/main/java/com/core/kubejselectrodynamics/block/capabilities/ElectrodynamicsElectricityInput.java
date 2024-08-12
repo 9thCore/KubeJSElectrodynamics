@@ -5,15 +5,29 @@ import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.rhino.util.HideFromJS;
 import net.minecraft.core.Direction;
 
-public interface ElectrodynamicsElectricityInput<T extends BlockBuilder> {
+import java.util.Arrays;
+import java.util.EnumSet;
+
+public interface ElectrodynamicsElectricityInput<T extends BlockBuilder> extends SelfAccessor<T> {
     @Info("Sets the machine's electric input faces.\nDirection.ALL is not supported, use #allElectricInput() instead.")
-    T electricInputs(Direction[] directions);
+    default T electricInputs(Direction[] directions) {
+        getElectricInputSet().clear();
+        getElectricInputSet().addAll(Arrays.asList(directions));
+        return getThis();
+    }
     @Info("Sets the machine's electric input face.\nDirection.ALL is not supported, use #allElectricInput() instead.")
     default T electricInput(Direction direction) {
         return electricInputs(new Direction[] {direction});
     }
     @Info("Allows electric input through every face.")
-    T allElectricInput();
+    default T allElectricInput() {
+        getElectricInputSet().clear();
+        return getThis();
+    }
     @HideFromJS
-    Direction[] getElectricInput();
+    default Direction[] getElectricInput() {
+        return getElectricInputSet().toArray(new Direction[0]);
+    }
+    @HideFromJS
+    EnumSet<Direction> getElectricInputSet();
 }

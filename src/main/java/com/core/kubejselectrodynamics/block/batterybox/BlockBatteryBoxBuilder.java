@@ -16,16 +16,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumSet;
 
 public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder implements ElectrodynamicsElectricityInput<BlockBatteryBoxBuilder>, ElectrodynamicsElectricityOutput<BlockBatteryBoxBuilder> {
     private int voltage = 120;
     private double capacity = 1000.0D;
     private double output = 300.0D;
     private int modelRotationOffset = 0;
-    private final Boolean[] inputSides = new Boolean[] {false, false, false, true, false, false}; // SOUTH
-    private final Boolean[] outputSides = new Boolean[] {false, false, true, false, false, false}; // NORTH
+    private final EnumSet<Direction> electricInput = EnumSet.of(Direction.SOUTH);
+    private final EnumSet<Direction> electricOutput = EnumSet.of(Direction.NORTH);
 
     public BlockBatteryBoxBuilder(ResourceLocation location) {
         super(location);
@@ -61,58 +60,17 @@ public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder im
     }
 
     @Override
-    public BlockBatteryBoxBuilder electricInputs(Direction[] directions) {
-        allElectricInput();
-        for (Direction direction : directions) {
-            inputSides[direction.ordinal()] = true;
-        }
-        return this;
+    public EnumSet<Direction> getElectricInputSet() {
+        return electricInput;
     }
 
     @Override
-    public Direction[] getElectricInput() {
-        List<Direction> list = new ArrayList<>();
-        for (Direction direction : Direction.values()) {
-            if (inputSides[direction.ordinal()]) {
-                list.add(direction);
-            }
-        }
-        return list.toArray(new Direction[0]);
+    public EnumSet<Direction> getElectricOutputSet() {
+        return electricOutput;
     }
 
     @Override
-    public BlockBatteryBoxBuilder allElectricInput() {
-        for (Direction direction : Direction.values()) {
-            inputSides[direction.ordinal()] = false;
-        }
-        return this;
-    }
-
-    @Override
-    public BlockBatteryBoxBuilder electricOutputs(Direction[] directions) {
-        allElectricOutput();
-        for (Direction direction : directions) {
-            outputSides[direction.ordinal()] = true;
-        }
-        return this;
-    }
-
-    @Override
-    public Direction[] getElectricOutput() {
-        List<Direction> list = new ArrayList<>();
-        for (Direction direction : Direction.values()) {
-            if (outputSides[direction.ordinal()]) {
-                list.add(direction);
-            }
-        }
-        return list.toArray(new Direction[0]);
-    }
-
-    @Override
-    public BlockBatteryBoxBuilder allElectricOutput() {
-        for (Direction direction : Direction.values()) {
-            outputSides[direction.ordinal()] = false;
-        }
+    public BlockBatteryBoxBuilder getThis() {
         return this;
     }
 
