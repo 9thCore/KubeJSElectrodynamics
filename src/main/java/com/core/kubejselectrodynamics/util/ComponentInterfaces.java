@@ -3,7 +3,7 @@ package com.core.kubejselectrodynamics.util;
 import net.minecraft.core.Direction;
 
 public class ComponentInterfaces {
-    public interface ComponentElectrodynamicInterface {
+    public interface IComponentElectrodynamics {
         void kjsElectro$clearInputDirections();
         void kjsElectro$clearOutputDirections();
         boolean kjsElectro$hasSidedInput(Direction side);
@@ -11,7 +11,7 @@ public class ComponentInterfaces {
         boolean kjsElectro$hasSidedConnection(Direction side);
     }
 
-    public interface ComponentContainerProviderInterface {
+    public interface IComponentContainerProvider {
         void kjsElectro$setName(String name);
     }
 }

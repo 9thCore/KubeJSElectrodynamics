@@ -1,6 +1,5 @@
 package com.core.kubejselectrodynamics.block.batterybox;
 
-import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.util.ComponentInterfaces;
 import electrodynamics.common.block.subtype.SubtypeMachine;
@@ -32,11 +31,11 @@ public class TileCustomBatteryBox extends TileBatteryBox {
         super(type, SubtypeMachine.batterybox, builder.getVoltage(), builder.getOutput(), builder.getCapacity(), worldPosition, blockState);
 
         // Hacks: set correct values
-        ((ComponentInterfaces.ComponentContainerProviderInterface) getComponent(IComponentType.ContainerProvider)).kjsElectro$setName(builder.getBuilderTranslationKey());
+        ((ComponentInterfaces.IComponentContainerProvider) getComponent(IComponentType.ContainerProvider)).kjsElectro$setName(builder.getBuilderTranslationKey());
 
         IComponent component = getComponent(IComponentType.Electrodynamic);
         ComponentElectrodynamic electrodynamic = (ComponentElectrodynamic) component;
-        ComponentInterfaces.ComponentElectrodynamicInterface mixinInterface = (ComponentInterfaces.ComponentElectrodynamicInterface) component;
+        ComponentInterfaces.IComponentElectrodynamics mixinInterface = (ComponentInterfaces.IComponentElectrodynamics) component;
 
         mixinInterface.kjsElectro$clearInputDirections();
         electrodynamic.setInputDirections(builder.getElectricInput());
@@ -53,7 +52,7 @@ public class TileCustomBatteryBox extends TileBatteryBox {
 
         for (Direction direction : Direction.values()) {
             int ordinal = direction.ordinal();
-            if (!((ComponentInterfaces.ComponentElectrodynamicInterface) electro).kjsElectro$hasSidedOutput(direction)) {
+            if (!((ComponentInterfaces.IComponentElectrodynamics) electro).kjsElectro$hasSidedOutput(direction)) {
                 continue;
             }
 
@@ -79,7 +78,7 @@ public class TileCustomBatteryBox extends TileBatteryBox {
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, Direction face) {
         ComponentElectrodynamic component = getComponent(IComponentType.Electrodynamic);
         if (capability == ForgeCapabilities.ENERGY) {
-            if (((ComponentInterfaces.ComponentElectrodynamicInterface) component).kjsElectro$hasSidedConnection(face)) {
+            if (((ComponentInterfaces.IComponentElectrodynamics) component).kjsElectro$hasSidedConnection(face)) {
                 return LazyOptional.of(() -> (T)this);
             }
             return LazyOptional.empty();
