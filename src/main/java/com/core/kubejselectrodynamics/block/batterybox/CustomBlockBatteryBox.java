@@ -1,9 +1,8 @@
 package com.core.kubejselectrodynamics.block.batterybox;
 
-import dev.latvian.mods.kubejs.block.custom.BasicBlockJS;
+import dev.latvian.mods.kubejs.block.custom.HorizontalDirectionalBlockBuilder;
 import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.voxelshapes.VoxelShapes;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.IWrenchable;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -40,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class CustomBlockBatteryBox extends BasicBlockJS.WithEntity implements IWrenchable {
+public class CustomBlockBatteryBox extends HorizontalDirectionalBlockBuilder.WithEntity implements IWrenchable {
     private final BlockEntityType.BlockEntitySupplier<BlockEntity> supplier;
     private final BlockBatteryBoxBuilder blockBuilder;
 
@@ -49,7 +48,7 @@ public class CustomBlockBatteryBox extends BasicBlockJS.WithEntity implements IW
         this.supplier = supplier;
         this.blockBuilder = blockBuilder;
         BlockState state = getStateDefinition().any()
-                .setValue(GenericEntityBlock.FACING, Direction.NORTH)
+                .setValue(FACING, Direction.NORTH)
                 .setValue(BlockMachine.ON, false);
         if (blockBuilder.canBeWaterlogged()) {
             state = state.setValue(BlockStateProperties.WATERLOGGED, false);
@@ -69,13 +68,12 @@ public class CustomBlockBatteryBox extends BasicBlockJS.WithEntity implements IW
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return VoxelShapes.getShape(state.getBlock(), state.getValue(GenericEntityBlock.FACING));
+        return VoxelShapes.getShape(state.getBlock(), state.getValue(FACING));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(GenericEntityBlock.FACING);
         builder.add(BlockMachine.ON);
     }
 
@@ -102,7 +100,7 @@ public class CustomBlockBatteryBox extends BasicBlockJS.WithEntity implements IW
     public BlockState rotate(BlockState blockState, Rotation rotation) {
         BlockState state = super.rotate(blockState, rotation);
         if (state == blockState) {
-            return blockState.setValue(GenericEntityBlock.FACING, rotation.rotate(blockState.getValue(GenericEntityBlock.FACING)));
+            return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
         }
         return state;
     }
@@ -114,7 +112,7 @@ public class CustomBlockBatteryBox extends BasicBlockJS.WithEntity implements IW
     public BlockState mirror(BlockState blockState, Mirror mirror) {
         BlockState state = super.mirror(blockState, mirror);
         if (state == blockState) {
-            return blockState.setValue(GenericEntityBlock.FACING, mirror.mirror(blockState.getValue(GenericEntityBlock.FACING)));
+            return blockState.setValue(FACING, mirror.mirror(blockState.getValue(FACING)));
         }
         return state;
     }
@@ -224,7 +222,7 @@ public class CustomBlockBatteryBox extends BasicBlockJS.WithEntity implements IW
      */
     @Override
     public void onRotate(ItemStack itemStack, BlockPos blockPos, Player player) {
-        if (player.level().getBlockState(blockPos).hasProperty(GenericEntityBlock.FACING)) {
+        if (player.level().getBlockState(blockPos).hasProperty(FACING)) {
             BlockState state = this.rotate(player.level().getBlockState(blockPos), Rotation.CLOCKWISE_90);
             player.level().setBlockAndUpdate(blockPos, state);
         }
@@ -244,7 +242,7 @@ public class CustomBlockBatteryBox extends BasicBlockJS.WithEntity implements IW
      */
     @Override
     public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
-        BlockState state = defaultBlockState().setValue(GenericEntityBlock.FACING, context.getHorizontalDirection().getOpposite());
+        BlockState state = defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
         if (blockBuilder.canBeWaterlogged()) {
             state = state.setValue(BlockStateProperties.WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
         }

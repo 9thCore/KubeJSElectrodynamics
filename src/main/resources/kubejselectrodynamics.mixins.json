@@ -10,7 +10,8 @@
     "IItemElectricMixin",
     "ComponentMixins$ComponentContainerProviderMixin",
     "ComponentMixins$ComponentElectrodynamicMixin",
-    "UtilsMixins$ElectricityUtilsMixin"
+    "UtilsMixins$ElectricityUtilsMixin",
+    "ElectrodynamicsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
