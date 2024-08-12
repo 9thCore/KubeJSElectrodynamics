@@ -1,12 +1,11 @@
 package com.core.kubejselectrodynamics.block.batterybox;
 
 import com.core.kubejselectrodynamics.block.BlockItemDescribableBuilder;
+import com.core.kubejselectrodynamics.block.RotatableBlockBuilder;
 import com.core.kubejselectrodynamics.block.capabilities.ElectrodynamicsElectricityInput;
 import com.core.kubejselectrodynamics.block.capabilities.ElectrodynamicsElectricityOutput;
 import com.core.kubejselectrodynamics.block.TileRegister;
 import dev.latvian.mods.kubejs.block.BlockItemBuilder;
-import dev.latvian.mods.kubejs.block.custom.HorizontalDirectionalBlockBuilder;
-import dev.latvian.mods.kubejs.client.VariantBlockStateGenerator;
 import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
 import dev.latvian.mods.rhino.util.HideFromJS;
@@ -18,11 +17,10 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.EnumSet;
 
-public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder implements ElectrodynamicsElectricityInput<BlockBatteryBoxBuilder>, ElectrodynamicsElectricityOutput<BlockBatteryBoxBuilder> {
+public class BlockBatteryBoxBuilder extends RotatableBlockBuilder<BlockBatteryBoxBuilder> implements ElectrodynamicsElectricityInput<BlockBatteryBoxBuilder>, ElectrodynamicsElectricityOutput<BlockBatteryBoxBuilder> {
     private int voltage = 120;
     private double capacity = 1000.0D;
     private double output = 300.0D;
-    private int modelRotationOffset = 0;
     private final EnumSet<Direction> electricInput = EnumSet.of(Direction.SOUTH);
     private final EnumSet<Direction> electricOutput = EnumSet.of(Direction.NORTH);
 
@@ -48,12 +46,6 @@ public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder im
         return this;
     }
 
-    @Info("Applies an offset to the model's rotation when generating the block state data.")
-    public BlockBatteryBoxBuilder rotationOffset(int offset) {
-        modelRotationOffset = getTrueRotation(offset);
-        return this;
-    }
-
     @Info("Equivalent to calling rotationOffset(270), as it is the rotation offset of base Electrodynamics' battery model rotation.")
     public BlockBatteryBoxBuilder batteryModel() {
         return rotationOffset(270);
@@ -74,18 +66,6 @@ public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder im
         return this;
     }
 
-    /**
-     * Method originally from KubeJS' source code, adapted to fit custom implementation
-     */
-    @Override
-    protected void generateBlockStateJson(VariantBlockStateGenerator bs) {
-        var modelLocation = model.isEmpty() ? newID("block/", "").toString() : model;
-        bs.variant("facing=north", v -> v.model(modelLocation).y(modelRotationOffset));
-        bs.variant("facing=east", v -> v.model(modelLocation).y(getTrueRotation(90 + modelRotationOffset)));
-        bs.variant("facing=south", v -> v.model(modelLocation).y(getTrueRotation(180 + modelRotationOffset)));
-        bs.variant("facing=west", v -> v.model(modelLocation).y(getTrueRotation(270 + modelRotationOffset)));
-    }
-
     @HideFromJS
     public int getVoltage() {
         return voltage;
@@ -99,10 +79,6 @@ public class BlockBatteryBoxBuilder extends HorizontalDirectionalBlockBuilder im
     @HideFromJS
     public double getCapacity() {
         return capacity;
-    }
-
-    private static int getTrueRotation(int rotation) {
-        return rotation % 360;
     }
 
     @Override
