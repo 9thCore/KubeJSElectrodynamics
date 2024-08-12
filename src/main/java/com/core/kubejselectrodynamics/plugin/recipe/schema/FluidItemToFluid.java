@@ -1,23 +1,12 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
-import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.TagFluidStackJS;
-import com.core.kubejselectrodynamics.util.CountableIngredientInterface;
 import com.core.kubejselectrodynamics.util.ElectroFluidWrapper;
-import com.core.kubejselectrodynamics.util.IngredientInterface;
 import com.core.kubejselectrodynamics.util.ItemUtils;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import dev.latvian.mods.kubejs.fluid.FluidStackJS;
 import dev.latvian.mods.kubejs.fluid.InputFluid;
 import dev.latvian.mods.kubejs.fluid.OutputFluid;
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
-import dev.latvian.mods.kubejs.util.ConsoleJS;
-import electrodynamics.common.recipe.recipeutils.CountableIngredient;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.ArrayList;
 
 public class FluidItemToFluid {
 

@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.item.battery;
 
-import com.core.kubejselectrodynamics.item.CustomItemExtension;
+import com.core.kubejselectrodynamics.item.ICustomItemExtension;
 import electrodynamics.api.item.IItemElectric;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.item.ItemElectric;
@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class CustomItemBattery extends ItemElectric implements CustomItemExtension {
+public class CustomItemBattery extends ItemElectric implements ICustomItemExtension {
     public CustomItemBattery(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
         super(properties, creativeTab, item -> Items.AIR);
     }

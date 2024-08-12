@@ -8,7 +8,7 @@ import net.minecraft.core.Direction;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-public interface ElectrodynamicsElectricityInput<T extends BlockBuilder> extends SelfAccessor<T> {
+public interface IElectrodynamicsElectricityInput<T extends BlockBuilder> extends ISelfAccessor<T> {
     @Info("Sets the machine's electric input faces.\nDirection.ALL is not supported, use #allElectricInput() instead.")
     default T electricInputs(Direction[] directions) {
         getElectricInputSet().clear();

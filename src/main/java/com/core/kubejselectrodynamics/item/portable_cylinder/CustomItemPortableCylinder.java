@@ -1,8 +1,6 @@
 package com.core.kubejselectrodynamics.item.portable_cylinder;
 
-import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
-import com.core.kubejselectrodynamics.item.CustomItemExtension;
-import dev.latvian.mods.kubejs.item.creativetab.KubeJSCreativeTabs;
+import com.core.kubejselectrodynamics.item.ICustomItemExtension;
 import electrodynamics.api.capability.ElectrodynamicsCapabilities;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -29,7 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class CustomItemPortableCylinder extends ItemPortableCylinder implements CustomItemExtension {
+public class CustomItemPortableCylinder extends ItemPortableCylinder implements ICustomItemExtension {
     private final ItemPortableCylinderBuilder builder;
 
     public CustomItemPortableCylinder(Item.Properties properties, Supplier<CreativeModeTab> creativeTab, ItemPortableCylinderBuilder builder) {

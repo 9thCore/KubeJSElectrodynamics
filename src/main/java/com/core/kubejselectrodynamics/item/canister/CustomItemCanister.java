@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.item.canister;
 
-import com.core.kubejselectrodynamics.item.CustomItemExtension;
+import com.core.kubejselectrodynamics.item.ICustomItemExtension;
 import electrodynamics.api.capability.types.fluid.RestrictedFluidHandlerItemStack;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.common.item.gear.tools.ItemCanister;
@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class CustomItemCanister extends ItemCanister implements CustomItemExtension {
+public class CustomItemCanister extends ItemCanister implements ICustomItemExtension {
     private final ItemCanisterBuilder builder;
 
     public CustomItemCanister(Properties properties, Supplier<CreativeModeTab> creativeTab, ItemCanisterBuilder builder) {

@@ -2,8 +2,8 @@ package com.core.kubejselectrodynamics.block.batterybox;
 
 import com.core.kubejselectrodynamics.block.BlockItemDescribableBuilder;
 import com.core.kubejselectrodynamics.block.RotatableBlockBuilder;
-import com.core.kubejselectrodynamics.block.capabilities.ElectrodynamicsElectricityInput;
-import com.core.kubejselectrodynamics.block.capabilities.ElectrodynamicsElectricityOutput;
+import com.core.kubejselectrodynamics.block.capabilities.IElectrodynamicsElectricityInput;
+import com.core.kubejselectrodynamics.block.capabilities.IElectrodynamicsElectricityOutput;
 import com.core.kubejselectrodynamics.block.TileRegister;
 import dev.latvian.mods.kubejs.block.BlockItemBuilder;
 import dev.latvian.mods.kubejs.typings.Info;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.EnumSet;
 
-public class BlockBatteryBoxBuilder extends RotatableBlockBuilder<BlockBatteryBoxBuilder> implements ElectrodynamicsElectricityInput<BlockBatteryBoxBuilder>, ElectrodynamicsElectricityOutput<BlockBatteryBoxBuilder> {
+public class BlockBatteryBoxBuilder extends RotatableBlockBuilder<BlockBatteryBoxBuilder> implements IElectrodynamicsElectricityInput<BlockBatteryBoxBuilder>, IElectrodynamicsElectricityOutput<BlockBatteryBoxBuilder> {
     private int voltage = 120;
     private double capacity = 1000.0D;
     private double output = 300.0D;

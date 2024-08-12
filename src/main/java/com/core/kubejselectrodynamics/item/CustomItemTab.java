@@ -13,11 +13,11 @@ import java.util.List;
 
 public class CustomItemTab {
     public static DeferredRegister<CreativeModeTab> REGISTER = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), KubeJSElectrodynamics.MODID);
-    public static final List<CustomItemExtension> items = new ArrayList<>();
+    public static final List<ICustomItemExtension> items = new ArrayList<>();
     public static final RegistryObject<CreativeModeTab> TAB = REGISTER.register("electrodynamics_items", () -> CreativeModeTab.builder()
             .icon(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get().getDefaultInstance())
             .displayItems((params, output) -> {
-                for (CustomItemExtension item : items) {
+                for (ICustomItemExtension item : items) {
                     output.acceptAll(item.getEntries());
                 }
             })

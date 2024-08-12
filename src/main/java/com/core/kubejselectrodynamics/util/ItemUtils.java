@@ -22,9 +22,9 @@ public class ItemUtils {
             } else {
                 // Try to find the tag
                 try {
-                    CountableIngredientInterface countableInterface = (CountableIngredientInterface) countable;
+                    ICountableIngredient countableInterface = (ICountableIngredient) countable;
                     Ingredient ingredient = countableInterface.kjsElectro$getIngredient();
-                    Ingredient.Value[] values = ((IngredientInterface) ingredient).kjsElectro$getIngredientValues();
+                    Ingredient.Value[] values = ((IIngredient) ingredient).kjsElectro$getIngredientValues();
                     int i = 0;
                     for (Ingredient.Value value : values) {
                         if (value instanceof Ingredient.TagValue) {

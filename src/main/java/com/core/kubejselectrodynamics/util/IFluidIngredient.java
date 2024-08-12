@@ -1,5 +1,5 @@
 package com.core.kubejselectrodynamics.util;
 
-public interface FluidIngredientInterface {
+public interface IFluidIngredient {
     int kjsElectroMixin$getAmount();
 }

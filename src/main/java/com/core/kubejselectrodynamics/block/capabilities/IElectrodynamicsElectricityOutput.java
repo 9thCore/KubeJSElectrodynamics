@@ -8,7 +8,7 @@ import net.minecraft.core.Direction;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-public interface ElectrodynamicsElectricityOutput<T extends BlockBuilder> extends SelfAccessor<T> {
+public interface IElectrodynamicsElectricityOutput<T extends BlockBuilder> extends ISelfAccessor<T> {
     @Info("Sets the machine's electric output faces.\nDirection.ALL is not supported, use #allElectricOutput() instead.")
     default T electricOutputs(Direction[] directions) {
         getElectricOutputSet().clear();

@@ -4,6 +4,6 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.Collection;
 
-public interface CustomItemExtension {
+public interface ICustomItemExtension {
     Collection<ItemStack> getEntries();
 }
