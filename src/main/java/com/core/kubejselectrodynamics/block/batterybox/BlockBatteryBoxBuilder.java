@@ -49,11 +49,6 @@ public class BlockBatteryBoxBuilder extends RotatableBlockBuilder<BlockBatteryBo
         return this;
     }
 
-    @Info("Equivalent to calling rotationOffset(270), as it is the rotation offset of base Electrodynamics' battery model rotation.")
-    public BlockBatteryBoxBuilder batteryModel() {
-        return rotationOffset(270);
-    }
-
     @Override
     public EnumSet<Direction> getElectricInputSet() {
         return electricInput;

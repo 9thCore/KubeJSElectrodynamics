@@ -18,6 +18,11 @@ public class RotatableBlockBuilder<T extends RotatableBlockBuilder<T>> extends H
         return (T)this;
     }
 
+    @Info("Equivalent to calling rotationOffset(270), the rotation offset of base Electrodynamics' battery model rotation.")
+    public T batteryModelRotation() {
+        return rotationOffset(270);
+    }
+
     private static int getTrueRotation(int rotation) {
         return rotation % 360;
     }
