@@ -2,6 +2,9 @@ package com.core.kubejselectrodynamics.block;
 
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.batterybox.TileCustomBatteryBox;
+import com.core.kubejselectrodynamics.block.motor.dc.TileCustomMotorDC;
+import com.core.kubejselectrodynamics.client.tile.RenderCustomMotorDC;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,5 +20,13 @@ public class TileRegister {
     public static final RegistryObject<BlockEntityType<TileCustomBatteryBox>> BATTERY_BOX_TYPE = REGISTER.register(
             "battery_box_type",
             () -> BlockEntityType.Builder.of(TileCustomBatteryBox::new, VALID_BATTERY_BLOCKS.toArray(new Block[0])).build(null)
+    );
+
+    public static BlockEntityOptionalRenderer<TileCustomMotorDC, TileCustomMotorDC.Render> MOTOR_DC_TYPE = new BlockEntityOptionalRenderer<>(
+            "dynamicelectricity",
+            "motor_dc_type",
+            () -> TileCustomMotorDC::new,
+            () -> TileCustomMotorDC.Render::new,
+            () -> (BlockEntityRendererProvider<TileCustomMotorDC.Render>) RenderCustomMotorDC::new
     );
 }

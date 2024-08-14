@@ -11,7 +11,8 @@
     "ComponentMixins$ComponentContainerProviderMixin",
     "ComponentMixins$ComponentElectrodynamicMixin",
     "UtilsMixins$ElectricityUtilsMixin",
-    "ElectrodynamicsMixin"
+    "ElectrodynamicsMixin",
+    "DynamicElectricityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

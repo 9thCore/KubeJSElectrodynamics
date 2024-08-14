@@ -1,6 +1,7 @@
 package com.core.kubejselectrodynamics.plugin;
 
 import com.core.kubejselectrodynamics.block.batterybox.BlockBatteryBoxBuilder;
+import com.core.kubejselectrodynamics.block.motor.dc.BlockMotorDCBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
@@ -30,6 +31,7 @@ public class KubePlugin extends KubeJSPlugin {
 
     @Override
     public void init() {
+        // ELECTRODYNAMICS
         // GAS
         GasBuilder.INFO.addType("basic", GasBuilder.class, GasBuilder::new, true);
 
@@ -40,6 +42,11 @@ public class KubePlugin extends KubeJSPlugin {
 
         // BLOCK
         RegistryInfo.BLOCK.addType("electrodynamics:batterybox", BlockBatteryBoxBuilder.class, BlockBatteryBoxBuilder::new, false);
+
+        // DYNAMIC ELECTRICITY
+        if (Platform.isModLoaded("dynamicelectricity")) {
+            RegistryInfo.BLOCK.addType("dynamicelectricity:motordc", BlockMotorDCBuilder.class, BlockMotorDCBuilder::new, false);
+        }
     }
 
     @Override

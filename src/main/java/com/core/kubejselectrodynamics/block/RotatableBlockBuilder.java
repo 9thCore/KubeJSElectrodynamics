@@ -23,6 +23,11 @@ public class RotatableBlockBuilder<T extends RotatableBlockBuilder<T>> extends H
         return rotationOffset(270);
     }
 
+    @Info("Equivalent to calling rotationOffset(90), the rotation offset of base Dynamic Electricity's motor model rotation.")
+    public T motorModelRotation() {
+        return rotationOffset(90);
+    }
+
     private static int getTrueRotation(int rotation) {
         return rotation % 360;
     }
