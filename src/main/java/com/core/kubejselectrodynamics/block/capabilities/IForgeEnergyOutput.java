@@ -23,6 +23,10 @@ public interface IForgeEnergyOutput<T extends BlockBuilder> extends ISelfAccesso
     default T allFEOutput() {
         return feOutputs(Direction.values());
     }
+    @Info("Disallows FE output through any face.")
+    default T noFEOutput() {
+        return feOutputs(new Direction[0]);
+    }
     @HideFromJS
     default Direction[] getFEOutput() {
         return getFEOutputSet().toArray(new Direction[0]);

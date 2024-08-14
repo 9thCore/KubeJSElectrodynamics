@@ -23,6 +23,10 @@ public interface IElectrodynamicsFluidInput<T extends BlockBuilder> extends ISel
     default T allFluidInput() {
         return fluidInputs(Direction.values());
     }
+    @Info("Disallows fluid input through any face.")
+    default T noFluidInput() {
+        return fluidInputs(new Direction[0]);
+    }
     @HideFromJS
     default Direction[] getFluidInput() {
         return getFluidInputSet().toArray(new Direction[0]);

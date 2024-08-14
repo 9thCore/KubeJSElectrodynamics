@@ -23,6 +23,10 @@ public interface IElectrodynamicsElectricityInput<T extends BlockBuilder> extend
     default T allElectricInput() {
         return electricInputs(Direction.values());
     }
+    @Info("Disallows electric input through any face.")
+    default T noElectricInput() {
+        return electricInputs(new Direction[0]);
+    }
     @HideFromJS
     default Direction[] getElectricInput() {
         return getElectricInputSet().toArray(new Direction[0]);
