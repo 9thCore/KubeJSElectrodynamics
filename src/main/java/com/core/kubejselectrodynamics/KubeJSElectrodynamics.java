@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 public class KubeJSElectrodynamics
 {
     public static final String MODID = "kubejselectrodynamics";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public KubeJSElectrodynamics() {
         CustomItemTab.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -28,9 +28,5 @@ public class KubeJSElectrodynamics
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(ClientRegister::setup);
-    }
-
-    public static void LogInfo(Object message) {
-        LOGGER.info(message.toString());
     }
 }
