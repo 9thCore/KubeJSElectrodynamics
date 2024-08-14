@@ -13,6 +13,7 @@ public interface ICustomShape<T extends BlockBuilder> {
     @HideFromJS
     List<AABB> getCustomShape();
 
+    @HideFromJS
     default void registerCustomShape(Block block) {
         if (getCustomShape().isEmpty()) {
             getCustomShape().add(new AABB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));

@@ -25,6 +25,7 @@ public interface ICopiedShape<T extends BlockBuilder> {
     @HideFromJS
     T setVoxelShape(CopyableShapeBlock block);
 
+    @HideFromJS
     default void registerCopiedShape(Block block) {
         VoxelShapeUtil.register(block, getVoxelShape().modID, getVoxelShape().getBlock(), getVoxelShape().direction);
     }
