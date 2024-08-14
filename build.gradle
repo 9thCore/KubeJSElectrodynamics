@@ -164,6 +164,12 @@ dependencies {
     implementation fg.deobf("curse.maven:assembly-lines-404360:5446480")
     implementation fg.deobf("curse.maven:dynamic-electricity-535933:4880390")
 
+    // Other tech
+    runtimeOnly fg.deobf("curse.maven:mekanism-268560:5395221")
+    runtimeOnly fg.deobf("curse.maven:cofh-core-69162:5374122")
+    runtimeOnly fg.deobf("curse.maven:thermal-foundation-222880:5443583")
+    runtimeOnly fg.deobf("curse.maven:thermal-expansion-69163:5372749")
+
     // JEI
     implementation fg.deobf("curse.maven:jei-238222:5576551")
 
