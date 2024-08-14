@@ -23,7 +23,7 @@ public class ComponentMixins {
     }
 
     @Mixin(ComponentElectrodynamic.class)
-    public static abstract class ComponentElectrodynamicMixin implements ComponentInterfaces.IComponentElectrodynamics {
+    public static class ComponentElectrodynamicMixin implements ComponentInterfaces.IComponentElectrodynamics {
         @Shadow protected HashSet<Direction> relativeInputDirections;
 
         @Shadow protected HashSet<Direction> relativeOutputDirections;
