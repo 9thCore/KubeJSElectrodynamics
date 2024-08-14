@@ -10,8 +10,6 @@ import dev.latvian.mods.rhino.util.HideFromJS;
 import net.minecraft.world.level.block.Block;
 
 public interface ICopiedShape<T extends BlockBuilder> {
-    String ELECTRODYNAMICSID = "electrodynamics";
-
     @HideFromJS
     CopyableShapeBlock getVoxelShape();
     @Info("Copies the passed machine's voxel shape into this block.")
