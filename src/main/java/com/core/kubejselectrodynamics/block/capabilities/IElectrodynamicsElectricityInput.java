@@ -21,8 +21,7 @@ public interface IElectrodynamicsElectricityInput<T extends BlockBuilder> extend
     }
     @Info("Allows electric input through every face.")
     default T allElectricInput() {
-        getElectricInputSet().clear();
-        return getThis();
+        return electricInputs(Direction.values());
     }
     @HideFromJS
     default Direction[] getElectricInput() {

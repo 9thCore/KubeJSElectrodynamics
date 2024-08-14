@@ -21,8 +21,7 @@ public interface IElectrodynamicsElectricityOutput<T extends BlockBuilder> exten
     }
     @Info("Allows electric output through every face.")
     default T allElectricOutput() {
-        getElectricOutputSet().clear();
-        return getThis();
+        return electricOutputs(Direction.values());
     }
     @HideFromJS
     default Direction[] getElectricOutput() {

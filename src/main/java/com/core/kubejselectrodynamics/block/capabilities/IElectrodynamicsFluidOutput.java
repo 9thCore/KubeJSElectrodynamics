@@ -21,8 +21,7 @@ public interface IElectrodynamicsFluidOutput<T extends BlockBuilder> extends ISe
     }
     @Info("Allows fluid input through every face.")
     default T allFluidOutput() {
-        getFluidOutputSet().clear();
-        return getThis();
+        return fluidOutputs(Direction.values());
     }
     @HideFromJS
     default Direction[] getFluidOutput() {

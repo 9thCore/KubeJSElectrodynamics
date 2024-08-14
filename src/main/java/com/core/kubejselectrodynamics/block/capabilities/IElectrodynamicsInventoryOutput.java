@@ -21,8 +21,7 @@ public interface IElectrodynamicsInventoryOutput<T extends BlockBuilder> extends
     }
     @Info("Allows inventory input through every face.")
     default T allInventoryOutput() {
-        getInventoryOutputSet().clear();
-        return getThis();
+        return inventoryOutputs(Direction.values());
     }
     @HideFromJS
     default Direction[] getInventoryOutput() {

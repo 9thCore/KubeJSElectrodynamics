@@ -21,8 +21,7 @@ public interface IForgeEnergyInput<T extends BlockBuilder> extends ISelfAccessor
     }
     @Info("Allows FE output through every face.")
     default T allFEInput() {
-        getFEInputSet().clear();
-        return getThis();
+        return feInputs(Direction.values());
     }
     @HideFromJS
     default Direction[] getFEInput() {
