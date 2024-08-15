@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
-import com.core.kubejselectrodynamics.util.ICountableIngredient;
+import com.core.kubejselectrodynamics.util.mixinterfaces.ICountableIngredient;
 import electrodynamics.common.recipe.recipeutils.CountableIngredient;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;

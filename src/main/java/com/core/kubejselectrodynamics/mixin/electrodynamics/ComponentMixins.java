@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
-import com.core.kubejselectrodynamics.util.ComponentInterfaces;
+import com.core.kubejselectrodynamics.util.mixinterfaces.ComponentInterfaces;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;

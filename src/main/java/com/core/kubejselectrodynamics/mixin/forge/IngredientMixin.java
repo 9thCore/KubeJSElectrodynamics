@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.mixin.forge;
 
-import com.core.kubejselectrodynamics.util.IIngredient;
+import com.core.kubejselectrodynamics.util.mixinterfaces.IIngredient;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

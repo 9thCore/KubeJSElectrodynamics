@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.util;
+package com.core.kubejselectrodynamics.util.mixinterfaces;
 
 import net.minecraft.core.Direction;
 

@@ -2,7 +2,7 @@ package com.core.kubejselectrodynamics.block.motor.dc;
 
 import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.block.capabilities.IBlockStateModifyChecker;
-import com.core.kubejselectrodynamics.util.ComponentInterfaces;
+import com.core.kubejselectrodynamics.util.mixinterfaces.ComponentInterfaces;
 import com.core.kubejselectrodynamics.util.TileUtils;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
 import electrodynamics.common.network.utils.FluidUtilities;

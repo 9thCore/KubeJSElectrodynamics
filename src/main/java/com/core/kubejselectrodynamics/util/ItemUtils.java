@@ -1,5 +1,7 @@
 package com.core.kubejselectrodynamics.util;
 
+import com.core.kubejselectrodynamics.util.mixinterfaces.ICountableIngredient;
+import com.core.kubejselectrodynamics.util.mixinterfaces.IIngredient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.InputItem;

@@ -1,6 +1,6 @@
 package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
-import com.core.kubejselectrodynamics.util.IFluidIngredient;
+import com.core.kubejselectrodynamics.util.mixinterfaces.IFluidIngredient;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

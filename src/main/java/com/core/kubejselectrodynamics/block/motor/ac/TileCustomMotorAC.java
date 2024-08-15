@@ -1,9 +1,8 @@
 package com.core.kubejselectrodynamics.block.motor.ac;
 
-import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.block.capabilities.IBlockStateModifyChecker;
-import com.core.kubejselectrodynamics.util.ComponentInterfaces;
+import com.core.kubejselectrodynamics.util.mixinterfaces.ComponentInterfaces;
 import com.core.kubejselectrodynamics.util.TileUtils;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
 import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;

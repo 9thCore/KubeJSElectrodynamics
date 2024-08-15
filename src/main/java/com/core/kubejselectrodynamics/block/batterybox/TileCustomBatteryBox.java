@@ -1,7 +1,7 @@
 package com.core.kubejselectrodynamics.block.batterybox;
 
 import com.core.kubejselectrodynamics.block.TileRegister;
-import com.core.kubejselectrodynamics.util.ComponentInterfaces;
+import com.core.kubejselectrodynamics.util.mixinterfaces.ComponentInterfaces;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.tile.electricitygrid.batteries.TileBatteryBox;
 import electrodynamics.prefab.tile.components.IComponent;
