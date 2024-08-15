@@ -88,10 +88,10 @@ public class BlockMotorACBuilder extends MotorBlockBuilder<BlockMotorACBuilder> 
         BlockItemDescriptable.addDescription(
                 () -> block,
                 Component.translatable(
-                        "tooltip.kubejselectrodynamics.dynamicelectricity.motordc",
-                        ChatFormatter.getChatDisplayShort(joulesConsumption, DisplayUnit.FORGE_ENERGY_UNIT),
-                        ChatFormatter.getChatDisplayShort(joulesConsumption * conversionEfficiency, DisplayUnit.JOULES),
-                        ChatFormatter.getChatDisplayShort(voltage, DisplayUnit.VOLTAGE)
+                        "tooltip.kubejselectrodynamics.dynamicelectricity.motorac",
+                        ChatFormatter.getChatDisplayShort(joulesConsumption, DisplayUnit.JOULES),
+                        ChatFormatter.getChatDisplayShort(voltage, DisplayUnit.VOLTAGE),
+                        ChatFormatter.getChatDisplayShort(joulesConsumption * conversionEfficiency, DisplayUnit.FORGE_ENERGY_UNIT)
                 )
         );
         return block;
