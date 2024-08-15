@@ -30,6 +30,8 @@ public class ComponentMixins {
 
         @Shadow(remap = false) private LazyOptional<ICapabilityElectrodynamic>[] sidedOptionals;
 
+        @Shadow private boolean isSided;
+
         @Override
         public void kjsElectro$clearInputDirections() {
             relativeInputDirections.clear();
@@ -42,7 +44,7 @@ public class ComponentMixins {
 
         @Override
         public boolean kjsElectro$hasSidedInput(Direction side) {
-            if (relativeInputDirections.size() == 0) {
+            if (!isSided) {
                 return true;
             }
             if (sidedOptionals[side.ordinal()].isPresent()) {
@@ -53,7 +55,7 @@ public class ComponentMixins {
 
         @Override
         public boolean kjsElectro$hasSidedOutput(Direction side) {
-            if (relativeOutputDirections.size() == 0) {
+            if (!isSided) {
                 return true;
             }
             if (sidedOptionals[side.ordinal()].isPresent()) {
