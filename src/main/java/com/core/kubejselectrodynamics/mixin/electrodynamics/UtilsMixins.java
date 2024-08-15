@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin;
+package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
 import com.core.kubejselectrodynamics.block.batterybox.TileCustomBatteryBox;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;

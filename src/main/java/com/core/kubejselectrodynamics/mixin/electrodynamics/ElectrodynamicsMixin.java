@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin;
+package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
 import com.core.kubejselectrodynamics.util.VoxelShapeUtil;
 import electrodynamics.Electrodynamics;

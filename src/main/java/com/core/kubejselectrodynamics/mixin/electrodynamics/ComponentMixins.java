@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin;
+package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
 import com.core.kubejselectrodynamics.util.ComponentInterfaces;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 public class ComponentMixins {
     @Mixin(ComponentContainerProvider.class)
     public static class ComponentContainerProviderMixin implements ComponentInterfaces.IComponentContainerProvider {
-        @Shadow protected String name;
+        @Shadow(remap = false) protected String name;
 
         @Override
         public void kjsElectro$setName(String name) {
@@ -24,11 +24,11 @@ public class ComponentMixins {
 
     @Mixin(ComponentElectrodynamic.class)
     public static class ComponentElectrodynamicMixin implements ComponentInterfaces.IComponentElectrodynamics {
-        @Shadow protected HashSet<Direction> relativeInputDirections;
+        @Shadow(remap = false) protected HashSet<Direction> relativeInputDirections;
 
-        @Shadow protected HashSet<Direction> relativeOutputDirections;
+        @Shadow(remap = false) protected HashSet<Direction> relativeOutputDirections;
 
-        @Shadow private LazyOptional<ICapabilityElectrodynamic>[] sidedOptionals;
+        @Shadow(remap = false) private LazyOptional<ICapabilityElectrodynamic>[] sidedOptionals;
 
         @Override
         public void kjsElectro$clearInputDirections() {

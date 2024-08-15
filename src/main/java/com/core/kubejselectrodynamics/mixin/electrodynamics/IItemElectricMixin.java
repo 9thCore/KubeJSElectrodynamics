@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin;
+package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
 import electrodynamics.api.item.IItemElectric;
 import electrodynamics.prefab.item.ElectricItemProperties;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(IItemElectric.class)
 public interface IItemElectricMixin {
-    @Shadow ElectricItemProperties getElectricProperties();
+    @Shadow(remap = false) ElectricItemProperties getElectricProperties();
 
     /**
      * @author 9thCore

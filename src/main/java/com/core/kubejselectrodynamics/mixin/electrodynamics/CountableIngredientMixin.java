@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin;
+package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
 import com.core.kubejselectrodynamics.util.ICountableIngredient;
 import electrodynamics.common.recipe.recipeutils.CountableIngredient;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(CountableIngredient.class)
 public class CountableIngredientMixin implements ICountableIngredient {
-    @Shadow private Ingredient INGREDIENT;
+    @Shadow(remap = false) private Ingredient INGREDIENT;
 
     @Override
     public Ingredient kjsElectro$getIngredient() {

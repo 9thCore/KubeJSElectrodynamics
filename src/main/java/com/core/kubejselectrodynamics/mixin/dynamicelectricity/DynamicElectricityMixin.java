@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin;
+package com.core.kubejselectrodynamics.mixin.dynamicelectricity;
 
 import com.core.kubejselectrodynamics.util.VoxelShapeUtil;
 import dynamicelectricity.DynamicElectricity;
