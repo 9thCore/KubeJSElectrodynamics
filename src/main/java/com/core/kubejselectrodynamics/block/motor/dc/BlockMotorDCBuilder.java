@@ -5,6 +5,7 @@ import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.block.capabilities.IElectrodynamicsElectricityOutput;
 import com.core.kubejselectrodynamics.block.capabilities.IElectrodynamicsFluidInput;
 import com.core.kubejselectrodynamics.block.capabilities.IElectrodynamicsInventoryInput;
+import com.core.kubejselectrodynamics.block.capabilities.IForgeEnergyInput;
 import com.core.kubejselectrodynamics.block.electroblocks.GenericRotatableEntityBlock;
 import com.core.kubejselectrodynamics.block.motor.MotorBlockBuilder;
 import dev.latvian.mods.kubejs.block.BlockItemBuilder;
@@ -21,11 +22,12 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.EnumSet;
 
-public class BlockMotorDCBuilder extends MotorBlockBuilder<BlockMotorDCBuilder> implements IElectrodynamicsElectricityOutput<BlockMotorDCBuilder>, IElectrodynamicsInventoryInput<BlockMotorDCBuilder> {
+public class BlockMotorDCBuilder extends MotorBlockBuilder<BlockMotorDCBuilder> implements IElectrodynamicsElectricityOutput<BlockMotorDCBuilder>, IElectrodynamicsInventoryInput<BlockMotorDCBuilder>, IForgeEnergyInput<BlockMotorDCBuilder> {
     private int voltage = 120;
     private int feConsumption = 1000;
     private final EnumSet<Direction> inventoryInput = EnumSet.of(Direction.UP, Direction.WEST, Direction.EAST);
     private final EnumSet<Direction> electricOutput = EnumSet.of(Direction.SOUTH);
+    private final EnumSet<Direction> feInput = EnumSet.of(Direction.NORTH);
     public BlockMotorDCBuilder(ResourceLocation location) {
         super(location);
         conversionEfficiency = 0.95D;
@@ -51,6 +53,11 @@ public class BlockMotorDCBuilder extends MotorBlockBuilder<BlockMotorDCBuilder> 
     @Override
     public EnumSet<Direction> getInventoryInputSet() {
         return inventoryInput;
+    }
+
+    @Override
+    public EnumSet<Direction> getFEInputSet() {
+        return feInput;
     }
 
     @HideFromJS

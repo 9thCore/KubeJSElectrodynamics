@@ -1,7 +1,9 @@
 package com.core.kubejselectrodynamics.block.motor.dc;
 
 import com.core.kubejselectrodynamics.block.TileRegister;
+import com.core.kubejselectrodynamics.block.capabilities.IBlockStateModifyChecker;
 import com.core.kubejselectrodynamics.util.ComponentInterfaces;
+import com.core.kubejselectrodynamics.util.TileUtils;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -17,9 +19,17 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-public class TileCustomMotorDC extends TileMotorDC {
+import java.util.EnumSet;
+
+public class TileCustomMotorDC extends TileMotorDC implements IBlockStateModifyChecker {
+    private EnumSet<Direction> inputDirections = EnumSet.noneOf(Direction.class);
+    private Direction lastFacing = null;
     private final CachedTileOutput[] outputs = new CachedTileOutput[6];
     public final BlockMotorDCBuilder builder;
 
@@ -52,11 +62,28 @@ public class TileCustomMotorDC extends TileMotorDC {
         fluidHandlerSimple.setInputDirections(builder.getFluidInput());
     }
 
+    @Override
+    public void onBlockStateUpdate(BlockState oldState, BlockState newState) {
+        super.onBlockStateUpdate(oldState, newState);
+        inputDirections = TileUtils.getGlobalDirections(builder.getFEInputSet(), newState.getValue(BlockStateProperties.HORIZONTAL_FACING));
+    }
+
+    @Override
+    public Direction getLastKnownDirection() {
+        return lastFacing;
+    }
+
+    @Override
+    public void setLastKnownDirection(Direction direction) {
+        lastFacing = direction;
+    }
+
     /**
      * Method originally from Electrodynamics' source code
      */
     @Override
     public void tickServer(ComponentTickable tickable) {
+        checkUpdate(getBlockState(), this::onBlockStateUpdate);
         if (this.hasRedstoneSignal.get()) {
             this.running.set(false);
         } else {
@@ -103,6 +130,14 @@ public class TileCustomMotorDC extends TileMotorDC {
                 }
             }
         }
+    }
+
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction face) {
+        if (capability == ForgeCapabilities.ENERGY && inputDirections.contains(face)) {
+            return LazyOptional.of(() -> (T)this);
+        }
+        return TileUtils.genericTileGetCapability(this, capability, face);
     }
 
     public static class Render extends TileCustomMotorDC {
