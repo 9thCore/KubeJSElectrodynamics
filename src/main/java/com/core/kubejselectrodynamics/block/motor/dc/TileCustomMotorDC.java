@@ -94,7 +94,9 @@ public class TileCustomMotorDC extends TileMotorDC implements IBlockStateModifyC
             ItemStack brush = inventory.getItem(0);
             ComponentFluidHandlerSimple tank = this.getComponent(IComponentType.FluidHandler);
             if (!brush.isEmpty() && feStored.get() >= maxFeConsumed.get()) {
-                brush.setDamageValue(brush.getDamageValue() + 1);
+                if (brush.isDamageableItem()) {
+                    brush.setDamageValue(brush.getDamageValue() + 1);
+                }
                 if (lubricantRemaining.get() > 0) {
                     lubricantRemaining.set(lubricantRemaining.get() - 1);
                     canRun = true;
@@ -104,7 +106,7 @@ public class TileCustomMotorDC extends TileMotorDC implements IBlockStateModifyC
                 }
             }
 
-            if (brush.getDamageValue() >= brush.getMaxDamage() && canRun) {
+            if (brush.isDamageableItem() && brush.getDamageValue() >= brush.getMaxDamage() && canRun) {
                 brush.shrink(1);
                 inventory.setItem(0, brush);
             }
