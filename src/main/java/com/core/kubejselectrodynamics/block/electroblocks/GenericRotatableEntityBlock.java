@@ -103,6 +103,15 @@ public class GenericRotatableEntityBlock extends HorizontalDirectionalBlockBuild
         return super.getRenderShape(state);
     }
 
+    @Override
+    public void onBlockStateChange(LevelReader level, BlockPos pos, BlockState oldState, BlockState newState) {
+        super.onBlockStateChange(level, pos, oldState, newState);
+        BlockEntity entity = level.getBlockEntity(pos);
+        if (entity instanceof GenericTile tile) {
+            tile.onBlockStateUpdate(oldState, newState);
+        }
+    }
+
     /**
      * Method originally from Electrodynamics' source code
      */
