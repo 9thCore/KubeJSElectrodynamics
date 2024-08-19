@@ -1,6 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
+  "minMixinExtrasVersion": "0.5.0-beta.2",
   "package": "com.core.kubejselectrodynamics.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
