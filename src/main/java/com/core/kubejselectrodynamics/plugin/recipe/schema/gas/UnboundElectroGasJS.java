@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class UnboundElectroGasJS extends ElectroGasStackJS {
     double amount = 1000.0D;
     int pressure = 1;
-    double temperature = 273.0D;
+    double temperature = 293.0D;
     final TagKey<Gas> tag;
 
     public UnboundElectroGasJS(@NotNull TagKey<Gas> tag) {
