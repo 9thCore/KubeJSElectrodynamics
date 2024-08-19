@@ -1,4 +1,4 @@
-package com.core.kubejselectrodynamics.mixin.dynamicelectricity;
+package com.core.kubejselectrodynamics.mixin.electrodynamics;
 
 import com.core.kubejselectrodynamics.util.mixinterfaces.ISlotRestricted;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
