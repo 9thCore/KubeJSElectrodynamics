@@ -3,9 +3,11 @@ package com.core.kubejselectrodynamics.plugin;
 import com.core.kubejselectrodynamics.block.batterybox.BlockBatteryBoxBuilder;
 import com.core.kubejselectrodynamics.block.motor.ac.BlockMotorACBuilder;
 import com.core.kubejselectrodynamics.block.motor.dc.BlockMotorDCBuilder;
+import com.core.kubejselectrodynamics.block.storage.gastank.BlockGasTankBuilder;
 import com.core.kubejselectrodynamics.block.storage.tank.BlockTankBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
+import com.core.kubejselectrodynamics.item.gastankinsulation.ItemGasInsulatorBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToGas;
@@ -41,10 +43,12 @@ public class KubePlugin extends KubeJSPlugin {
         RegistryInfo.ITEM.addType("electrodynamics:portable_cylinder", ItemPortableCylinderBuilder.class, ItemPortableCylinderBuilder::new, false);
         RegistryInfo.ITEM.addType("electrodynamics:canister", ItemCanisterBuilder.class, ItemCanisterBuilder::new, false);
         RegistryInfo.ITEM.addType("electrodynamics:battery", ItemBatteryBuilder.class, ItemBatteryBuilder::new, false);
+        RegistryInfo.ITEM.addType("electrodynamics:gasinsulation", ItemGasInsulatorBuilder.class, ItemGasInsulatorBuilder::new, false);
 
         // BLOCK
         RegistryInfo.BLOCK.addType("electrodynamics:batterybox", BlockBatteryBoxBuilder.class, BlockBatteryBoxBuilder::new, false);
         RegistryInfo.BLOCK.addType("electrodynamics:tank", BlockTankBuilder.class, BlockTankBuilder::new, false);
+        RegistryInfo.BLOCK.addType("electrodynamics:gastank", BlockGasTankBuilder.class, BlockGasTankBuilder::new, false);
 
         // DYNAMIC ELECTRICITY
         if (Platform.isModLoaded("dynamicelectricity")) {

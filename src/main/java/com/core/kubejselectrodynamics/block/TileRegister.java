@@ -28,6 +28,12 @@ public class TileRegister {
             () -> TileCustomBatteryBox::new
     );
 
+    public static final BlockEntityRegister<TileCustomGasTank> GAS_TANK_TYPE = new BlockEntityRegister<>(
+            "electrodynamics",
+            "gas_tank_type",
+            () -> TileCustomGasTank::new
+    );
+
     public static BlockEntityOptionalRenderer<TileCustomMotorDC, TileCustomMotorDC.Render> MOTOR_DC_TYPE = new BlockEntityOptionalRenderer<>(
             "dynamicelectricity",
             "motor_dc_type",
