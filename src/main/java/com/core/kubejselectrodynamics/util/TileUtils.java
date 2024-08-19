@@ -4,14 +4,22 @@ import electrodynamics.api.capability.ElectrodynamicsCapabilities;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import java.util.EnumSet;
 
 public class TileUtils {
+    /**
+     * Rotate the given directions according to the given orientation
+     */
     public static EnumSet<Direction> getGlobalDirections(EnumSet<Direction> localDirections, Direction facing) {
         EnumSet<Direction> result = EnumSet.noneOf(Direction.class);
         for (Direction direction : localDirections) {
@@ -20,6 +28,10 @@ public class TileUtils {
         return result;
     }
 
+    /**
+     * Method originally from Electrodynamics' source code
+     * GenericTile capability code extracted out so it can be called instead of going through the superclass
+     */
     public static <T> LazyOptional<T> genericTileGetCapability(GenericTile tile, Capability<T> cap, Direction side) {
         if (cap == ElectrodynamicsCapabilities.ELECTRODYNAMIC && tile.hasComponent(IComponentType.Electrodynamic)) {
             return tile.getComponent(IComponentType.Electrodynamic).getCapability(cap, side, null);
