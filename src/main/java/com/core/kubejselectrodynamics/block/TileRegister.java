@@ -4,6 +4,7 @@ import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.batterybox.TileCustomBatteryBox;
 import com.core.kubejselectrodynamics.block.motor.ac.TileCustomMotorAC;
 import com.core.kubejselectrodynamics.block.motor.dc.TileCustomMotorDC;
+import com.core.kubejselectrodynamics.block.storage.gastank.TileCustomGasTank;
 import com.core.kubejselectrodynamics.block.storage.tank.TileCustomTank;
 import com.core.kubejselectrodynamics.client.tile.RenderCustomMotorAC;
 import com.core.kubejselectrodynamics.client.tile.RenderCustomMotorDC;
@@ -20,10 +21,11 @@ import java.util.List;
 
 public class TileRegister {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, KubeJSElectrodynamics.MODID);
-    public static final List<Block> VALID_BATTERY_BLOCKS = new ArrayList<>();
-    public static final RegistryObject<BlockEntityType<TileCustomBatteryBox>> BATTERY_BOX_TYPE = REGISTER.register(
+
+    public static final BlockEntityRegister<TileCustomBatteryBox> BATTERY_BOX_TYPE = new BlockEntityRegister<>(
+            "electrodynamics",
             "battery_box_type",
-            () -> BlockEntityType.Builder.of(TileCustomBatteryBox::new, VALID_BATTERY_BLOCKS.toArray(new Block[0])).build(null)
+            () -> TileCustomBatteryBox::new
     );
 
     public static BlockEntityOptionalRenderer<TileCustomMotorDC, TileCustomMotorDC.Render> MOTOR_DC_TYPE = new BlockEntityOptionalRenderer<>(

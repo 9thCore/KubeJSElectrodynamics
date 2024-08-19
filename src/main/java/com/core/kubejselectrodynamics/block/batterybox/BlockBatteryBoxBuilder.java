@@ -110,8 +110,8 @@ public class BlockBatteryBoxBuilder extends RotatableBlockBuilder<BlockBatteryBo
             throw new UnsupportedOperationException("#blockEntity() not supported");
         }
 
-        Block block = new CustomBlockBatteryBox(TileCustomBatteryBox::new, this);
-        TileRegister.VALID_BATTERY_BLOCKS.add(block);
+        Block block = new CustomBlockBatteryBox(TileRegister.BATTERY_BOX_TYPE.getSupplier(), this);
+        TileRegister.BATTERY_BOX_TYPE.valid(block);
         registerShape(block);
         BlockItemDescriptable.addDescription(() -> block, ElectroTextUtils.voltageTooltip(voltage));
         return block;
