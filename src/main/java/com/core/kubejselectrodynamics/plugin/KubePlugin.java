@@ -3,6 +3,7 @@ package com.core.kubejselectrodynamics.plugin;
 import com.core.kubejselectrodynamics.block.batterybox.BlockBatteryBoxBuilder;
 import com.core.kubejselectrodynamics.block.motor.ac.BlockMotorACBuilder;
 import com.core.kubejselectrodynamics.block.motor.dc.BlockMotorDCBuilder;
+import com.core.kubejselectrodynamics.block.storage.tank.BlockTankBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
@@ -43,6 +44,7 @@ public class KubePlugin extends KubeJSPlugin {
 
         // BLOCK
         RegistryInfo.BLOCK.addType("electrodynamics:batterybox", BlockBatteryBoxBuilder.class, BlockBatteryBoxBuilder::new, false);
+        RegistryInfo.BLOCK.addType("electrodynamics:tank", BlockTankBuilder.class, BlockTankBuilder::new, false);
 
         // DYNAMIC ELECTRICITY
         if (Platform.isModLoaded("dynamicelectricity")) {

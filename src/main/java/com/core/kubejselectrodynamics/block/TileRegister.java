@@ -4,8 +4,10 @@ import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.batterybox.TileCustomBatteryBox;
 import com.core.kubejselectrodynamics.block.motor.ac.TileCustomMotorAC;
 import com.core.kubejselectrodynamics.block.motor.dc.TileCustomMotorDC;
+import com.core.kubejselectrodynamics.block.storage.tank.TileCustomTank;
 import com.core.kubejselectrodynamics.client.tile.RenderCustomMotorAC;
 import com.core.kubejselectrodynamics.client.tile.RenderCustomMotorDC;
+import com.core.kubejselectrodynamics.client.tile.RenderCustomTank;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -30,6 +32,14 @@ public class TileRegister {
             () -> TileCustomMotorDC::new,
             () -> TileCustomMotorDC.Render::new,
             () -> (BlockEntityRendererProvider<TileCustomMotorDC.Render>) RenderCustomMotorDC::new
+    );
+
+    public static BlockEntityOptionalRenderer<TileCustomTank, TileCustomTank.Render> TANK_TYPE = new BlockEntityOptionalRenderer<>(
+            "electrodynamics",
+            "tank_type",
+            () -> TileCustomTank::new,
+            () -> TileCustomTank.Render::new,
+            () -> (BlockEntityRendererProvider<TileCustomTank.Render>) RenderCustomTank::new
     );
 
     public static BlockEntityOptionalRenderer<TileCustomMotorAC, TileCustomMotorAC.Render> MOTOR_AC_TYPE = new BlockEntityOptionalRenderer<>(

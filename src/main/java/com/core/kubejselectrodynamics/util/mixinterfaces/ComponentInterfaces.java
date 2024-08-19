@@ -14,4 +14,10 @@ public class ComponentInterfaces {
     public interface IComponentContainerProvider {
         void kjsElectro$setName(String name);
     }
+
+    public interface IComponentFluidHandlerSimple {
+        boolean kjsElectro$hasSidedInput(Direction side);
+        boolean kjsElectro$hasSidedOutput(Direction side);
+        boolean kjsElectro$hasSidedConnection(Direction side);
+    }
 }

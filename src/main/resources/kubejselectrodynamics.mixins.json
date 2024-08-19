@@ -6,10 +6,11 @@
   "mixins": [
     "dynamicelectricity.ContainerMotorDCMixin",
     "dynamicelectricity.DynamicElectricityMixin",
-    "dynamicelectricity.TileMotorDCMixin",
     "dynamicelectricity.SlotRestrictedMixin",
+    "dynamicelectricity.TileMotorDCMixin",
     "electrodynamics.ComponentMixins$ComponentContainerProviderMixin",
     "electrodynamics.ComponentMixins$ComponentElectrodynamicMixin",
+    "electrodynamics.ComponentMixins$ComponentFluidHandlerSimpleMixin",
     "electrodynamics.CountableIngredientMixin",
     "electrodynamics.ElectrodynamicsMixin",
     "electrodynamics.FluidIngredientMixin",
