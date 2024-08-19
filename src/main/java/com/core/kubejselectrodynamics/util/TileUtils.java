@@ -6,6 +6,7 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -43,5 +44,17 @@ public class TileUtils {
             return tile.getComponent(IComponentType.GasHandler).getCapability(cap, side, null);
         }
         return LazyOptional.empty();
+    }
+
+    /**
+     * First ResourceLocation is of the format "base", subsequent is of the format "base{i}", with i starting at 2
+     */
+    public static ResourceLocation[] generateModelArray(int length, String base) {
+        ResourceLocation[] array = new ResourceLocation[length];
+        array[0] = new ResourceLocation(base);
+        for (int i = 1; i < array.length; i++) {
+            array[i] = new ResourceLocation(base + String.valueOf(i + 1));
+        }
+        return array;
     }
 }

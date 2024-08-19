@@ -24,7 +24,7 @@ public class TileCustomBatteryBox extends TileBatteryBox {
     private final CachedTileOutput[] outputs = new CachedTileOutput[6];
 
     public TileCustomBatteryBox(BlockPos worldPosition, BlockState blockState) {
-        this(TileRegister.BATTERY_BOX_TYPE.getType(), worldPosition, blockState, ((CustomBlockBatteryBox)blockState.getBlock()).kjs$getBlockBuilder());
+        this(TileRegister.BATTERY_BOX_TYPE.getBasicType(), worldPosition, blockState, ((CustomBlockBatteryBox)blockState.getBlock()).kjs$getBlockBuilder());
     }
 
     public TileCustomBatteryBox(BlockEntityType<?> type, BlockPos worldPosition, BlockState blockState, BlockBatteryBoxBuilder builder) {
@@ -84,5 +84,12 @@ public class TileCustomBatteryBox extends TileBatteryBox {
             return LazyOptional.empty();
         }
         return component.getCapability(capability, face, null);
+    }
+
+    public static class Render extends TileCustomBatteryBox {
+        public Render(BlockPos worldPosition, BlockState blockState) {
+            super(TileRegister.BATTERY_BOX_TYPE.getRenderedType(), worldPosition, blockState, ((CustomBlockBatteryBox)blockState.getBlock()).kjs$getBlockBuilder());
+        }
+
     }
 }
