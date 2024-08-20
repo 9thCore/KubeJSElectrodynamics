@@ -30,4 +30,15 @@ public class FluidItemToItem {
             Keys.TICKS,
             Keys.EXPERIENCE
     );
+
+    public static RecipeSchema MSRFUEL_PREPROCESSOR_SCHEMA = new RecipeSchema(
+            FluidItemToItemRecipeJS.class,
+            FluidItemToItemRecipeJS::new,
+            Keys.ITEM_OUTPUT,
+            Keys.FLUID_INPUTS_EXACT_1,
+            Keys.ITEM_INPUTS_EXACT_3,
+            Keys.USAGE_PER_TICK,
+            Keys.TICKS,
+            Keys.EXPERIENCE
+    );
 }

@@ -9,10 +9,7 @@ import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
 import com.core.kubejselectrodynamics.item.gastankinsulation.ItemGasInsulatorBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
-import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidItemToFluid;
-import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToGas;
-import com.core.kubejselectrodynamics.plugin.recipe.schema.FluidToItem;
-import com.core.kubejselectrodynamics.plugin.recipe.schema.ItemToItem;
+import com.core.kubejselectrodynamics.plugin.recipe.schema.*;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasWrapper;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasBuilder;
 import com.core.kubejselectrodynamics.util.ElectroFluidWrapper;
@@ -77,6 +74,16 @@ public class KubePlugin extends KubeJSPlugin {
         if (Platform.isModLoaded("blastcraft")) {
             register(event, RecipeHolder.BLASTCRAFT, "blast_compressor", ItemToItem.SCHEMA);
         }
+
+        // Nuclear Science
+        if (Platform.isModLoaded("nuclearscience")) {
+            register(event, RecipeHolder.NUCLEARSCIENCE, "chemical_extractor", FluidItemToItem.SCHEMA);
+            register(event, RecipeHolder.NUCLEARSCIENCE, "msrfuel_preprocessor", FluidItemToItem.MSRFUEL_PREPROCESSOR_SCHEMA);
+            register(event, RecipeHolder.NUCLEARSCIENCE, "radioactive_processor", FluidItemToItem.SCHEMA);
+            register(event, RecipeHolder.NUCLEARSCIENCE, "fission_reactor", ItemToItem.FISSION_REACTOR_SCHEMA);
+            register(event, RecipeHolder.NUCLEARSCIENCE, "fuel_reprocessor", ItemToItem.SCHEMA);
+            register(event, RecipeHolder.NUCLEARSCIENCE, "nuclear_boiler", FluidItemToGas.SCHEMA);
+        }
     }
 
     @Override
@@ -88,7 +95,8 @@ public class KubePlugin extends KubeJSPlugin {
 
     enum RecipeHolder {
         ELECTRODYNAMICS("electrodynamics"),
-        BLASTCRAFT("blastcraft");
+        BLASTCRAFT("blastcraft"),
+        NUCLEARSCIENCE("nuclearscience");
 
         public final String mod;
         RecipeHolder(String name) {

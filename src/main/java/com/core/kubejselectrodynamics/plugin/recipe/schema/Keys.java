@@ -11,6 +11,7 @@ import dev.latvian.mods.kubejs.recipe.component.*;
 public class Keys {
     public static final RecipeKey<InputItem[]> ITEM_INPUTS_EXACT_1 = Components.ARRAY_ITEM_INPUT(1).key("iteminputs").preferred("itemInputs");
     public static final RecipeKey<InputItem[]> ITEM_INPUTS_EXACT_2 = Components.ARRAY_ITEM_INPUT(2).key("iteminputs").preferred("itemInputs");
+    public static final RecipeKey<InputItem[]> ITEM_INPUTS_EXACT_3 = Components.ARRAY_ITEM_INPUT(3).key("iteminputs").preferred("itemInputs");
     public static final RecipeKey<OutputItem[]> ITEM_BI_EXACT_1 = Components.ARRAY_ITEM_OUTPUT(1).key("itembi").preferred("itemByproducts").defaultOptional();
     public static final RecipeKey<InputFluid[]> FLUID_INPUTS_EXACT_1 = Components.ARRAY_FLUID_INPUT(1).key("fluidinputs").preferred("fluidInputs");
     public static final RecipeKey<OutputGas[]> GAS_BI_EXACT_1 = Components.ARRAY_GAS_OUTPUT(1).key("gasbi").preferred("gasByproducts").defaultOptional();

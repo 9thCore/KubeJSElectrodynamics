@@ -47,4 +47,14 @@ public class ItemToItem {
             Keys.EXPERIENCE,
             Keys.ITEM_BI_EXACT_1
     );
+
+    public static RecipeSchema FISSION_REACTOR_SCHEMA = new RecipeSchema(
+            ItemToItemRecipeJS.class,
+            ItemToItemRecipeJS::new,
+            Keys.ITEM_OUTPUT,
+            Keys.ITEM_INPUTS_EXACT_1,
+            Keys.USAGE_PER_TICK,
+            Keys.TICKS,
+            Keys.EXPERIENCE
+    );
 }
