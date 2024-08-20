@@ -27,6 +27,9 @@ public class KubePlugin extends KubeJSPlugin {
     }
 
     public void register(RegisterRecipeSchemasEvent event, RecipeHolder holder, String name, RecipeSchema schema) {
+        if (!Platform.isModLoaded(holder.mod)) {
+            return;
+        }
         event.register(GetRecipeType(holder, name + "_recipe"), schema);
     }
 
@@ -71,19 +74,15 @@ public class KubePlugin extends KubeJSPlugin {
         register(event, RecipeHolder.ELECTRODYNAMICS, "electrolytic_separator", FluidToGas.SCHEMA);
 
         // Blastcraft
-        if (Platform.isModLoaded("blastcraft")) {
-            register(event, RecipeHolder.BLASTCRAFT, "blast_compressor", ItemToItem.SCHEMA);
-        }
+        register(event, RecipeHolder.BLASTCRAFT, "blast_compressor", ItemToItem.SCHEMA);
 
         // Nuclear Science
-        if (Platform.isModLoaded("nuclearscience")) {
-            register(event, RecipeHolder.NUCLEARSCIENCE, "chemical_extractor", FluidItemToItem.SCHEMA);
-            register(event, RecipeHolder.NUCLEARSCIENCE, "msrfuel_preprocessor", FluidItemToItem.MSRFUEL_PREPROCESSOR_SCHEMA);
-            register(event, RecipeHolder.NUCLEARSCIENCE, "radioactive_processor", FluidItemToItem.SCHEMA);
-            register(event, RecipeHolder.NUCLEARSCIENCE, "fission_reactor", ItemToItem.FISSION_REACTOR_SCHEMA);
-            register(event, RecipeHolder.NUCLEARSCIENCE, "fuel_reprocessor", ItemToItem.SCHEMA);
-            register(event, RecipeHolder.NUCLEARSCIENCE, "nuclear_boiler", FluidItemToGas.SCHEMA);
-        }
+        register(event, RecipeHolder.NUCLEARSCIENCE, "chemical_extractor", FluidItemToItem.SCHEMA);
+        register(event, RecipeHolder.NUCLEARSCIENCE, "msrfuel_preprocessor", FluidItemToItem.MSRFUEL_PREPROCESSOR_SCHEMA);
+        register(event, RecipeHolder.NUCLEARSCIENCE, "radioactive_processor", FluidItemToItem.SCHEMA);
+        register(event, RecipeHolder.NUCLEARSCIENCE, "fission_reactor", ItemToItem.FISSION_REACTOR_SCHEMA);
+        register(event, RecipeHolder.NUCLEARSCIENCE, "fuel_reprocessor", ItemToItem.SCHEMA);
+        register(event, RecipeHolder.NUCLEARSCIENCE, "nuclear_boiler", FluidItemToGas.SCHEMA);
     }
 
     @Override
