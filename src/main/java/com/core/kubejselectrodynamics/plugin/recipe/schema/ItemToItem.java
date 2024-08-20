@@ -1,19 +1,10 @@
 package com.core.kubejselectrodynamics.plugin.recipe.schema;
 
-import com.core.kubejselectrodynamics.util.ItemUtils;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 
 public class ItemToItem {
 
-    public static class ItemToItemRecipeJS extends ElectrodynamicsRecipeJS {
-        @Override
-        public JsonElement writeInputItem(InputItem item) {
-            return ItemUtils.writeInputItem(item);
-        }
-    }
+    public static class ItemToItemRecipeJS extends ElectrodynamicsRecipeJS { }
 
     public static RecipeSchema SCHEMA = new RecipeSchema(
             ItemToItemRecipeJS.class,

@@ -3,8 +3,13 @@ package com.core.kubejselectrodynamics.plugin.recipe.schema;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.fluid.TagFluidStackJS;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasStackJS;
 import com.core.kubejselectrodynamics.util.ElectroFluidWrapper;
+import com.core.kubejselectrodynamics.util.ItemUtils;
+import com.google.gson.JsonElement;
 import dev.architectury.hooks.fluid.forge.FluidStackHooksForge;
 import dev.latvian.mods.kubejs.fluid.FluidStackJS;
+import dev.latvian.mods.kubejs.fluid.InputFluid;
+import dev.latvian.mods.kubejs.fluid.OutputFluid;
+import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.recipe.RecipeJS;
 import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
@@ -220,5 +225,21 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
 
         ConsoleJS.SERVER.warn("Original recipe not of Electrodynamics type - could not get experience");
         return 0;
+    }
+
+
+    @Override
+    public OutputFluid readOutputFluid(Object from) {
+        return ElectroFluidWrapper.of(from);
+    }
+
+    @Override
+    public InputFluid readInputFluid(Object from) {
+        return ElectroFluidWrapper.of(from);
+    }
+
+    @Override
+    public JsonElement writeInputItem(InputItem item) {
+        return ItemUtils.writeInputItem(item);
     }
 }
