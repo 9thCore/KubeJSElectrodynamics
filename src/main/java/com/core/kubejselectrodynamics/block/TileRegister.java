@@ -4,6 +4,7 @@ import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.batterybox.TileCustomBatteryBox;
 import com.core.kubejselectrodynamics.block.motor.ac.TileCustomMotorAC;
 import com.core.kubejselectrodynamics.block.motor.dc.TileCustomMotorDC;
+import com.core.kubejselectrodynamics.block.radioactive.TileCustomRadioactive;
 import com.core.kubejselectrodynamics.block.storage.gastank.TileCustomGasTank;
 import com.core.kubejselectrodynamics.block.storage.tank.TileCustomTank;
 import com.core.kubejselectrodynamics.client.tile.RenderCustomBatteryBox;
@@ -59,5 +60,11 @@ public class TileRegister {
             () -> TileCustomMotorAC::new,
             () -> TileCustomMotorAC.Render::new,
             () -> (BlockEntityRendererProvider<TileCustomMotorAC.Render>) RenderCustomMotorAC::new
+    );
+
+    public static final BlockEntityRegister<TileCustomRadioactive> RADIOACTIVE_TYPE = new BlockEntityRegister<>(
+            "nuclearscience",
+            "radioactive_type",
+            () -> TileCustomRadioactive::new
     );
 }

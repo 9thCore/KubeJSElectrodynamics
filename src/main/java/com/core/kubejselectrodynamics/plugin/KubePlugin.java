@@ -3,12 +3,14 @@ package com.core.kubejselectrodynamics.plugin;
 import com.core.kubejselectrodynamics.block.batterybox.BlockBatteryBoxBuilder;
 import com.core.kubejselectrodynamics.block.motor.ac.BlockMotorACBuilder;
 import com.core.kubejselectrodynamics.block.motor.dc.BlockMotorDCBuilder;
+import com.core.kubejselectrodynamics.block.radioactive.BlockRadioactiveBuilder;
 import com.core.kubejselectrodynamics.block.storage.gastank.BlockGasTankBuilder;
 import com.core.kubejselectrodynamics.block.storage.tank.BlockTankBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
 import com.core.kubejselectrodynamics.item.gastankinsulation.ItemGasInsulatorBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
+import com.core.kubejselectrodynamics.item.radioactive.ItemRadioactiveBuilder;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.*;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasWrapper;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasBuilder;
@@ -54,6 +56,11 @@ public class KubePlugin extends KubeJSPlugin {
         if (Platform.isModLoaded("dynamicelectricity")) {
             RegistryInfo.BLOCK.addType("dynamicelectricity:motordc", BlockMotorDCBuilder.class, BlockMotorDCBuilder::new, false);
             RegistryInfo.BLOCK.addType("dynamicelectricity:motorac", BlockMotorACBuilder.class, BlockMotorACBuilder::new, false);
+        }
+
+        if (Platform.isModLoaded("nuclearscience")) {
+            RegistryInfo.BLOCK.addType("nuclearscience:radioactive", BlockRadioactiveBuilder.class, BlockRadioactiveBuilder::new, false);
+            RegistryInfo.ITEM.addType("nuclearscience:radioactive", ItemRadioactiveBuilder.class, ItemRadioactiveBuilder::new, false);
         }
     }
 
