@@ -20,9 +20,13 @@ import dev.architectury.platform.Platform;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
+import dev.latvian.mods.kubejs.registry.BuilderBase;
+import dev.latvian.mods.kubejs.registry.BuilderFactory;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import dev.latvian.mods.kubejs.script.BindingsEvent;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.function.Supplier;
 
 public class KubePlugin extends KubeJSPlugin {
     public ResourceLocation GetRecipeType(ModHolder holder, String type) {
@@ -34,6 +38,13 @@ public class KubePlugin extends KubeJSPlugin {
             return;
         }
         event.register(GetRecipeType(holder, name + "_recipe"), schema);
+    }
+
+    public static <T> void register(RegistryInfo<T> info, ModHolder holder, String id, Supplier<Class<? extends BuilderBase<? extends T>>> builderType, Supplier<BuilderFactory> factory, boolean isDefault) {
+        if (!Platform.isModLoaded(holder.mod)) {
+            return;
+        }
+        info.addType(holder.mod + ":" + id, builderType.get(), factory.get(), isDefault);
     }
 
     @Override
@@ -54,17 +65,13 @@ public class KubePlugin extends KubeJSPlugin {
         RegistryInfo.BLOCK.addType("electrodynamics:gastank", BlockGasTankBuilder.class, BlockGasTankBuilder::new, false);
 
         // DYNAMIC ELECTRICITY
-        if (Platform.isModLoaded(ModHolder.DYNAMICELECTRICITY.mod)) {
-            RegistryInfo.BLOCK.addType("dynamicelectricity:motordc", BlockMotorDCBuilder.class, BlockMotorDCBuilder::new, false);
-            RegistryInfo.BLOCK.addType("dynamicelectricity:motorac", BlockMotorACBuilder.class, BlockMotorACBuilder::new, false);
-        }
+        register(RegistryInfo.BLOCK, ModHolder.DYNAMICELECTRICITY, "motordc", () -> BlockMotorDCBuilder.class, () -> BlockMotorDCBuilder::new, false);
+        register(RegistryInfo.BLOCK, ModHolder.DYNAMICELECTRICITY, "motorac", () -> BlockMotorACBuilder.class, () -> BlockMotorACBuilder::new, false);
 
         // NUCLEAR SCIENCE
-        if (Platform.isModLoaded(ModHolder.NUCLEARSCIENCE.mod)) {
-            RegistryInfo.BLOCK.addType("nuclearscience:radioactive", BlockRadioactiveBuilder.class, BlockRadioactiveBuilder::new, false);
-            RegistryInfo.ITEM.addType("nuclearscience:radioactive", ItemRadioactiveBuilder.class, ItemRadioactiveBuilder::new, false);
-            RegistryInfo.ITEM.addType("nuclearscience:fuelrod", ItemFuelRodBuilder.class, ItemFuelRodBuilder::new, false);
-        }
+        register(RegistryInfo.BLOCK, ModHolder.NUCLEARSCIENCE, "radioactive", () -> BlockRadioactiveBuilder.class, () -> BlockRadioactiveBuilder::new, false);
+        register(RegistryInfo.ITEM, ModHolder.NUCLEARSCIENCE, "radioactive", () -> ItemRadioactiveBuilder.class, () -> ItemRadioactiveBuilder::new, false);
+        register(RegistryInfo.ITEM, ModHolder.NUCLEARSCIENCE, "fuelrod", () -> ItemFuelRodBuilder.class, () -> ItemFuelRodBuilder::new, false);
     }
 
     @Override
