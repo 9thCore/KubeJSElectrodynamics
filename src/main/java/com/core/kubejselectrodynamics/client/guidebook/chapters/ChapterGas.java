@@ -87,4 +87,8 @@ public class ChapterGas extends Chapter {
     public MutableComponent getTitle() {
         return TextUtil.guidebookGas("title");
     }
+
+    public static boolean valid() {
+        return !GasRegistrationUtil.KJS_REGISTERED_GASSES.isEmpty();
+    }
 }

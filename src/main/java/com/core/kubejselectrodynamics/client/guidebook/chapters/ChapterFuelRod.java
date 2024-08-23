@@ -48,4 +48,8 @@ public class ChapterFuelRod extends Chapter {
         int damage = item.getDefaultInstance().getMaxDamage();
         return damage != 0 ? Component.literal(String.valueOf(damage)) : TextUtil.guidebookFuelRod("inf");
     }
+
+    public static boolean valid() {
+        return !RadiationUtil.fuelRods.keySet().isEmpty();
+    }
 }
