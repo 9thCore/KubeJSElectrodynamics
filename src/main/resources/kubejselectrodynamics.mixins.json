@@ -21,6 +21,7 @@
     "electrodynamics.gastank.GenericTileGasTankMixin",
     "forge.IngredientMixin",
     "nuclearscience.ContainerReactorCoreMixin",
+    "nuclearscience.FissionReactorRecipeCategoryMixin",
     "nuclearscience.TileFissionReactorCoreMixin"
   ],
   "injectors": {
