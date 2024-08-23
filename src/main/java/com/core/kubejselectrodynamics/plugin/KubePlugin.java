@@ -25,11 +25,11 @@ import dev.latvian.mods.kubejs.script.BindingsEvent;
 import net.minecraft.resources.ResourceLocation;
 
 public class KubePlugin extends KubeJSPlugin {
-    public ResourceLocation GetRecipeType(RecipeHolder holder, String type) {
+    public ResourceLocation GetRecipeType(ModHolder holder, String type) {
         return new ResourceLocation(holder.mod, type);
     }
 
-    public void register(RegisterRecipeSchemasEvent event, RecipeHolder holder, String name, RecipeSchema schema) {
+    public void register(RegisterRecipeSchemasEvent event, ModHolder holder, String name, RecipeSchema schema) {
         if (!Platform.isModLoaded(holder.mod)) {
             return;
         }
@@ -54,13 +54,13 @@ public class KubePlugin extends KubeJSPlugin {
         RegistryInfo.BLOCK.addType("electrodynamics:gastank", BlockGasTankBuilder.class, BlockGasTankBuilder::new, false);
 
         // DYNAMIC ELECTRICITY
-        if (Platform.isModLoaded("dynamicelectricity")) {
+        if (Platform.isModLoaded(ModHolder.DYNAMICELECTRICITY.mod)) {
             RegistryInfo.BLOCK.addType("dynamicelectricity:motordc", BlockMotorDCBuilder.class, BlockMotorDCBuilder::new, false);
             RegistryInfo.BLOCK.addType("dynamicelectricity:motorac", BlockMotorACBuilder.class, BlockMotorACBuilder::new, false);
         }
 
         // NUCLEAR SCIENCE
-        if (Platform.isModLoaded("nuclearscience")) {
+        if (Platform.isModLoaded(ModHolder.NUCLEARSCIENCE.mod)) {
             RegistryInfo.BLOCK.addType("nuclearscience:radioactive", BlockRadioactiveBuilder.class, BlockRadioactiveBuilder::new, false);
             RegistryInfo.ITEM.addType("nuclearscience:radioactive", ItemRadioactiveBuilder.class, ItemRadioactiveBuilder::new, false);
             RegistryInfo.ITEM.addType("nuclearscience:fuelrod", ItemFuelRodBuilder.class, ItemFuelRodBuilder::new, false);
@@ -70,29 +70,29 @@ public class KubePlugin extends KubeJSPlugin {
     @Override
     public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
         // Electrodynamics
-        register(event, RecipeHolder.ELECTRODYNAMICS, "energized_alloyer", ItemToItem.ALLOYER_SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "lathe", ItemToItem.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "mineral_crusher", ItemToItem.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "mineral_grinder", ItemToItem.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "oxidation_furnace", ItemToItem.OXIDIZER_FURNACE_SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "reinforced_alloyer", ItemToItem.ALLOYER_SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "wire_mill", ItemToItem.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "chemical_crystallizer", FluidToItem.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "chemical_mixer", FluidItemToFluid.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "fermentation_plant", FluidItemToFluid.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "mineral_washer", FluidItemToFluid.SCHEMA);
-        register(event, RecipeHolder.ELECTRODYNAMICS, "electrolytic_separator", FluidToGas.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "energized_alloyer", ItemToItem.ALLOYER_SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "lathe", ItemToItem.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "mineral_crusher", ItemToItem.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "mineral_grinder", ItemToItem.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "oxidation_furnace", ItemToItem.OXIDIZER_FURNACE_SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "reinforced_alloyer", ItemToItem.ALLOYER_SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "wire_mill", ItemToItem.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "chemical_crystallizer", FluidToItem.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "chemical_mixer", FluidItemToFluid.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "fermentation_plant", FluidItemToFluid.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "mineral_washer", FluidItemToFluid.SCHEMA);
+        register(event, ModHolder.ELECTRODYNAMICS, "electrolytic_separator", FluidToGas.SCHEMA);
 
         // Blastcraft
-        register(event, RecipeHolder.BLASTCRAFT, "blast_compressor", ItemToItem.SCHEMA);
+        register(event, ModHolder.BLASTCRAFT, "blast_compressor", ItemToItem.SCHEMA);
 
         // Nuclear Science
-        register(event, RecipeHolder.NUCLEARSCIENCE, "chemical_extractor", FluidItemToItem.SCHEMA);
-        register(event, RecipeHolder.NUCLEARSCIENCE, "msrfuel_preprocessor", FluidItemToItem.MSRFUEL_PREPROCESSOR_SCHEMA);
-        register(event, RecipeHolder.NUCLEARSCIENCE, "radioactive_processor", FluidItemToItem.SCHEMA);
-        register(event, RecipeHolder.NUCLEARSCIENCE, "fission_reactor", ItemToItem.FISSION_REACTOR_SCHEMA);
-        register(event, RecipeHolder.NUCLEARSCIENCE, "fuel_reprocessor", ItemToItem.SCHEMA);
-        register(event, RecipeHolder.NUCLEARSCIENCE, "nuclear_boiler", FluidItemToGas.SCHEMA);
+        register(event, ModHolder.NUCLEARSCIENCE, "chemical_extractor", FluidItemToItem.SCHEMA);
+        register(event, ModHolder.NUCLEARSCIENCE, "msrfuel_preprocessor", FluidItemToItem.MSRFUEL_PREPROCESSOR_SCHEMA);
+        register(event, ModHolder.NUCLEARSCIENCE, "radioactive_processor", FluidItemToItem.SCHEMA);
+        register(event, ModHolder.NUCLEARSCIENCE, "fission_reactor", ItemToItem.FISSION_REACTOR_SCHEMA);
+        register(event, ModHolder.NUCLEARSCIENCE, "fuel_reprocessor", ItemToItem.SCHEMA);
+        register(event, ModHolder.NUCLEARSCIENCE, "nuclear_boiler", FluidItemToGas.SCHEMA);
     }
 
     @Override
@@ -102,13 +102,14 @@ public class KubePlugin extends KubeJSPlugin {
         event.add("ElectrodynamicsGas", ElectroGasWrapper.class);
     }
 
-    enum RecipeHolder {
+    enum ModHolder {
         ELECTRODYNAMICS("electrodynamics"),
         BLASTCRAFT("blastcraft"),
+        DYNAMICELECTRICITY("dynamicelectricity"),
         NUCLEARSCIENCE("nuclearscience");
 
         public final String mod;
-        RecipeHolder(String name) {
+        ModHolder(String name) {
             this.mod = name;
         }
     }
