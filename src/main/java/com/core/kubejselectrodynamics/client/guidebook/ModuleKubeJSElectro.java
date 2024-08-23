@@ -1,6 +1,7 @@
 package com.core.kubejselectrodynamics.client.guidebook;
 
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
+import com.core.kubejselectrodynamics.client.guidebook.chapters.ChapterFuelRod;
 import com.core.kubejselectrodynamics.client.guidebook.chapters.ChapterGas;
 import com.core.kubejselectrodynamics.util.TextUtil;
 import electrodynamics.client.guidebook.utils.components.Module;
@@ -15,6 +16,7 @@ public class ModuleKubeJSElectro extends Module {
     @Override
     public void addChapters() {
         chapters.add(new ChapterGas(this));
+        chapters.add(new ChapterFuelRod(this));
     }
 
     @Override

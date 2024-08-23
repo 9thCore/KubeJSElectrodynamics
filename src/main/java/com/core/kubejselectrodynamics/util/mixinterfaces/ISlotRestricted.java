@@ -7,4 +7,5 @@ import java.util.List;
 public interface ISlotRestricted {
     List<Item> kjsElectro$getWhitelist();
     void kjsElectro$setWhitelist(List<Item> items);
+    void kjsElectro$mayPlace(boolean forcedResult);
 }

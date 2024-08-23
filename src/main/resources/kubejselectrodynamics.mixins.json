@@ -7,7 +7,6 @@
   "mixins": [
     "dynamicelectricity.ContainerMotorDCMixin",
     "dynamicelectricity.DynamicElectricityMixin",
-    "electrodynamics.SlotRestrictedMixin",
     "dynamicelectricity.TileMotorDCMixin",
     "electrodynamics.ComponentMixins$ComponentContainerProviderMixin",
     "electrodynamics.ComponentMixins$ComponentElectrodynamicMixin",
@@ -16,10 +15,13 @@
     "electrodynamics.ElectrodynamicsMixin",
     "electrodynamics.FluidIngredientMixin",
     "electrodynamics.IItemElectricMixin",
+    "electrodynamics.SlotRestrictedMixin",
     "electrodynamics.UtilsMixins$ElectricityUtilsMixin",
     "electrodynamics.gastank.ContainerGasTankGenericMixin",
     "electrodynamics.gastank.GenericTileGasTankMixin",
-    "forge.IngredientMixin"
+    "forge.IngredientMixin",
+    "nuclearscience.ContainerReactorCoreMixin",
+    "nuclearscience.TileFissionReactorCoreMixin"
   ],
   "injectors": {
     "defaultRequire": 1

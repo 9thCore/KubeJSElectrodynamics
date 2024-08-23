@@ -8,6 +8,7 @@ import com.core.kubejselectrodynamics.block.storage.gastank.BlockGasTankBuilder;
 import com.core.kubejselectrodynamics.block.storage.tank.BlockTankBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
+import com.core.kubejselectrodynamics.item.fuelrod.ItemFuelRodBuilder;
 import com.core.kubejselectrodynamics.item.gastankinsulation.ItemGasInsulatorBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
 import com.core.kubejselectrodynamics.item.radioactive.ItemRadioactiveBuilder;
@@ -58,9 +59,11 @@ public class KubePlugin extends KubeJSPlugin {
             RegistryInfo.BLOCK.addType("dynamicelectricity:motorac", BlockMotorACBuilder.class, BlockMotorACBuilder::new, false);
         }
 
+        // NUCLEAR SCIENCE
         if (Platform.isModLoaded("nuclearscience")) {
             RegistryInfo.BLOCK.addType("nuclearscience:radioactive", BlockRadioactiveBuilder.class, BlockRadioactiveBuilder::new, false);
             RegistryInfo.ITEM.addType("nuclearscience:radioactive", ItemRadioactiveBuilder.class, ItemRadioactiveBuilder::new, false);
+            RegistryInfo.ITEM.addType("nuclearscience:fuelrod", ItemFuelRodBuilder.class, ItemFuelRodBuilder::new, false);
         }
     }
 

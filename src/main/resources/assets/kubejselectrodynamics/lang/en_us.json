@@ -5,5 +5,8 @@
   "guidebook.kubejselectrodynamics.chapter.gas.list.all": "KubeJS Electrodynamics adds the following gasses:",
   "guidebook.kubejselectrodynamics.chapter.gas.list.condensable": "Out of the above, the following gasses can condense:",
   "tooltip.kubejselectrodynamics.dynamicelectricity.motordc": "%1$s -> %2$s @ %3$s",
-  "tooltip.kubejselectrodynamics.dynamicelectricity.motorac": "%1$s @ %2$s -> %3$s"
+  "tooltip.kubejselectrodynamics.dynamicelectricity.motorac": "%1$s @ %2$s -> %3$s",
+  "guidebook.kubejselectrodynamics.chapter.fuelrod.title": "Fuel Rods",
+  "guidebook.kubejselectrodynamics.chapter.fuelrod.list": "KubeJS Electrodynamics adds the following fuel rods:",
+  "guidebook.kubejselectrodynamics.chapter.fuelrod.inf": "Infinite"
 }

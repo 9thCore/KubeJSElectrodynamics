@@ -13,6 +13,10 @@ public class TextUtil {
         return guidebook("chapter.gas." + key, additional);
     }
 
+    public static MutableComponent guidebookFuelRod(String key, Object... additional) {
+        return guidebook("chapter.fuelrod." + key, additional);
+    }
+
     public static MutableComponent getText(String prefix, String postfix, Object... additional) {
         return Component.translatable(prefix + "." + KubeJSElectrodynamics.MODID + "." + postfix, additional);
     }
