@@ -29,11 +29,11 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.function.Supplier;
 
 public class KubePlugin extends KubeJSPlugin {
-    public ResourceLocation GetRecipeType(ModHolder holder, String type) {
+    public static ResourceLocation GetRecipeType(ModHolder holder, String type) {
         return new ResourceLocation(holder.mod, type);
     }
 
-    public void register(RegisterRecipeSchemasEvent event, ModHolder holder, String name, RecipeSchema schema) {
+    public static void register(RegisterRecipeSchemasEvent event, ModHolder holder, String name, RecipeSchema schema) {
         if (!holder.valid()) {
             return;
         }
