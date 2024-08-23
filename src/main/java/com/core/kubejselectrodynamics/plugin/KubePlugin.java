@@ -34,14 +34,14 @@ public class KubePlugin extends KubeJSPlugin {
     }
 
     public void register(RegisterRecipeSchemasEvent event, ModHolder holder, String name, RecipeSchema schema) {
-        if (!Platform.isModLoaded(holder.mod)) {
+        if (!holder.valid()) {
             return;
         }
         event.register(GetRecipeType(holder, name + "_recipe"), schema);
     }
 
     public static <T> void register(RegistryInfo<T> info, ModHolder holder, String id, Supplier<Class<? extends BuilderBase<? extends T>>> builderType, Supplier<BuilderFactory> factory, boolean isDefault) {
-        if (!Platform.isModLoaded(holder.mod)) {
+        if (!holder.valid()) {
             return;
         }
         info.addType(holder.mod + ":" + id, builderType.get(), factory.get(), isDefault);
@@ -50,16 +50,11 @@ public class KubePlugin extends KubeJSPlugin {
     @Override
     public void init() {
         // ELECTRODYNAMICS
-        // GAS
         GasBuilder.INFO.addType("basic", GasBuilder.class, GasBuilder::new, true);
-
-        // ITEM
         RegistryInfo.ITEM.addType("electrodynamics:portable_cylinder", ItemPortableCylinderBuilder.class, ItemPortableCylinderBuilder::new, false);
         RegistryInfo.ITEM.addType("electrodynamics:canister", ItemCanisterBuilder.class, ItemCanisterBuilder::new, false);
         RegistryInfo.ITEM.addType("electrodynamics:battery", ItemBatteryBuilder.class, ItemBatteryBuilder::new, false);
         RegistryInfo.ITEM.addType("electrodynamics:gasinsulation", ItemGasInsulatorBuilder.class, ItemGasInsulatorBuilder::new, false);
-
-        // BLOCK
         RegistryInfo.BLOCK.addType("electrodynamics:batterybox", BlockBatteryBoxBuilder.class, BlockBatteryBoxBuilder::new, false);
         RegistryInfo.BLOCK.addType("electrodynamics:tank", BlockTankBuilder.class, BlockTankBuilder::new, false);
         RegistryInfo.BLOCK.addType("electrodynamics:gastank", BlockGasTankBuilder.class, BlockGasTankBuilder::new, false);
@@ -109,15 +104,19 @@ public class KubePlugin extends KubeJSPlugin {
         event.add("ElectrodynamicsGas", ElectroGasWrapper.class);
     }
 
-    enum ModHolder {
+    public enum ModHolder {
         ELECTRODYNAMICS("electrodynamics"),
         BLASTCRAFT("blastcraft"),
         DYNAMICELECTRICITY("dynamicelectricity"),
         NUCLEARSCIENCE("nuclearscience");
 
-        public final String mod;
+        private final String mod;
         ModHolder(String name) {
             this.mod = name;
+        }
+
+        public boolean valid() {
+            return Platform.isModLoaded(mod);
         }
     }
 }
