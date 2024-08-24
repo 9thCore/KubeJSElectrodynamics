@@ -5,8 +5,11 @@ import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -37,6 +40,11 @@ public interface IItemElectricMixin {
                 /* PATCH: CAPACITY CHECK */
                 if (electric.getElectricProperties().capacity > electricItem.getElectricProperties().capacity) {
                     // Assume electrical items are rated for some maximum power value, their default battery
+                    return;
+                }
+                /* PATCH: RECEIVE CHECK */
+                if (electric.getElectricProperties().receive.getVoltage() != electricItem.getElectricProperties().receive.getVoltage()) {
+                    // Assume electrical items are rated for a specific receiving voltage, as well as extract
                     return;
                 }
                 ItemStack currBattery = electricItem.getCurrentBattery(tool);
@@ -80,5 +88,55 @@ public interface IItemElectricMixin {
             IItemElectric.setMaximumCapacity(tool, this.getElectricProperties().capacity);
         }
         tag.put("currentbattery", battery.save(new CompoundTag()));
+    }
+
+    /**
+     * @author 9thCore
+     * @reason Patch method to check capacity and extract voltage
+     */
+    @Overwrite(remap = false)
+    static boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
+        if (action == null || action == ClickAction.PRIMARY) {
+            return false;
+        }
+
+        if (((IItemElectric) stack.getItem()).cannotHaveBatterySwapped()) {
+            return false;
+        }
+
+        if (!(other.getItem() instanceof IItemElectric) || (other.getItem() instanceof IItemElectric electric && !electric.isEnergyStorageOnly())) {
+            return false;
+        }
+
+        IItemElectric thisElectric = (IItemElectric) stack.getItem();
+        IItemElectric otherElectric = (IItemElectric) other.getItem();
+
+        if (otherElectric.getJoulesStored(other) == 0 || otherElectric.getElectricProperties().receive.getVoltage() != thisElectric.getElectricProperties().receive.getVoltage()) {
+            return false;
+        }
+
+        /* PATCH: EXTRA CHECKS */
+        if (thisElectric.getElectricProperties().extract.getVoltage() != otherElectric.getElectricProperties().extract.getVoltage()) {
+            return false;
+        }
+        if (thisElectric.getElectricProperties().capacity < otherElectric.getElectricProperties().capacity) {
+            return false;
+        }
+
+        ItemStack currBattery = thisElectric.getCurrentBattery(stack);
+
+        double joulesStored = thisElectric.getJoulesStored(stack);
+
+        IItemElectric.setEnergyStored(currBattery, joulesStored);
+
+        access.set(currBattery);
+
+        IItemElectric.setEnergyStored(stack, otherElectric.getJoulesStored(other));
+
+        thisElectric.setCurrentBattery(stack, other);
+
+        player.level().playLocalSound(player.getX(), player.getY(), player.getZ(), ElectrodynamicsSounds.SOUND_BATTERY_SWAP.get(), SoundSource.PLAYERS, 0.25F, 1.0F, false);
+
+        return true;
     }
 }
