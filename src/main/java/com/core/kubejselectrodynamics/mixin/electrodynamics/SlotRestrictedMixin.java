@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 public class SlotRestrictedMixin implements ISlotRestricted {
     @Shadow(remap = false) private List<Item> whitelist;
 
-    @Shadow private Predicate<ItemStack> mayPlace;
+    @Shadow(remap = false) private Predicate<ItemStack> mayPlace;
 
     @Override
     public List<Item> kjsElectro$getWhitelist() {
