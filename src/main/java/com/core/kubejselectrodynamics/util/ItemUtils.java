@@ -7,10 +7,16 @@ import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.util.ConsoleJS;
 import electrodynamics.common.recipe.recipeutils.CountableIngredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITag;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ItemUtils {
     public static JsonElement writeInputItem(InputItem item) {
@@ -63,5 +69,18 @@ public class ItemUtils {
         model.addProperty("loader", "forge:fluid_container");
         model.add("textures", textures);
         return model;
+    }
+
+    public static Item getItemFromID(String id) {
+        ResourceLocation location = new ResourceLocation(id);
+        if (!ForgeRegistries.ITEMS.containsKey(location)) {
+            throw new IllegalArgumentException("Invalid item " + id);
+        }
+        return ForgeRegistries.ITEMS.getValue(location);
+    }
+
+    public static ITag<Item> getTagFromID(String id) {
+        TagKey<Item> key = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(id));
+        return Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(key);
     }
 }
