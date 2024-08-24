@@ -16,6 +16,7 @@
     "electrodynamics.FluidIngredientMixin",
     "electrodynamics.IItemElectricMixin",
     "electrodynamics.SlotRestrictedMixin",
+    "electrodynamics.event.ThermoelectricGeneratorHeatRegisterMixin",
     "electrodynamics.UtilsMixins$ElectricityUtilsMixin",
     "electrodynamics.gastank.ContainerGasTankGenericMixin",
     "electrodynamics.gastank.GenericTileGasTankMixin",

@@ -12,6 +12,7 @@ import com.core.kubejselectrodynamics.item.fuelrod.ItemFuelRodBuilder;
 import com.core.kubejselectrodynamics.item.gastankinsulation.ItemGasInsulatorBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
 import com.core.kubejselectrodynamics.item.radioactive.ItemRadioactiveBuilder;
+import com.core.kubejselectrodynamics.plugin.event.ElectrodynamicsEvents;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.*;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasWrapper;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasBuilder;
@@ -102,6 +103,11 @@ public class KubePlugin extends KubeJSPlugin {
         super.registerBindings(event);
         event.add("ElectrodynamicsFluid", ElectroFluidWrapper.class);
         event.add("ElectrodynamicsGas", ElectroGasWrapper.class);
+    }
+
+    @Override
+    public void registerEvents() {
+        ElectrodynamicsEvents.GROUP.register();
     }
 
     public enum ModHolder {
