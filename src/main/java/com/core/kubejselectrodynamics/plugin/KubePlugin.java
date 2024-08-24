@@ -8,11 +8,11 @@ import com.core.kubejselectrodynamics.block.storage.gastank.BlockGasTankBuilder;
 import com.core.kubejselectrodynamics.block.storage.tank.BlockTankBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
-import com.core.kubejselectrodynamics.item.fuelrod.ItemFuelRodBuilder;
 import com.core.kubejselectrodynamics.item.gastankinsulation.ItemGasInsulatorBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
 import com.core.kubejselectrodynamics.item.radioactive.ItemRadioactiveBuilder;
 import com.core.kubejselectrodynamics.plugin.event.ElectrodynamicsEvents;
+import com.core.kubejselectrodynamics.plugin.event.NuclearScienceEvents;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.*;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.ElectroGasWrapper;
 import com.core.kubejselectrodynamics.plugin.recipe.schema.gas.GasBuilder;
@@ -67,7 +67,6 @@ public class KubePlugin extends KubeJSPlugin {
         // NUCLEAR SCIENCE
         register(RegistryInfo.BLOCK, ModHolder.NUCLEARSCIENCE, "radioactive", () -> BlockRadioactiveBuilder.class, () -> BlockRadioactiveBuilder::new, false);
         register(RegistryInfo.ITEM, ModHolder.NUCLEARSCIENCE, "radioactive", () -> ItemRadioactiveBuilder.class, () -> ItemRadioactiveBuilder::new, false);
-        register(RegistryInfo.ITEM, ModHolder.NUCLEARSCIENCE, "fuelrod", () -> ItemFuelRodBuilder.class, () -> ItemFuelRodBuilder::new, false);
     }
 
     @Override
@@ -108,6 +107,9 @@ public class KubePlugin extends KubeJSPlugin {
     @Override
     public void registerEvents() {
         ElectrodynamicsEvents.GROUP.register();
+        if (ModHolder.NUCLEARSCIENCE.valid()) {
+            NuclearScienceEvents.GROUP.register();
+        }
     }
 
     public enum ModHolder {

@@ -16,9 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TileFissionReactorCore.class)
 public abstract class TileFissionReactorCoreMixin {
-    @Shadow @Final public static int FUEL_ROD_COUNT;
+    @Shadow(remap = false) @Final public static int FUEL_ROD_COUNT;
 
-    @Shadow public Property<Integer> fuelCount;
+    @Shadow(remap = false) public Property<Integer> fuelCount;
 
     @Inject(
             method = "onInventoryChange",
@@ -30,8 +30,8 @@ public abstract class TileFissionReactorCoreMixin {
             int delta = 0;
             for (int i = 0; i < FUEL_ROD_COUNT; i++) {
                 ItemStack stack = inv.getItem(i);
-                if (!stack.isEmpty() && RadiationUtil.fuelRods.containsKey(stack.getItem())) {
-                    delta += RadiationUtil.fuelRods.get(stack.getItem()) * stack.getCount();
+                if (!stack.isEmpty() && RadiationUtil.customFuelRods.containsKey(stack.getItem())) {
+                    delta += RadiationUtil.customFuelRods.get(stack.getItem()) * stack.getCount();
                 }
             }
             fuelCount.set(fuelCount.get() + delta);

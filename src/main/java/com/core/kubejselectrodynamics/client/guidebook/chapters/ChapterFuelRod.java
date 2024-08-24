@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import nuclearscience.common.tile.fissionreactor.TileFissionReactorCore;
 import nuclearscience.prefab.utils.NuclearTextUtils;
 
@@ -27,7 +26,7 @@ public class ChapterFuelRod extends Chapter {
     public void addData() {
         pageData.add(new TextWrapperObject(TextUtil.guidebookFuelRod("list")).setSeparateStart());
 
-        RadiationUtil.fuelRods.forEach((item, value) -> {
+        RadiationUtil.customFuelRods.forEach((item, value) -> {
             pageData.add(new TextWrapperObject(item.getDescription()).setSeparateStart());
             pageData.add(new TextWrapperObject(NuclearTextUtils.guidebook("chapter.fissionreactor.maxtemp", TileFissionReactorCore.MELTDOWN_TEMPERATURE_CALC / 8 * value + 15)).setIndentions(1).setSeparateStart());
             pageData.add(new TextWrapperObject(NuclearTextUtils.guidebook("chapter.fissionreactor.cycles", getCycles(item))).setIndentions(1).setSeparateStart());
@@ -50,6 +49,6 @@ public class ChapterFuelRod extends Chapter {
     }
 
     public static boolean valid() {
-        return !RadiationUtil.fuelRods.keySet().isEmpty();
+        return !RadiationUtil.customFuelRods.keySet().isEmpty();
     }
 }

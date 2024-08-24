@@ -23,7 +23,7 @@ public class FissionReactorRecipeCategoryMixin {
             remap = false
     )
     private boolean kjsElectro$getItemInputsPatch(List<ItemStack> instance, Object object, Operation<Boolean> original) {
-        instance.addAll(RadiationUtil.fuelRods.keySet().stream().map(Item::getDefaultInstance).toList());
+        instance.addAll(RadiationUtil.customFuelRods.keySet().stream().map(Item::getDefaultInstance).toList());
         return original.call(instance, object);
     }
 }
