@@ -4,8 +4,10 @@ import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.client.ClientRegister;
 import com.core.kubejselectrodynamics.item.CustomItemTab;
 import com.core.kubejselectrodynamics.plugin.KubePlugin;
+import com.core.kubejselectrodynamics.plugin.event.ElectrodynamicsEvents;
 import com.core.kubejselectrodynamics.plugin.event.NuclearScienceEvents;
 import com.core.kubejselectrodynamics.plugin.event.server.FuelRodEventJS;
+import com.core.kubejselectrodynamics.plugin.event.server.GasTankInsulatorEventJS;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,6 +33,7 @@ public class KubeJSElectrodynamics
     }
 
     public void onDatapackSync(OnDatapackSyncEvent event) {
+        ElectrodynamicsEvents.GAS_TANK_INSULATION.post(new GasTankInsulatorEventJS());
         if (KubePlugin.ModHolder.NUCLEARSCIENCE.valid()) {
             NuclearScienceEvents.FUEL_ROD.post(new FuelRodEventJS());
         }
