@@ -5,7 +5,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import nuclearscience.common.tile.fissionreactor.TileFissionReactorCore;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,7 +33,7 @@ public abstract class TileFissionReactorCoreMixin {
             for (int i = 0; i < FUEL_ROD_COUNT; i++) {
                 ItemStack stack = inv.getItem(i);
                 if (!stack.isEmpty() && RadiationUtil.customFuelRods.containsKey(stack.getItem())) {
-                    delta += RadiationUtil.customFuelRods.get(stack.getItem()) * stack.getCount();
+                    delta += RadiationUtil.getFuelValue(stack.getItem()) * stack.getCount();
                 }
             }
             fuelCount.set(fuelCount.get() + delta);
@@ -48,5 +50,22 @@ public abstract class TileFissionReactorCoreMixin {
     )
     private int kjsElectro$damageIfAllowed(ItemStack instance, Operation<Integer> original) {
         return instance.isDamageableItem() ? original.call(instance) : -1;
+    }
+
+    @WrapOperation(
+            method = "tickServer",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lelectrodynamics/prefab/tile/components/type/ComponentInventory;setItem(ILnet/minecraft/world/item/ItemStack;)V"
+            ),
+            remap = false
+    )
+    private void kjsElectro$setItemPatch(ComponentInventory instance, int index, ItemStack stack, Operation<Void> original) {
+        Item existing = instance.getItem(index).getItem();
+        if (RadiationUtil.isFuelRod(existing)) {
+            instance.setItem(index,RadiationUtil.getSpentFuel(existing).getDefaultInstance());
+            return;
+        }
+        original.call(instance, index, stack);
     }
 }

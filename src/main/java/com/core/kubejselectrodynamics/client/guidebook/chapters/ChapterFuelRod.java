@@ -26,9 +26,10 @@ public class ChapterFuelRod extends Chapter {
     public void addData() {
         pageData.add(new TextWrapperObject(TextUtil.guidebookFuelRod("list")).setSeparateStart());
 
-        RadiationUtil.customFuelRods.forEach((item, value) -> {
+        RadiationUtil.customFuelRods.forEach((item, pair) -> {
+            int temperature = TileFissionReactorCore.MELTDOWN_TEMPERATURE_CALC / 8 * pair.getA() + 15;
             pageData.add(new TextWrapperObject(item.getDescription()).setSeparateStart());
-            pageData.add(new TextWrapperObject(NuclearTextUtils.guidebook("chapter.fissionreactor.maxtemp", TileFissionReactorCore.MELTDOWN_TEMPERATURE_CALC / 8 * value + 15)).setIndentions(1).setSeparateStart());
+            pageData.add(new TextWrapperObject(NuclearTextUtils.guidebook("chapter.fissionreactor.maxtemp", temperature)).setIndentions(1).setSeparateStart());
             pageData.add(new TextWrapperObject(NuclearTextUtils.guidebook("chapter.fissionreactor.cycles", getCycles(item))).setIndentions(1).setSeparateStart());
         });
     }
