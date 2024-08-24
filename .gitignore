@@ -26,3 +26,10 @@ forge*changelog.txt
 
 # custom
 gradle/
+!run/
+run/*
+!run/kubejs/
+run/kubejs/*
+!run/kubejs/client_scripts/
+!run/kubejs/startup_scripts/
+!run/kubejs/server_scripts/
