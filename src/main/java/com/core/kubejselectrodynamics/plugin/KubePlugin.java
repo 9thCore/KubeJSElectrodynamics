@@ -6,6 +6,7 @@ import com.core.kubejselectrodynamics.block.motor.dc.BlockMotorDCBuilder;
 import com.core.kubejselectrodynamics.block.radioactive.BlockRadioactiveBuilder;
 import com.core.kubejselectrodynamics.block.storage.gastank.BlockGasTankBuilder;
 import com.core.kubejselectrodynamics.block.storage.tank.BlockTankBuilder;
+import com.core.kubejselectrodynamics.block.wire.BlockWireMainBuilder;
 import com.core.kubejselectrodynamics.item.battery.ItemBatteryBuilder;
 import com.core.kubejselectrodynamics.item.canister.ItemCanisterBuilder;
 import com.core.kubejselectrodynamics.item.portable_cylinder.ItemPortableCylinderBuilder;
@@ -57,6 +58,7 @@ public class KubePlugin extends KubeJSPlugin {
         RegistryInfo.BLOCK.addType("electrodynamics:batterybox", BlockBatteryBoxBuilder.class, BlockBatteryBoxBuilder::new, false);
         RegistryInfo.BLOCK.addType("electrodynamics:tank", BlockTankBuilder.class, BlockTankBuilder::new, false);
         RegistryInfo.BLOCK.addType("electrodynamics:gastank", BlockGasTankBuilder.class, BlockGasTankBuilder::new, false);
+        RegistryInfo.BLOCK.addType("electrodynamics:wire", BlockWireMainBuilder.class, BlockWireMainBuilder::new, false);
 
         // DYNAMIC ELECTRICITY
         register(RegistryInfo.BLOCK, ModHolder.DYNAMICELECTRICITY, "motordc", () -> BlockMotorDCBuilder.class, () -> BlockMotorDCBuilder::new, false);

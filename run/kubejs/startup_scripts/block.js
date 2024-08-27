@@ -50,6 +50,16 @@ StartupEvents.registry("block", event => {
     .copyVoxelShape("hslagastank")
     .model("electrodynamics:block/gastankhsla");
 
+    // Do note you need two textures: test_wire and logistical_test_wire
+    // See assets directory for an example
+    event.create("kubejs:test_wire", "electrodynamics:wire")
+    .wireTint(255, 127, 0, 255) // Orange wire tint
+    .resistance(0.05) // 5x the resistance of Iron
+    .ampacity(600) // Same ampacity as Silver
+    .texture("conductor", "kubejs:block/wire/test_wire") // Texture used in the center of the wire
+    .texture("logistical_conductor", "kubejs:block/wire/logistical_test_wire") // The texture on the logistical wire specifically, defaults to the wire's conductor (and looks bad)
+    .notSolid();
+
     if (Platform.getMods().containsKey("dynamicelectricity")) {
         // DYNAMIC ELECTRICTY
         event.create("kubejs:impossibly_efficient_dc_motor", "dynamicelectricity:motordc")

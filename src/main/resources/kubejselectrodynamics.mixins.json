@@ -12,6 +12,7 @@
     "electrodynamics.ComponentMixins$ComponentElectrodynamicMixin",
     "electrodynamics.ComponentMixins$ComponentFluidHandlerSimpleMixin",
     "electrodynamics.CountableIngredientMixin",
+    "electrodynamics.ElectricNetworkMixin",
     "electrodynamics.ElectrodynamicsMixin",
     "electrodynamics.FluidIngredientMixin",
     "electrodynamics.IItemElectricMixin",

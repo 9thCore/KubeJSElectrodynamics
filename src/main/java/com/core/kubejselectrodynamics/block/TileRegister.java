@@ -7,19 +7,13 @@ import com.core.kubejselectrodynamics.block.motor.dc.TileCustomMotorDC;
 import com.core.kubejselectrodynamics.block.radioactive.TileCustomRadioactive;
 import com.core.kubejselectrodynamics.block.storage.gastank.TileCustomGasTank;
 import com.core.kubejselectrodynamics.block.storage.tank.TileCustomTank;
-import com.core.kubejselectrodynamics.client.tile.RenderCustomBatteryBox;
-import com.core.kubejselectrodynamics.client.tile.RenderCustomMotorAC;
-import com.core.kubejselectrodynamics.client.tile.RenderCustomMotorDC;
-import com.core.kubejselectrodynamics.client.tile.RenderCustomTank;
+import com.core.kubejselectrodynamics.block.wire.TileCustomLogisticalWire;
+import com.core.kubejselectrodynamics.block.wire.TileCustomWire;
+import com.core.kubejselectrodynamics.client.tile.*;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TileRegister {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, KubeJSElectrodynamics.MODID);
@@ -36,6 +30,19 @@ public class TileRegister {
             "electrodynamics",
             "gas_tank_type",
             () -> TileCustomGasTank::new
+    );
+
+    // TODO make into a optional renderer
+    public static final BlockEntityRegister<TileCustomWire> WIRE_TYPE = new BlockEntityRegister<>(
+            "electrodynamics",
+            "wire_type",
+            () -> TileCustomWire::new
+    );
+
+    public static final BlockEntityRegister<TileCustomLogisticalWire> LOGISTICAL_WIRE_TYPE = new BlockEntityRegister<>(
+            "electrodynamics",
+            "logistical_wire_type",
+            () -> TileCustomLogisticalWire::new
     );
 
     public static BlockEntityOptionalRenderer<TileCustomMotorDC, TileCustomMotorDC.Render> MOTOR_DC_TYPE = new BlockEntityOptionalRenderer<>(
