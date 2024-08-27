@@ -1,7 +1,6 @@
 package com.core.kubejselectrodynamics.block.wire;
 
 import com.core.kubejselectrodynamics.block.TileRegister;
-import com.core.kubejselectrodynamics.block.capabilities.IElectrodynamicsCustomRenderer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.block.BlockBuilder;
@@ -53,13 +52,13 @@ public class BlockWireBuilder extends BlockBuilder {
         builders.add(this);
     }
 
-    @Info("Sets the resistance of the wire.")
+    @Info("Sets the resistance of the wire, as a double.")
     public BlockWireBuilder resistance(double resistance) {
         this.wireResistance = resistance;
         return this;
     }
 
-    @Info("Sets the ampacity of the wire.")
+    @Info("Sets the ampacity of the wire, as a long.")
     public BlockWireBuilder ampacity(long ampacity) {
         this.wireAmpacity = ampacity;
         return this;
@@ -71,7 +70,7 @@ public class BlockWireBuilder extends BlockBuilder {
         return this;
     }
 
-    @Info("Sets the tint of the wire in item form. Defaults to white (255, 255, 255, 255).")
+    @Info("Sets the tint of the wire in item form, as ints. Defaults to white (255, 255, 255, 255).")
     public BlockWireBuilder wireTint(int r, int g, int b, int a) {
         wireTint = new Color(colorClamp(r), colorClamp(g), colorClamp(b), colorClamp(a));
         return this;
