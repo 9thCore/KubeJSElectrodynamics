@@ -33,3 +33,4 @@ run/kubejs/*
 !run/kubejs/client_scripts/
 !run/kubejs/startup_scripts/
 !run/kubejs/server_scripts/
+!run/kubejs/assets
