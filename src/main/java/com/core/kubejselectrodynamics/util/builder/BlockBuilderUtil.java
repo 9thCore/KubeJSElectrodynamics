@@ -63,10 +63,10 @@ public class BlockBuilderUtil {
         return value.name().toLowerCase(Locale.ENGLISH);
     }
 
-    public static String getTextureOrDefault(JsonObject textures, String id, String defaultID) {
+    public static String getTextureOrDefault(JsonObject textures, String id, String defaultValue) {
         if (textures.has(id)) {
             return textures.get(id).getAsString();
         }
-        return textures.get(defaultID).getAsString();
+        return defaultValue;
     }
 }

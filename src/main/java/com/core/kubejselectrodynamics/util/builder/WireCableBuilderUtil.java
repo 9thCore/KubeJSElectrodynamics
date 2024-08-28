@@ -24,7 +24,7 @@ public class WireCableBuilderUtil {
             BlockBuilderUtil.addTextureIfMissing(textures, "conductor", String.format("%s:block/%s", bareWireBuilder.id.getNamespace(), bareWireBuilder.id.getPath()));
             // Hack for the logistical model
             if (wireClass == SubtypeWire.WireClass.LOGISTICAL) {
-                textures.addProperty("conductor", BlockBuilderUtil.getTextureOrDefault(textures, "logistical_conductor", "conductor"));
+                textures.addProperty("conductor", BlockBuilderUtil.getTextureOrDefault(textures, "logistical_conductor", textures.get("conductor").getAsString()));
             }
         }
 
