@@ -1,6 +1,7 @@
 package com.core.kubejselectrodynamics.block.wire;
 
 import com.core.kubejselectrodynamics.item.CustomItemTab;
+import com.core.kubejselectrodynamics.util.builder.BlockBuilderUtil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dev.latvian.mods.kubejs.block.BlockItemBuilder;
@@ -41,15 +42,15 @@ public class BlockItemWireBuilder extends BlockItemBuilder {
         SubtypeWire.WireClass wireClass = blockBuilder.getSubtype().wireClass;
         textureJson = blockBuilder.textures;
         if (blockBuilder.hasBaseTexture()) {
-            BlockWireBuilder.addTextureIfMissing(textureJson, "layer0", getLayer0Texture(wireClass));
+            BlockBuilderUtil.addTextureIfMissing(textureJson, "layer0", getLayer0Texture(wireClass));
             if (hasLayer1Texture(wireClass)) {
-                BlockWireBuilder.addTextureIfMissing(textureJson, "layer1", getLayer1Texture(wireClass));
+                BlockBuilderUtil.addTextureIfMissing(textureJson, "layer1", getLayer1Texture(wireClass));
             }
             if (hasLayer2Texture(wireClass)) {
-                BlockWireBuilder.addTextureIfMissing(textureJson, "layer2", getLayer2Texture(wireClass));
+                BlockBuilderUtil.addTextureIfMissing(textureJson, "layer2", getLayer2Texture(wireClass));
             }
         } else {
-            BlockWireBuilder.addTextureIfMissing(textureJson, "layer0",  newID("item/", "").toString());
+            BlockBuilderUtil.addTextureIfMissing(textureJson, "layer0",  newID("item/", "").toString());
         }
         model.add("textures", textureJson);
         generator.json(newID("models/item/", ""), model);
