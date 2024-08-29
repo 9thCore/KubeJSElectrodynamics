@@ -14,13 +14,13 @@ public class BlockWireMainBuilder extends BlockWireBuilder {
 
     @Override
     public void createAdditionalObjects() {
-        for (SubtypeWire.WireColor wireColor : SubtypeWire.WireColor.values()) {
-            if (invalidColor(wireColor)) {
+        for (SubtypeWire.WireClass wireClass : SubtypeWire.WireClass.values()) {
+            if (mainConfiguration(wireClass)) {
                 continue;
             }
 
-            for (SubtypeWire.WireClass wireClass : SubtypeWire.WireClass.values()) {
-                if (mainConfiguration(wireClass)) {
+            for (SubtypeWire.WireColor wireColor : SubtypeWire.WireColor.values()) {
+                if (invalidColor(wireColor)) {
                     continue;
                 }
 
