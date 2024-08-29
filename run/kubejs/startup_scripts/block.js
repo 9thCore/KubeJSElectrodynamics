@@ -50,8 +50,8 @@ StartupEvents.registry("block", event => {
     .copyVoxelShape("hslagastank")
     .model("electrodynamics:block/gastankhsla");
 
-    // Do note you need two textures: test_wire and logistical_test_wire
-    // See assets directory for an example
+    // Autogenerates item textures based on "conductor" and "logistical_conductor" textures
+    // Autogenerates block models
     event.create("kubejs:test_wire", "electrodynamics:wire")
     .wireTint(255, 127, 0, 255) // Orange wire tint
     .resistance(0.05) // 5x the resistance of Iron
@@ -59,6 +59,12 @@ StartupEvents.registry("block", event => {
     .texture("conductor", "kubejs:block/wire/test_wire") // Texture used in the center of the wire
     .texture("logistical_conductor", "kubejs:block/wire/logistical_test_wire") // The texture on the logistical wire specifically, defaults to the wire's conductor (and looks bad)
     .notSolid();
+
+    // Autogenerates block models only
+    event.create("kubejs:constricted_pipe", "electrodynamics:fluidpipe")
+    .texture("texture", "kubejs:block/fluidpipe/constricted_pipe") // Block texture
+    .texture("layer0", "kubejs:item/fluidpipe/constricted_pipe") // Item texture
+    .maxTransfer(100) // 50x less than the copper pipe
 
     if (Platform.getMods().containsKey("dynamicelectricity")) {
         // DYNAMIC ELECTRICTY

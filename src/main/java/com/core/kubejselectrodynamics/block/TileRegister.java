@@ -2,6 +2,7 @@ package com.core.kubejselectrodynamics.block;
 
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.batterybox.TileCustomBatteryBox;
+import com.core.kubejselectrodynamics.block.fluidpipe.TileCustomFluidPipe;
 import com.core.kubejselectrodynamics.block.motor.ac.TileCustomMotorAC;
 import com.core.kubejselectrodynamics.block.motor.dc.TileCustomMotorDC;
 import com.core.kubejselectrodynamics.block.radioactive.TileCustomRadioactive;
@@ -32,7 +33,6 @@ public class TileRegister {
             () -> TileCustomGasTank::new
     );
 
-    // TODO make into a optional renderer
     public static final BlockEntityRegister<TileCustomWire> WIRE_TYPE = new BlockEntityRegister<>(
             "electrodynamics",
             "wire_type",
@@ -43,6 +43,12 @@ public class TileRegister {
             "electrodynamics",
             "logistical_wire_type",
             () -> TileCustomLogisticalWire::new
+    );
+
+    public static final BlockEntityRegister<TileCustomFluidPipe> FLUID_PIPE_TYPE = new BlockEntityRegister<>(
+            "electrodynamics",
+            "fluid_pipe_type",
+            () -> TileCustomFluidPipe::new
     );
 
     public static BlockEntityOptionalRenderer<TileCustomMotorDC, TileCustomMotorDC.Render> MOTOR_DC_TYPE = new BlockEntityOptionalRenderer<>(
