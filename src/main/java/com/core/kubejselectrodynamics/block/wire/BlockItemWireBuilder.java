@@ -27,7 +27,7 @@ public class BlockItemWireBuilder extends BlockItemBuilder {
     @Override
     public void generateAssetJsons(AssetJsonGenerator generator) {
         JsonObject model = new JsonObject();
-        if (blockBuilder.isBare()) {
+        if (blockBuilder.hasBaseTexture() && blockBuilder.isBare()) {
             JsonObject display = new JsonObject();
             JsonArray scale = new JsonArray();
             scale.add(0.7D);
