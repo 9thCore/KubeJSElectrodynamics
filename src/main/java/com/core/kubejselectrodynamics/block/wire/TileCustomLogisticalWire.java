@@ -11,12 +11,17 @@ public class TileCustomLogisticalWire extends TileCustomWire {
     public boolean isPowered = false;
 
     public TileCustomLogisticalWire(BlockPos pos, BlockState state) {
-        this(((CustomBlockWire) state.getBlock()).kjs$getBlockBuilder(), TileRegister.LOGISTICAL_WIRE_TYPE.getType(), pos, state);
+        this(((CustomBlockWire) state.getBlock()).kjs$getBlockBuilder(), pos, state);
     }
 
-    public TileCustomLogisticalWire(BlockWireBuilder builder, BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(builder, type, pos, state);
+    public TileCustomLogisticalWire(BlockWireBuilder builder, BlockPos pos, BlockState state) {
+        super(builder, pos, state);
         this.forceComponent((new ComponentTickable(this)).tickServer(this::tickServer));
+    }
+
+    @Override
+    public BlockEntityType<?> getType() {
+        return TileRegister.LOGISTICAL_WIRE_TYPE.getType();
     }
 
     /**

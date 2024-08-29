@@ -2,31 +2,26 @@ package com.core.kubejselectrodynamics.block.wire;
 
 import com.core.kubejselectrodynamics.block.TileRegister;
 import electrodynamics.common.block.subtype.SubtypeWire;
-import electrodynamics.common.tile.electricitygrid.GenericTileWire;
-import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
-import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.common.tile.electricitygrid.TileWire;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class TileCustomWire extends GenericTileWire {
-    public Property<Double> transmit;
-    public SubtypeWire wire;
-    public SubtypeWire.WireColor color;
+public class TileCustomWire extends TileWire {
     private final BlockWireBuilder builder;
 
     public TileCustomWire(BlockPos pos, BlockState state) {
-        this(((CustomBlockWire) state.getBlock()).kjs$getBlockBuilder(), TileRegister.WIRE_TYPE.getType(), pos, state);
+        this(((CustomBlockWire) state.getBlock()).kjs$getBlockBuilder(), pos, state);
     }
 
-    public TileCustomWire(BlockWireBuilder builder, BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
-        super(blockEntityType, pos, state);
+    public TileCustomWire(BlockWireBuilder builder, BlockPos pos, BlockState state) {
+        super(pos, state);
         this.builder = builder;
-        this.transmit = this.property(new Property<>(PropertyType.Double, "transmit", 0.0));
-        this.wire = builder.getSubtype();
-        this.color = builder.getWireColor();
-        this.addComponent(new ComponentTickable(this));
+    }
+
+    @Override
+    public BlockEntityType<?> getType() {
+        return TileRegister.WIRE_TYPE.getType();
     }
 
     @Override

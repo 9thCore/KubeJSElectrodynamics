@@ -151,10 +151,10 @@ public class BlockWireBuilder extends BlockBuilder {
     public Block createObject() {
         CustomBlockWire block;
         if (wireClass.conductsRedstone) {
-            block = new CustomBlockLogisticalWire(this, TileRegister.LOGISTICAL_WIRE_TYPE.getSupplier());
+            block = new CustomBlockLogisticalWire(this);
             TileRegister.LOGISTICAL_WIRE_TYPE.valid(block);
         } else {
-            block = new CustomBlockWire(this, TileRegister.WIRE_TYPE.getSupplier());
+            block = new CustomBlockWire(this);
             TileRegister.WIRE_TYPE.valid(block);
         }
         return block;
