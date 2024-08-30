@@ -3,6 +3,7 @@ package com.core.kubejselectrodynamics.block;
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.block.batterybox.TileCustomBatteryBox;
 import com.core.kubejselectrodynamics.block.fluidpipe.TileCustomFluidPipe;
+import com.core.kubejselectrodynamics.block.gaspipe.TileCustomGasPipe;
 import com.core.kubejselectrodynamics.block.motor.ac.TileCustomMotorAC;
 import com.core.kubejselectrodynamics.block.motor.dc.TileCustomMotorDC;
 import com.core.kubejselectrodynamics.block.radioactive.TileCustomRadioactive;
@@ -49,6 +50,12 @@ public class TileRegister {
             "electrodynamics",
             "fluid_pipe_type",
             () -> TileCustomFluidPipe::new
+    );
+
+    public static final BlockEntityRegister<TileCustomGasPipe> GAS_PIPE_TYPE = new BlockEntityRegister<>(
+            "electrodynamics",
+            "gas_pipe_type",
+            () -> TileCustomGasPipe::new
     );
 
     public static BlockEntityOptionalRenderer<TileCustomMotorDC, TileCustomMotorDC.Render> MOTOR_DC_TYPE = new BlockEntityOptionalRenderer<>(

@@ -15,6 +15,7 @@
     "electrodynamics.ElectricNetworkMixin",
     "electrodynamics.ElectrodynamicsMixin",
     "electrodynamics.FluidIngredientMixin",
+    "electrodynamics.GasNetworkMixin",
     "electrodynamics.IItemElectricMixin",
     "electrodynamics.SlotRestrictedMixin",
     "electrodynamics.UtilsMixins$ElectricityUtilsMixin",

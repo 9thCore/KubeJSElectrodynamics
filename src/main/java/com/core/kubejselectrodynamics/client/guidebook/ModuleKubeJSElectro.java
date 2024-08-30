@@ -3,6 +3,7 @@ package com.core.kubejselectrodynamics.client.guidebook;
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
 import com.core.kubejselectrodynamics.client.guidebook.chapters.ChapterFuelRod;
 import com.core.kubejselectrodynamics.client.guidebook.chapters.ChapterGas;
+import com.core.kubejselectrodynamics.client.guidebook.chapters.ChapterGasPipe;
 import com.core.kubejselectrodynamics.plugin.KubePlugin;
 import com.core.kubejselectrodynamics.util.TextUtil;
 import electrodynamics.client.guidebook.utils.components.Module;
@@ -18,6 +19,10 @@ public class ModuleKubeJSElectro extends Module {
     public void addChapters() {
         if (ChapterGas.valid()) {
             chapters.add(new ChapterGas(this));
+        }
+
+        if (ChapterGasPipe.valid()) {
+            chapters.add(new ChapterGasPipe(this));
         }
 
         if (KubePlugin.ModHolder.NUCLEARSCIENCE.valid() && ChapterFuelRod.valid()) {

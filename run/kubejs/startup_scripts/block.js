@@ -62,9 +62,18 @@ StartupEvents.registry("block", event => {
 
     // Autogenerates block models only
     event.create("kubejs:constricted_pipe", "electrodynamics:fluidpipe")
+    .maxTransfer(100) // 50x less than the copper pipe
     .texture("texture", "kubejs:block/fluidpipe/constricted_pipe") // Block texture
     .texture("layer0", "kubejs:item/fluidpipe/constricted_pipe") // Item texture
-    .maxTransfer(100) // 50x less than the copper pipe
+
+    // Autogenerates block models only
+    event.create("kubejs:spacious_pipe", "electrodynamics:gaspipe")
+    .pipeMaterial(Text.aqua("antimatter").italic().append(Text.darkGray(" (or something)").italic(false)))
+    .maxTransfer(500000) // 50x more throughput than the copper pipe
+    .maxPressure(5) // But very low maximum pressure (half the plastic's!)
+    .corrodedByAcid() // Beware!
+    .texture("texture", "kubejs:block/gaspipe/spacious_pipe") // Block texture
+    .texture("layer0", "kubejs:item/gaspipe/spacious_pipe") // Item texture
 
     if (Platform.getMods().containsKey("dynamicelectricity")) {
         // DYNAMIC ELECTRICTY
