@@ -11,7 +11,7 @@ public class ItemToItem {
             ItemToItemRecipeJS::new,
             Keys.ITEM_OUTPUT,
             Keys.ITEM_INPUTS_EXACT_1,
-            Keys.USAGE_PER_TICK,
+            // Keys.USAGE_PER_TICK,
             Keys.TICKS,
             Keys.EXPERIENCE,
             Keys.ITEM_BI_EXACT_1
@@ -22,7 +22,7 @@ public class ItemToItem {
             ItemToItemRecipeJS::new,
             Keys.ITEM_OUTPUT,
             Keys.ITEM_INPUTS_EXACT_2,
-            Keys.USAGE_PER_TICK,
+            // Keys.USAGE_PER_TICK,
             Keys.TICKS,
             Keys.EXPERIENCE,
             Keys.ITEM_BI_EXACT_1
@@ -33,7 +33,7 @@ public class ItemToItem {
             ItemToItemRecipeJS::new,
             Keys.ITEM_OUTPUT,
             Keys.ITEM_INPUTS_EXACT_2,
-            Keys.USAGE_PER_TICK,
+            // Keys.USAGE_PER_TICK,
             Keys.TICKS,
             Keys.EXPERIENCE,
             Keys.ITEM_BI_EXACT_1
@@ -44,7 +44,7 @@ public class ItemToItem {
             ItemToItemRecipeJS::new,
             Keys.ITEM_OUTPUT,
             Keys.ITEM_INPUTS_EXACT_1,
-            Keys.USAGE_PER_TICK,
+            // Keys.USAGE_PER_TICK,
             Keys.TICKS,
             Keys.EXPERIENCE
     );

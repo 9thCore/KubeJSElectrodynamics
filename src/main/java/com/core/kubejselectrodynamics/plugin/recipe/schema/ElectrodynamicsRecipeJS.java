@@ -182,6 +182,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         return null;
     }
 
+    /*
     @Info("Return the original recipe's power usage per tick.")
     public double getOriginalRecipeUsagePerTick() {
         if (getOriginalRecipe() == null) {
@@ -196,6 +197,7 @@ public class ElectrodynamicsRecipeJS extends RecipeJS {
         ConsoleJS.SERVER.warn("Original recipe not of Electrodynamics type - could not get usage per tick");
         return 0.0D;
     }
+     */
 
     @Info("Return the original recipe's ticks required to craft.")
     public int getOriginalRecipeTicks() {

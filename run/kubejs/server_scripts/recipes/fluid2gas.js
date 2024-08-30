@@ -4,8 +4,6 @@ ServerEvents.recipes(event => {
         ElectrodynamicsGas.of("kubejs:test_gas", 500).withTemperature(500),
         // fluid input (1)
         Fluid.of("minecraft:lava", 1000),
-        // usage per tick
-        500,
         // ticks
         200,
         // experience
@@ -23,8 +21,6 @@ ServerEvents.recipes(event => {
         ElectrodynamicsGas.of("kubejs:cheese_gas", 1000, 20),
         // fluid input (1)
         Fluid.of("minecraft:milk", 500),
-        // usage per tick
-        200,
         // ticks
         40,
         // experience
@@ -51,7 +47,6 @@ ServerEvents.recipes(event => {
         event.recipes.electrodynamics.electrolytic_separator_recipe(
             recipe.getOriginalRecipeGasResult().withAmount(2000),
             recipe.getOriginalRecipeFluidIngredients()[0].withAmount(4000),
-            recipe.getOriginalRecipeUsagePerTick() + 100,
             recipe.getOriginalRecipeTicks() + 20,
             recipe.getOriginalRecipeExperience(),
             electroGasses

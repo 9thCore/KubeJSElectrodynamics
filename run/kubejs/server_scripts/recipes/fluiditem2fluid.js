@@ -6,8 +6,6 @@ ServerEvents.recipes(event => {
         Fluid.of("minecraft:lava", 400),
         // item input (1)
         Ingredient.of("minecraft:cobblestone").withCount(8),
-        // usage per tick
-        100,
         // ticks required for craft
         40,
         // experience
@@ -24,7 +22,6 @@ ServerEvents.recipes(event => {
             result.withAmount(result.getAmount() * 2),
             recipe.getOriginalRecipeFluidIngredients(),
             recipe.getOriginalRecipeItemIngredients(),
-            recipe.getOriginalRecipeUsagePerTick(),
             recipe.getOriginalRecipeTicks() * 1.5,
             recipe.getOriginalRecipeExperience()
         );

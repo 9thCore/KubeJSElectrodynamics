@@ -11,7 +11,7 @@ public class FluidToGas {
             FluidToGasRecipeJS::new,
             Keys.GAS_OUTPUT,
             Keys.FLUID_INPUTS_EXACT_1,
-            Keys.USAGE_PER_TICK,
+            // Keys.USAGE_PER_TICK,
             Keys.TICKS,
             Keys.EXPERIENCE,
             Keys.GAS_BI_EXACT_1

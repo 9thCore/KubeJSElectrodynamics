@@ -7,8 +7,6 @@ ServerEvents.recipes(event => {
             Fluid.of("minecraft:milk", 200),
             // item input (1)
             Ingredient.of("minecraft:wheat").withCount(3),
-            // usage per tick
-            100,
             // ticks required for craft
             40,
             // experience
@@ -26,8 +24,6 @@ ServerEvents.recipes(event => {
                 Ingredient.of("minecraft:redstone").withCount(16),
                 Ingredient.of("minecraft:lapis_lazuli").withCount(12)
             ],
-            // usage per tick
-            100,
             // ticks required for craft
             40,
             // experience
@@ -41,8 +37,6 @@ ServerEvents.recipes(event => {
             Fluid.of("minecraft:water", 400),
             // item input (1)
             Ingredient.of("minecraft:redstone").withCount(2),
-            // usage per tick
-            100,
             // ticks required for craft
             40,
             // experience

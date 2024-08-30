@@ -8,8 +8,6 @@ ServerEvents.recipes(event => {
             Ingredient.of("minecraft:iron_ingot").withCount(2),
             "4x #minecraft:logs"
         ],
-        // usage per tick
-        100,
         // ticks required for craft
         40,
         // experience
@@ -23,8 +21,6 @@ ServerEvents.recipes(event => {
         "2x minecraft:heavy_weighted_pressure_plate",
         // input (1)
         "minecraft:iron_block",
-        // usage per tick
-        100,
         // ticks required for craft
         40,
         // experience
@@ -42,8 +38,6 @@ ServerEvents.recipes(event => {
             [
                 "2x minecraft:blaze_rod"
             ],
-            // usage per tick
-            500,
             // ticks required for craft
             1200,
             // experience
@@ -61,8 +55,6 @@ ServerEvents.recipes(event => {
             [
                 "minecraft:pufferfish"
             ],
-            // usage per tick
-            100,
             // ticks required for craft
             40,
             // experience
@@ -76,8 +68,6 @@ ServerEvents.recipes(event => {
             "minecraft:pufferfish",
             // input (1)
             "minecraft:cod",
-            // usage per tick
-            100,
             // ticks required for craft
             40,
             // experience

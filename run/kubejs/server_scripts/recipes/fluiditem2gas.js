@@ -7,8 +7,6 @@ ServerEvents.recipes(event => {
             Fluid.of("minecraft:lava", 500),
             // item input (1)
             Ingredient.of("minecraft:copper_ingot").withCount(4),
-            // usage per tick
-            100,
             // ticks required for craft
             40,
             // experience
