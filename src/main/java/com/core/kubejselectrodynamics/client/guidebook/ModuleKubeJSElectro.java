@@ -34,6 +34,10 @@ public class ModuleKubeJSElectro extends Module {
         if (KubePlugin.ModHolder.NUCLEARSCIENCE.valid() && ChapterFuelRod.valid()) {
             chapters.add(new ChapterFuelRod(this));
         }
+
+        if (KubePlugin.ModHolder.DYNAMICELECTRICITY.valid() && ChapterConductorBrush.valid()) {
+            chapters.add(new ChapterConductorBrush(this));
+        }
     }
 
     @Override

@@ -9,6 +9,14 @@ public class TextUtil {
         return getText("guidebook", key, additional);
     }
 
+    public static MutableComponent guidebookMotor(String key, Object... additional) {
+        return guidebook("chapter.motor." + key, additional);
+    }
+
+    public static MutableComponent guidebookMotorBrush(String key, Object... additional) {
+        return guidebookMotor("brush." + key, additional);
+    }
+
     public static MutableComponent guidebookFluid(String key, Object... additional) {
         return guidebook("chapter.fluid." + key, additional);
     }
