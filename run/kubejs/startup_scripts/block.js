@@ -68,7 +68,7 @@ StartupEvents.registry("block", event => {
 
     // Autogenerates block models only
     event.create("kubejs:spacious_pipe", "electrodynamics:gaspipe")
-    .pipeMaterial(Text.aqua("antimatter").italic().append(Text.darkGray(" (or something)").italic(false))) // Custom material tooltip, not present if not specified
+    .pipeMaterial(Text.aqua("antimatter").italic().append(Text.darkGray(" (or something)").italic(false))) // Custom material tooltip
     .maxTransfer(500000) // 50x more throughput than the copper pipe
     .maxPressure(5) // But very low maximum pressure (half the plastic's!)
     .corrodedByAcid() // Beware!
