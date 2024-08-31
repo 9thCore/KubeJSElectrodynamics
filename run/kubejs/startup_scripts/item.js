@@ -46,13 +46,11 @@ StartupEvents.registry("item", event => {
     // Technically this is not required here, because brushes don't have a special type
     if (Platform.getMods().containsKey("dynamicelectricity")) {
         event.create("kubejs:bad_brush") // No special type...
-        .tag("kubejselectrodynamics:conductorbrush") // ...just a special tag!
         .maxDamage(100)
         .texture("minecraft:item/brush")
         .tooltip(Text.gray("This doesn't seem very good at conducting electricity..."));
         
         event.create("kubejs:unbreakable_brush")
-        .tag("kubejselectrodynamics:conductorbrush")
         .texture("minecraft:item/nether_star");
         // Notice the absence of a #maxDamage() call!
     } else {

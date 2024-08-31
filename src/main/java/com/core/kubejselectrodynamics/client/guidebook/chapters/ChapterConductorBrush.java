@@ -1,7 +1,7 @@
 package com.core.kubejselectrodynamics.client.guidebook.chapters;
 
 import com.core.kubejselectrodynamics.KubeJSElectrodynamics;
-import com.core.kubejselectrodynamics.tag.DynamicElectricityTags;
+import com.core.kubejselectrodynamics.util.MotorBrushRegister;
 import com.core.kubejselectrodynamics.util.TextUtil;
 import electrodynamics.client.guidebook.utils.components.Chapter;
 import electrodynamics.client.guidebook.utils.components.Module;
@@ -12,10 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.tags.ITag;
-
-import java.util.Objects;
 
 public class ChapterConductorBrush extends Chapter {
     private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, new ResourceLocation(KubeJSElectrodynamics.MODID, "textures/guidebook/chapter/conductorbrush/logo.png"));
@@ -28,7 +24,7 @@ public class ChapterConductorBrush extends Chapter {
     public void addData() {
         pageData.add(new TextWrapperObject(TextUtil.guidebookMotorBrush("list")).setSeparateStart());
 
-        for (Item item : getTag()) {
+        for (Item item : MotorBrushRegister.brushes) {
             pageData.add(new TextWrapperObject(item.getDescription()).setSeparateStart());
             pageData.add(new TextWrapperObject(TextUtil.guidebookMotorBrush("format", getCycles(item))).setIndentions(1).setSeparateStart());
         }
@@ -49,11 +45,7 @@ public class ChapterConductorBrush extends Chapter {
         return damage != 0 ? Component.literal(String.valueOf(damage)) : TextUtil.guidebookMotorBrush("inf");
     }
 
-    private static ITag<Item> getTag() {
-        return Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(DynamicElectricityTags.BRUSH_TAG);
-    }
-
     public static boolean valid() {
-        return !getTag().isEmpty();
+        return !MotorBrushRegister.brushes.isEmpty();
     }
 }

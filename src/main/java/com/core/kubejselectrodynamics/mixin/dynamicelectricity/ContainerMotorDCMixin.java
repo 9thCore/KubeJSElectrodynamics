@@ -1,12 +1,11 @@
 package com.core.kubejselectrodynamics.mixin.dynamicelectricity;
 
-import com.core.kubejselectrodynamics.tag.DynamicElectricityTags;
+import com.core.kubejselectrodynamics.util.MotorBrushRegister;
 import com.core.kubejselectrodynamics.util.mixinterfaces.ISlotRestricted;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Mixin(ContainerMotorDC.class)
 public class ContainerMotorDCMixin {
@@ -28,7 +26,7 @@ public class ContainerMotorDCMixin {
         List<Item> whitelist = slot.kjsElectro$getWhitelist();
         // This sucks
         List<Item> newWhitelist = new ArrayList<>(whitelist);
-        newWhitelist.addAll(Objects.requireNonNull(ForgeRegistries.ITEMS.tags()).getTag(DynamicElectricityTags.BRUSH_TAG).stream().toList());
+        newWhitelist.addAll(MotorBrushRegister.brushes);
         slot.kjsElectro$setWhitelist(newWhitelist);
     }
 }

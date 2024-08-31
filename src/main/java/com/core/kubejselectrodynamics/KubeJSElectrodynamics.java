@@ -4,8 +4,10 @@ import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.client.ClientRegister;
 import com.core.kubejselectrodynamics.item.CustomItemTab;
 import com.core.kubejselectrodynamics.plugin.KubePlugin;
+import com.core.kubejselectrodynamics.plugin.event.DynamicElectricityEvents;
 import com.core.kubejselectrodynamics.plugin.event.ElectrodynamicsEvents;
 import com.core.kubejselectrodynamics.plugin.event.NuclearScienceEvents;
+import com.core.kubejselectrodynamics.plugin.event.server.ConductorBrushEventJS;
 import com.core.kubejselectrodynamics.plugin.event.server.FuelRodEventJS;
 import com.core.kubejselectrodynamics.plugin.event.server.GasTankInsulatorEventJS;
 import com.mojang.logging.LogUtils;
@@ -36,6 +38,9 @@ public class KubeJSElectrodynamics
         ElectrodynamicsEvents.GAS_TANK_INSULATION.post(new GasTankInsulatorEventJS());
         if (KubePlugin.ModHolder.NUCLEARSCIENCE.valid()) {
             NuclearScienceEvents.FUEL_ROD.post(new FuelRodEventJS());
+        }
+        if (KubePlugin.ModHolder.DYNAMICELECTRICITY.valid()) {
+            DynamicElectricityEvents.CONDUCTOR_BRUSH.post(new ConductorBrushEventJS());
         }
     }
 
