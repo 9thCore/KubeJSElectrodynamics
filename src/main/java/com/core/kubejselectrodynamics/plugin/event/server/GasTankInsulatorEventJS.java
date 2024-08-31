@@ -11,7 +11,7 @@ public class GasTankInsulatorEventJS extends EventJS {
         InsulationUtils.insulationEffectiveness.clear();
     }
 
-    @Info("Register a single item or an item tag as a gas tank insulator with the given insulation.")
+    @Info("Register a single item or an item tag as a gas tank insulator with the given insulation. Insulation cannot go below 1.0.")
     public void register(String id, double effectiveness) {
         if (id.startsWith("#")) {
             registerTag(id.substring(1), effectiveness);
@@ -20,12 +20,12 @@ public class GasTankInsulatorEventJS extends EventJS {
         registerItem(id, effectiveness);
     }
 
-    @Info("Register a single item as a gas tank insulator with the given insulation.")
+    @Info("Register a single item as a gas tank insulator with the given insulation. Insulation cannot go below 1.0.")
     public void registerItem(String id, double effectiveness) {
         InsulationUtils.registerInsulator(ItemUtils.getItemFromID(id), effectiveness);
     }
 
-    @Info("Register an item tag as a gas tank insulator with the given insulation.")
+    @Info("Register an item tag as a gas tank insulator with the given insulation. Insulation cannot go below 1.0.")
     public void registerTag(String id, double effectiveness) {
         for (Item item : ItemUtils.getTagFromID(id)) {
             InsulationUtils.registerInsulator(item, effectiveness);

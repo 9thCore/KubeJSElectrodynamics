@@ -11,7 +11,7 @@ public class InsulationUtils {
     public static Map<Item, Double> insulationEffectiveness = new HashMap<Item, Double>();
 
     public static void registerInsulator(Item item, double factor) {
-        insulationEffectiveness.put(item, factor);
+        insulationEffectiveness.put(item, Math.max(factor, 1.0));
     }
 
     public static double getInsulationEffectiveness(ItemStack item) {
