@@ -2,6 +2,7 @@ package com.core.kubejselectrodynamics;
 
 import com.core.kubejselectrodynamics.block.TileRegister;
 import com.core.kubejselectrodynamics.client.ClientRegister;
+import com.core.kubejselectrodynamics.event.ItemEvents;
 import com.core.kubejselectrodynamics.item.CustomItemTab;
 import com.core.kubejselectrodynamics.plugin.KubePlugin;
 import com.core.kubejselectrodynamics.plugin.event.DynamicElectricityEvents;
@@ -16,6 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.Bindings;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -32,6 +34,9 @@ public class KubeJSElectrodynamics
         CustomItemTab.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         TileRegister.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.addListener(this::onDatapackSync);
+        if (KubePlugin.ModHolder.DYNAMICELECTRICITY.valid()) {
+            Bindings.getForgeBus().get().addListener(ItemEvents::tooltipEvent);
+        }
     }
 
     public void onDatapackSync(OnDatapackSyncEvent event) {

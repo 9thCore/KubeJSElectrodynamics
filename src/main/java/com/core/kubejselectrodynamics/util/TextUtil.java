@@ -33,6 +33,14 @@ public class TextUtil {
         return guidebook("chapter.fuelrod." + key, additional);
     }
 
+    public static MutableComponent tooltip(String key, Object... additional) {
+        return getText("tooltip", key, additional);
+    }
+
+    public static MutableComponent tooltipMotorBrush(String key, Object... additional) {
+        return tooltip("motor.brush." + key, additional);
+    }
+
     public static MutableComponent getText(String prefix, String postfix, Object... additional) {
         return Component.translatable(prefix + "." + KubeJSElectrodynamics.MODID + "." + postfix, additional);
     }

@@ -26,7 +26,7 @@ public class ContainerMotorDCMixin {
         List<Item> whitelist = slot.kjsElectro$getWhitelist();
         // This sucks
         List<Item> newWhitelist = new ArrayList<>(whitelist);
-        newWhitelist.addAll(MotorBrushRegister.brushes);
+        newWhitelist.addAll(MotorBrushRegister.brushes.keySet());
         slot.kjsElectro$setWhitelist(newWhitelist);
     }
 }

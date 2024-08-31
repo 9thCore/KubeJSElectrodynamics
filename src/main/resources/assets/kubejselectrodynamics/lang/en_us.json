@@ -22,5 +22,6 @@
   "guidebook.kubejselectrodynamics.chapter.motor.brush.title": "Conductor brushes",
   "guidebook.kubejselectrodynamics.chapter.motor.brush.list": "KubeJS Electrodynamics adds the following DC motor conductor brushes:",
   "guidebook.kubejselectrodynamics.chapter.motor.brush.format": "Cycles: %s",
-  "guidebook.kubejselectrodynamics.chapter.motor.brush.inf": "Infinite"
+  "guidebook.kubejselectrodynamics.chapter.motor.brush.inf": "Infinite",
+  "tooltip.kubejselectrodynamics.motor.brush.inf": "Infinite"
 }

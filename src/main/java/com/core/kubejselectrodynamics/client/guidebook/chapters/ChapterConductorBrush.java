@@ -24,7 +24,7 @@ public class ChapterConductorBrush extends Chapter {
     public void addData() {
         pageData.add(new TextWrapperObject(TextUtil.guidebookMotorBrush("list")).setSeparateStart());
 
-        for (Item item : MotorBrushRegister.brushes) {
+        for (Item item : MotorBrushRegister.brushes.keySet()) {
             pageData.add(new TextWrapperObject(item.getDescription()).setSeparateStart());
             pageData.add(new TextWrapperObject(TextUtil.guidebookMotorBrush("format", getCycles(item))).setIndentions(1).setSeparateStart());
         }
