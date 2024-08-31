@@ -27,13 +27,13 @@ public class ChapterGasInsulation extends Chapter {
 
     @Override
     public void addData() {
-        pageData.add(new TextWrapperObject(TextUtil.guidebookGas("insulation.list")).setSeparateStart());
+        pageData.add(new TextWrapperObject(TextUtil.guidebookGasInsulation("list")).setSeparateStart());
 
         for (Map.Entry<Item, Double> entry : InsulationUtils.insulationEffectiveness.entrySet()) {
-            blankLine();
             double percentage = (entry.getValue() - 1) * 100;
             MutableComponent value = ChatFormatter.formatDecimals(percentage, 1);
-            pageData.add(new TextWrapperObject(TextUtil.guidebookGas("insulation.format", entry.getKey().getDescription(), value.append("%"))).setSeparateStart());
+            pageData.add(new TextWrapperObject(entry.getKey().getDescription()).setSeparateStart());
+            pageData.add(new TextWrapperObject(TextUtil.guidebookGasInsulation("format", value.append("%"))).setSeparateStart().setIndentions(1));
         }
     }
 
@@ -44,7 +44,7 @@ public class ChapterGasInsulation extends Chapter {
 
     @Override
     public MutableComponent getTitle() {
-        return TextUtil.guidebookGas("insulation.title");
+        return TextUtil.guidebookGasInsulation("title");
     }
 
     public static boolean valid() {

@@ -25,6 +25,10 @@ public class TextUtil {
         return guidebook("chapter.gas." + key, additional);
     }
 
+    public static MutableComponent guidebookGasInsulation(String key, Object... additional) {
+        return guidebookGas("insulation." + key, additional);
+    }
+
     public static MutableComponent guidebookFuelRod(String key, Object... additional) {
         return guidebook("chapter.fuelrod." + key, additional);
     }

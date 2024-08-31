@@ -15,7 +15,7 @@
   "guidebook.kubejselectrodynamics.chapter.gas.pipe.corrodible": "/!\\ Corrodible /!\\",
   "guidebook.kubejselectrodynamics.chapter.gas.insulation.title": "Gas insulation",
   "guidebook.kubejselectrodynamics.chapter.gas.insulation.list": "KubeJS Electrodynamics adds the following gas tank insulation:",
-  "guidebook.kubejselectrodynamics.chapter.gas.insulation.format": "%1$s : %2$s",
+  "guidebook.kubejselectrodynamics.chapter.gas.insulation.format": "Efficiency: %s",
   "tooltip.kubejselectrodynamics.fluidpipe.defaultname": "None",
   "guidebook.kubejselectrodynamics.chapter.fluid.pipe.title": "Fluid pipes",
   "guidebook.kubejselectrodynamics.chapter.fluid.pipe.list": "KubeJS Electrodynamics adds the following fluid pipes:",
