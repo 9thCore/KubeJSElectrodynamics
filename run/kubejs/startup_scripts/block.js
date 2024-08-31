@@ -62,13 +62,14 @@ StartupEvents.registry("block", event => {
 
     // Autogenerates block models only
     event.create("kubejs:constricted_pipe", "electrodynamics:fluidpipe")
+    .pipeMaterial(Text.translatable("block.kubejs.constricted_pipe.material")) // Only for the guidebook, best to use something resembling the pipe's name (like "Constricted" in this example); can use a translation key
     .maxTransfer(100) // 50x less than the copper pipe
     .texture("texture", "kubejs:block/fluidpipe/constricted_pipe") // Block texture
     .texture("layer0", "kubejs:item/fluidpipe/constricted_pipe") // Item texture
 
     // Autogenerates block models only
     event.create("kubejs:spacious_pipe", "electrodynamics:gaspipe")
-    .pipeMaterial(Text.aqua("antimatter").italic().append(Text.darkGray(" (or something)").italic(false))) // Custom material tooltip
+    .pipeMaterial(Text.aqua("antimatter").italic().append(Text.darkGray(" (or something)").italic(false))) // Custom material tooltip; can use a translation key
     .maxTransfer(500000) // 50x more throughput than the copper pipe
     .maxPressure(5) // But very low maximum pressure (half the plastic's!)
     .corrodedByAcid() // Beware!

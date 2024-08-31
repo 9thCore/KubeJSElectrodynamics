@@ -9,15 +9,22 @@ import dev.latvian.mods.kubejs.generator.AssetJsonGenerator;
 import dev.latvian.mods.kubejs.typings.Info;
 import dev.latvian.mods.rhino.util.HideFromJS;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BlockFluidPipeBuilder extends BlockBuilder {
+    public static final List<BlockFluidPipeBuilder> BUILDERS = new ArrayList<>();
     private long maxTransfer = SubtypeFluidPipe.copper.maxTransfer;
+    private Component materialName = Component.translatable("tooltip.kubejselectrodynamics.fluidpipe.defaultname");
 
     public BlockFluidPipeBuilder(ResourceLocation i) {
         super(i);
         textures.keySet().clear();
+        BUILDERS.add(this);
     }
 
     @Info("Sets the maximum transfer per tick, as a long.")
@@ -26,9 +33,20 @@ public class BlockFluidPipeBuilder extends BlockBuilder {
         return this;
     }
 
+    @Info("Sets the pipe's material. Only affects the guidebook.")
+    public BlockFluidPipeBuilder pipeMaterial(Component materialName) {
+        this.materialName = materialName;
+        return this;
+    }
+
     @HideFromJS
     public long getMaxTransfer() {
         return maxTransfer;
+    }
+
+    @HideFromJS
+    public Component getMaterialName() {
+        return materialName;
     }
 
     @Override
